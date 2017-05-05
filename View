@@ -1,0 +1,74 @@
+/**
+ * Write a description of class Model here.
+ * 
+ * @author Chase Carnaroli
+ * @version 0.0
+ */
+
+import java.awt.*;          // import Container
+import java.util.*;         // import ArrayList
+import javax.swing.*;       // import JFrame
+import java.awt.event.*;    // import event listener
+
+public class View extends JFrame
+{
+    // instance variables
+    private Model myGame;
+    private final int NUM_ROWS, NUM_COLS;
+
+    /**
+     * Constructor for objects of class Model
+     */
+    public View(Model game)
+    {
+        // initialise instance variables
+        myGame = game;
+        NUM_ROWS = game.getNumRows();
+        NUM_COLS = game.getNumCols();
+        
+        // set up window
+        Container container = getContentPane();
+        container.setLayout( new GridLayout(NUM_ROWS, NUM_COLS) );
+        
+        // needed to close application
+        addWindowListener(new java.awt.event.WindowAdapter() 
+            {
+                public void windowClosing(WindowEvent evt) {
+                    System.exit(0);
+                }
+            }
+        );
+
+        // Set window size and show window
+        setSize(700, 700);     // width=700, height=700
+        setVisible(true);
+    }
+    
+    public void addCharacter(Character thing){
+        
+    }
+    
+    public void removeCharacter(Character thing){
+        
+    }
+    
+    public void resetField(){
+        
+    }
+    
+    public void endProgram(){
+        System.exit(0);
+    }
+    
+    // THE CODE BELOW THIS IS NOT DONE
+    private class MouseHandler extends MouseAdapter
+    {
+        public int row, col;
+        
+        // constructor
+        public MouseHandler(Pane area, int r, int c){
+            row = r;
+            col = c;
+        }
+    }
+}
