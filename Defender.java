@@ -6,34 +6,16 @@ import java.util.List;
  * @author Parth
  * @version 0.0
  */
-public abstract class Defender
+public abstract class Defender extends Character
 {
-    private int hp;
-    private Location loc;
-    public Defender(int baseHP)
+    public Defender(int baseHP, Location loc)
     {
-        hp = baseHP;
-    }
-
-    public boolean giveDamage(int damage)
-    {
-        hp -= damage;
-        return hp > 0;
-    }
-
-    public boolean dead()
-    {
-        return hp <= 0;
+        super(baseHP, loc);
     }
 
     /**
      * Takes ants, does damage to any damage should be done too,
      * Returns ants killed.
      */   
-    abstract public List<Ant> processAnts(List<Ant> ants); 
-
-    public Location getLoc()
-    {
-        return loc;
-    }
+    abstract public List<Ant> processAnts(List<Ant> ants);
 }
