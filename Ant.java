@@ -1,30 +1,17 @@
 import java.util.List;
 /**
- * Abstract class Ant - write a description of the class here
  * 
- * @author (your name here)
- * @version (version number or date here)
+ * 
+ * @author Parth
+ * @version 0.0
  */
-public abstract class Ant
+public abstract class Ant extends Character
 {
-    Location loc;
-    private int hp;
-    
-    public Location getLoc()
+    public Ant(int baseHP, Location loc)
     {
-        return loc;
+        super(baseHP, loc);
     }
-    
-    public void setLoc(Location loc)
-    {
-        this.loc = loc;
-    }
-    
-    public Ant(Location loc)
-    {
-        this.loc = loc;
-    }
-    
+
     /**
      * Ant should act. If it kills a defender, then it should 
      * return an instance of them.
