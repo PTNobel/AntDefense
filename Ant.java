@@ -12,6 +12,17 @@ public abstract class Ant extends Character
         super(baseHP, loc);
     }
 
+    private Icon icon;
+    public void setIcon(Icon icon)
+    {
+        this.icon = icon;
+    }
+    
+    public Icon getIcon()
+    {
+        return this.icon;
+    }
+
     /**
      * Ant should act. If it kills a defender, then it should 
      * return an instance of them.
