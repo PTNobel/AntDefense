@@ -16,9 +16,10 @@ public class View extends JFrame
     // instance variables
     private Model myGame;
     private Dimension screenSize;
-    private final int NUM_ROWS, NUM_COLS, NUM_STORE_ITEMS;
+    private final int NUM_ROWS, NUM_COLS, NUM_STORE_ITEMS, NUM_ATTACKERS;
     private JButton[][] boardArray;
     private JButton[] store;
+    private JProgressBar progressBar;
 
     /**
      * Constructor for objects of class Model
@@ -30,6 +31,7 @@ public class View extends JFrame
         myGame = game;
         NUM_ROWS = game.getNumRows();
         NUM_COLS = game.getNumCols();
+        NUM_ATTACKERS = game.getNumAttackers();
         NUM_STORE_ITEMS = game.getNumStoreItems();
 
         MouseHandler mouseHandler = new MouseHandler();     // creates a mouseHandler
@@ -46,8 +48,13 @@ public class View extends JFrame
 
         /**CODE FOR THE BOARD ON THE SCREEN**/
         // Create board
-        JLayeredPane boardUI = new JLayeredPane();                                                          // constructs boardUI pane          
-        boardUI.setBounds(origin.x+(width/12), origin.y+(height/5), width-(width/6), height-(2*height/5));  // puts boardUI at (x,y) and sets width/height
+        JLayeredPane boardUI = new JLayeredPane();                                  // constructs boardUI pane
+        Dimension boardSize = new Dimension(width-(width/6), height-(2*height/5));  // dimensions of the board
+        int boardUIxPos = origin.x+(width/12);                                      // x position of boardUI
+        int boardUIyPos = origin.y+(height/5);                                      // y position of the boardUI
+
+        // set position of board
+        boardUI.setBounds(boardUIxPos, boardUIyPos, (int)boardSize.getWidth(), (int)boardSize.getHeight());     // puts boardUI at (x,y) and sets width/height
 
         // add buttons to board
         boardUI.setLayout(new GridLayout(NUM_ROWS, NUM_COLS));  // creates grid layout for the buttons
@@ -69,12 +76,15 @@ public class View extends JFrame
             }
         }
 
-        
         /**CODE FOR THE STORE ON THE SCREEN**/
         // Create store
-        JLayeredPane storeUI = new JLayeredPane();                                                                                              // constructs storeUI pane                        
-        Dimension storeItem = new Dimension((height/5)-(height/10), (height/5)-(height/10));                                                    // dimensions of each storeItem button
-        storeUI.setBounds(origin.x+(width/24), origin.y+(height/20), (int)storeItem.getWidth() * NUM_STORE_ITEMS, (int)storeItem.getHeight());  // puts boardUI at (x,y) and sets width/height
+        JLayeredPane storeUI = new JLayeredPane();                                                  // constructs storeUI pane                        
+        Dimension storeItemSize = new Dimension((height/5)-(height/10), (height/5)-(height/10));    // dimensions of each storeItem button
+        int storeUIxPos = origin.x+(width/24);                                                      // x position of storeUI
+        int storeUIyPos = origin.y+(height/20);                                                     // y position of storeUI
+
+        // set position of storeUI
+        storeUI.setBounds(storeUIxPos, storeUIyPos, (int)storeItemSize.getWidth() * NUM_STORE_ITEMS, (int)storeItemSize.getHeight());     // puts boardUI at (x,y) and sets width/height
 
         // add buttons to store
         storeUI.setLayout(new GridLayout(1, NUM_STORE_ITEMS));  // creates grid layout for the buttons
@@ -90,10 +100,23 @@ public class View extends JFrame
             // store[r].setIcon(game.getStore[r].getIcon());
         }
 
+        /**CODE FOR THE PROGRESS BAR**/
+        // Create progress bar
+        progressBar = new JProgressBar(0,NUM_ATTACKERS);                                // constructs progressBar
+        Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), height/10);   // dimensions of the progressBar
+
+        // set coordinate
+        int progressBarxPos = boardUIxPos + (int)boardSize.getWidth() - (int)progressBarSize.getWidth();    // x position of progress bar
+        int progressBaryPos = boardUIyPos + (int)boardSize.getHeight() + height/11;                         // y position of progress bar
+
+        // set position of progressBar
+        progressBar.setBounds(progressBarxPos, progressBaryPos, (int)progressBarSize.getWidth(), (int)progressBarSize.getHeight()); // puts progressBar at (x,y) and sets width/height
+
         // Set window size and show window
-        add(boardUI);          // adds boardUI to the screen
-        add(storeUI);          // adds storeUI to the screen
-        setVisible(true);      // makes the screen visable
+        add(progressBar);       // adds progressBar to the screen     
+        add(boardUI);           // adds boardUI to the screen
+        add(storeUI);           // adds storeUI to the screen
+        setVisible(true);       // makes the screen visable
 
         // needed to close application
         addWindowListener(new java.awt.event.WindowAdapter() 
