@@ -10,13 +10,16 @@ import java.util.List;
  */
 public class Model
 {
-    private final int NUM_ROWS = 5;
-    private final int NUM_COLS = 10;
+    private final int NUM_ROWS, NUM_COLS, NUM_STORE_ITEMS, NUM_ATTACKERS;
     private Defender[][] board;
     private List<Defender> defenderList;
     private List<Ant> antList;
     public Model()
     {
+        NUM_ATTACKERS = 20;
+        NUM_ROWS = 5;
+        NUM_COLS = 10;
+        NUM_STORE_ITEMS = 6;
         board = new Defender[NUM_ROWS][NUM_COLS];
         antList = new LinkedList<Ant>();
         defenderList = new LinkedList<Defender>();
@@ -44,6 +47,22 @@ public class Model
         } 
         else
             return false;
+    }
+    
+    public int getNumRows(){
+        return NUM_ROWS;
+    }
+    
+    public int getNumCols(){
+        return NUM_COLS;
+    }
+    
+    public int getNumStoreItems(){
+        return NUM_STORE_ITEMS;
+    }
+    
+    public int getNumAttackers(){
+        return NUM_ATTACKERS;
     }
 
     public Defender getDefenderAtLoc(Location loc)
