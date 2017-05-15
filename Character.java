@@ -25,7 +25,7 @@ abstract public class Character
         this.loc = loc;
     }
 
-    public boolean giveDamage(int damage)
+    public boolean takeDamage(int damage)
     {
         hp -= damage;
         return hp > 0;
