@@ -15,7 +15,9 @@ public class View extends JFrame
 {
     // instance variables
     private Model myGame;
-    private Dimension screenSize;
+    private static final int WIDTH = 960;
+    private static final int HEIGHT = 720;
+    public static int jbuttonHeight = 1, jbuttonWidth = 1;
     private final int NUM_ROWS, NUM_COLS, NUM_STORE_ITEMS, NUM_ATTACKERS;
     private JButton[][] boardArray;
     private JButton[] store;
@@ -37,10 +39,7 @@ public class View extends JFrame
         MouseHandler mouseHandler = new MouseHandler();     // creates a mouseHandler
 
         // set up window
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();     // gets size of the screen and saves as a Dimension
-        int width = (int)screenSize.getWidth();                                 // gets width of screen
-        int height = (int)screenSize.getHeight();                               // gets height of screen
-        setSize(width, height);                                                 // sets size in pixels
+        setSize(WIDTH, HEIGHT);                                                 // sets size in pixels
         setResizable(false);                                                    // makes it resizable or not (true == resizable screen)
         this.getContentPane().setLayout(null);                                  // this allows us to place components wherever we want on the screen
 
@@ -49,9 +48,9 @@ public class View extends JFrame
         /**CODE FOR THE BOARD ON THE SCREEN**/
         // Create board
         JLayeredPane boardUI = new JLayeredPane();                                  // constructs boardUI pane
-        Dimension boardSize = new Dimension(width-(width/6), height-(2*height/5));  // dimensions of the board
-        int boardUIxPos = origin.x+(width/12);                                      // x position of boardUI
-        int boardUIyPos = origin.y+(height/5);                                      // y position of the boardUI
+        Dimension boardSize = new Dimension(WIDTH-(WIDTH/6), HEIGHT-(2*HEIGHT/5));  // dimensions of the board
+        int boardUIxPos = origin.x+(WIDTH/12);                                      // x position of boardUI
+        int boardUIyPos = origin.y+(HEIGHT/5);                                      // y position of the boardUI
 
         // set position of board
         boardUI.setBounds(boardUIxPos, boardUIyPos, (int)boardSize.getWidth(), (int)boardSize.getHeight());     // puts boardUI at (x,y) and sets width/height
@@ -75,13 +74,16 @@ public class View extends JFrame
                 //boardArray[r][c].setBorderPainted(true);        // Keeps border outlines
             }
         }
-
+        // Let's share the constants Location needs
+        jbuttonHeight = boardArray[0][0].getHeight();
+        jbuttonWidth = boardArray[0][0].getWidth();
+        
         /**CODE FOR THE STORE ON THE SCREEN**/
         // Create store
         JLayeredPane storeUI = new JLayeredPane();                                                  // constructs storeUI pane                        
-        Dimension storeItemSize = new Dimension((height/5)-(height/10), (height/5)-(height/10));    // dimensions of each storeItem button
-        int storeUIxPos = origin.x+(width/24);                                                      // x position of storeUI
-        int storeUIyPos = origin.y+(height/20);                                                     // y position of storeUI
+        Dimension storeItemSize = new Dimension((HEIGHT/5)-(HEIGHT/10), (HEIGHT/5)-(HEIGHT/10));    // dimensions of each storeItem button
+        int storeUIxPos = origin.x+(WIDTH/24);                                                      // x position of storeUI
+        int storeUIyPos = origin.y+(HEIGHT/20);                                                     // y position of storeUI
 
         // set position of storeUI
         storeUI.setBounds(storeUIxPos, storeUIyPos, (int)storeItemSize.getWidth() * NUM_STORE_ITEMS, (int)storeItemSize.getHeight());     // puts boardUI at (x,y) and sets width/height
@@ -103,12 +105,12 @@ public class View extends JFrame
         /**CODE FOR THE PROGRESS BAR**/
         // Create progress bar
         progressBar = new JProgressBar(0,NUM_ATTACKERS);                                // constructs progressBar
-        Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), height/10);   // dimensions of the progressBar
+        Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), HEIGHT/10);   // dimensions of the progressBar
 
         // set coordinate
         int progressBarxPos = boardUIxPos + (int)boardSize.getWidth() - (int)progressBarSize.getWidth();    // x position of progress bar
-        int progressBaryPos = boardUIyPos + (int)boardSize.getHeight() + height/11;                         // y position of progress bar
-
+        //int progressBaryPos = boardUIyPos + (int)boardSize.getHeight() + HEIGHT/11;                         // y position of progress bar
+        int progressBaryPos = 19*HEIGHT/20 - (int)progressBarSize.getHeight();                         // y position of progress bar
         // set position of progressBar
         progressBar.setBounds(progressBarxPos, progressBaryPos, (int)progressBarSize.getWidth(), (int)progressBarSize.getHeight()); // puts progressBar at (x,y) and sets width/height
 
