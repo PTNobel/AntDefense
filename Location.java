@@ -1,4 +1,4 @@
-
+import java.awt.Point;
 /**
  * Keeps track of locations in the game grid.
  * 
@@ -7,18 +7,34 @@
  */
 public class Location
 {
-    private int row;
-    private int col;
-    
-    Location(int r, int c)
+    private Point pt;
+    Location(int x, int y)
     {
-        row = r;
-        col = c;
+        pt = new Point(x, y);
+    }
+
+    public int getRow()
+    {
+        return pt.x/View.jbuttonWidth;
+    }
+
+    public int getCol()
+    {
+        return pt.y/View.jbuttonWidth;
+    }
+
+    public Point getPoint()
+    {
+        return pt;
     }
     
-    public int getRow()
-    {return row;}
+    public int getX()
+    {
+        return pt.x;
+    }
     
-    public int getCol()
-    {return col;}
+    public int getY()
+    {
+        return pt.y;
+    }
 }
