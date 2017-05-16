@@ -15,10 +15,11 @@ public class View extends JFrame
 {
     // instance variables
     private Model myGame;
+    private Controller control;
     private static final int WIDTH = 960;
     private static final int HEIGHT = 720;
     public static int jbuttonHeight = 1, jbuttonWidth = 1;
-    private final int NUM_ROWS, NUM_COLS, NUM_STORE_ITEMS, NUM_ATTACKERS;
+    private final int NUM_ROWS, NUM_COLS, NUM_ATTACKERS;
     private JButton[][] boardArray;
     private JButton[] store;
     private JProgressBar progressBar;
@@ -26,17 +27,15 @@ public class View extends JFrame
     /**
      * Constructor for objects of class Model
      */
-    public View(Model game)
+    public View(Model game, Controller control)
     {
-        super("AntDefense");
+        super("Ant Defense");
         // initialise instance variables
         myGame = game;
         NUM_ROWS = game.getNumRows();
         NUM_COLS = game.getNumCols();
         NUM_ATTACKERS = game.getNumAttackers();
-        NUM_STORE_ITEMS = game.getNumStoreItems();
-
-        MouseHandler mouseHandler = new MouseHandler();     // creates a mouseHandler
+        this.control = control;
 
         // set up window
         setSize(WIDTH, HEIGHT);                                                 // sets size in pixels
@@ -66,7 +65,8 @@ public class View extends JFrame
             {
                 boardArray[r][c] = new JButton();                   // instantiate each JButton with a row/col label
                 boardUI.add(boardArray[r][c]);                      // add the JButton to the pane
-                boardArray[r][c].addMouseListener(mouseHandler);    // register the JButton with the mouse handler
+                BoardMouseHandler bmh = new BoardMouseHandler(r, c);
+                boardArray[r][c].addMouseListener(bmh);    // register the JButton with the mouse handler
 
                 boardArray[r][c].setContentAreaFilled(false);     // Makes button transparent
                 // Code below is not needed but we're keeping it for reference later
@@ -85,26 +85,27 @@ public class View extends JFrame
         int storeUIxPos = origin.x+(WIDTH/24);                                                      // x position of storeUI
         int storeUIyPos = origin.y+(HEIGHT/20);                                                     // y position of storeUI
 
+        StoreItem[] storeItems = StoreItem.values();
         // set position of storeUI
-        storeUI.setBounds(storeUIxPos, storeUIyPos, (int)storeItemSize.getWidth() * NUM_STORE_ITEMS, (int)storeItemSize.getHeight());     // puts boardUI at (x,y) and sets width/height
+        storeUI.setBounds(storeUIxPos, storeUIyPos, (int)storeItemSize.getWidth() * storeItems.length, (int)storeItemSize.getHeight());     // puts boardUI at (x,y) and sets width/height
 
         // add buttons to store
-        storeUI.setLayout(new GridLayout(1, NUM_STORE_ITEMS));  // creates grid layout for the buttons
+        storeUI.setLayout(new GridLayout(1, storeItems.length));  // creates grid layout for the buttons
 
-        store = new JButton[NUM_STORE_ITEMS];                   // instantiates store
+        store = new JButton[storeItems.length];                   // instantiates store
 
         // places buttons on store
-        for(int r = 0; r < NUM_STORE_ITEMS; r++){
+        for(int r = 0; r < storeItems.length; r++){
             store[r] = new JButton();                   // instantiate each JButton with a row/col label
             storeUI.add(store[r]);                      // add the JButton to the pane
-            store[r].addMouseListener(mouseHandler);    // register the JButton with the mouse handler
+            store[r].addMouseListener(new StoreMouseHandler(storeItems[r]));    // register the JButton with the mouse handler
 
             // store[r].setIcon(game.getStore[r].getIcon());
         }
 
         /**CODE FOR THE PROGRESS BAR**/
         // Create progress bar
-        progressBar = new JProgressBar(0,NUM_ATTACKERS);                                // constructs progressBar
+        progressBar = new JProgressBar(0, NUM_ATTACKERS);                                // constructs progressBar
         Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), HEIGHT/10);   // dimensions of the progressBar
 
         // set coordinate
@@ -130,25 +131,59 @@ public class View extends JFrame
         );
     }
 
-    public void addCharacter(Character thing){
+    public void addCharacter(Character thing)
+    {
 
     }
 
-    public void removeCharacter(Character thing){
+    public void removeCharacter(Character thing)
+    {
 
     }
 
-    public void resetField(){
+    public void resetField()
+    {
 
     }
 
-    public void endProgram(){
+    public void endProgram()
+    {
         System.exit(0);
     }
 
     // THE CODE BELOW THIS IS NOT DONE
-    private class MouseHandler extends MouseAdapter
+    private class StoreMouseHandler extends MouseAdapter
+    {
+        public StoreItem si;
+
+        public StoreMouseHandler(StoreItem si)
+        {
+            this.si = si;
+        }
+        
+        public void mouseClicked(MouseEvent event)
+        {
+            control.pickDefender(si);
+        }
+    }
+    
+    private class BoardMouseHandler extends MouseAdapter
     {
         public int row, col;
+        public BoardMouseHandler(int r, int c)
+        {
+            row = r;
+            col = c;
+        }
+        public void mouseClicked(MouseEvent event)
+        {
+            Location loc = new Location(row*jbuttonWidth, col*jbuttonHeight);
+            control.placeDefender(loc);
+        }
+    }
+
+    public void setProgress(int prog)
+    {
+        progressBar.setValue(prog);
     }
 }
