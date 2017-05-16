@@ -10,9 +10,9 @@ import java.util.ListIterator;
 public class WarriorAnt extends Ant
 {
     private int swing;
-    public WarriorAnt(int baseHP, Location loc)
+    public WarriorAnt(Location loc)
     {
-        super(baseHP, loc);
+        super(250, loc);
         swing = 15;
     }
 
@@ -21,7 +21,7 @@ public class WarriorAnt extends Ant
         List<Defender> d = new LinkedList<Defender>();
         for (Defender defense : defenders)
         {
-            if (loc.getCol() == defense.getLoc().getCol() && loc.getRow() == defense.getLoc().getCol())
+            if (loc.getCol() == defense.getLoc().getCol() && loc.getRow() == defense.getLoc().getRow())
             {
                 if(!defense.takeDamage(swing))
                     d.add(defense);
