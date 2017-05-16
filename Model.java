@@ -14,6 +14,10 @@ public class Model
     private Defender[][] board;
     private List<Defender> defenderList;
     private List<Ant> antList;
+
+
+    private int gold;
+    private int curSelectedDefender = -1;
     public Model()
     {
         NUM_ATTACKERS = 20;
@@ -114,20 +118,37 @@ public class Model
         return output;
     }
 
-    public List<Defender> reapDefenders()
+    public ActResult act()
     {
-        List<Defender> output = new LinkedList<Defender>();
-
-        for (int c, r = 0; r < board.length; r++)
-            for (c = 0; c < board[r].length; c++)
-            {
-                if (board[r][c] != null && board[r][c].dead())
-                {
-                    output.add(board[r][c]);
-                    board[r][c] = null;
-                }
-            }
-
+        ActResult output = new ActResult();
+        // add new defenders on board
+        // move ants
+        // add new ants
+        // process actors
+        // track dead ants
         return output;
     }
+
+    public boolean selectDefenderToPlace(int i)
+    {
+        curSelectedDefender = i;
+
+        // Switch for defender cost
+        // check if player can afford defender
+            // subtract from gold if they can
+            // return true
+        // Can't afford it?
+            // return false;
+            //
+        return false;
+    }
+
+    public boolean placeDefender(Location loc)
+    {
+        // Switch curSelectedDefender
+        // init and place if valid
+        // else return false
+        return false;
+    }
+
 }
