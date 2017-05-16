@@ -11,9 +11,9 @@ public class DancingAnt extends Ant
 {
     private int swing;
     
-    public DancingAnt(int baseHP, Location loc)
+    public DancingAnt(Location loc)
     {
-        super(baseHP, loc);
+        super(100, loc);
         swing = 12;
     }
 
@@ -22,7 +22,7 @@ public class DancingAnt extends Ant
         List<Defender> d = new LinkedList<Defender>();
         for (Defender defense : defenders)
         {
-            if (loc.getCol() == defense.getLoc().getCol() && loc.getRow() == defense.getLoc().getCol())
+            if (loc.getCol() == defense.getLoc().getCol() && loc.getRow() == defense.getLoc().getRow())
             {
                 if(!defense.takeDamage(swing))
                     d.add(defense);
