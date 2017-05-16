@@ -15,9 +15,9 @@ public class PoisonFood extends Defender
     /**
      * Constructor for objects of class PoisonFood
      */
-    public PoisonFood(int baseHP, Location loc)
+    public PoisonFood(Location loc)
     {
-        super(baseHP, loc);
+        super(200, loc);
         dmg = 20;
     }
 
@@ -26,7 +26,7 @@ public class PoisonFood extends Defender
         List<Ant> d = new LinkedList<Ant>();
         for (Ant ant : ants)
         {
-            if (loc.getCol() == ant.getLoc().getCol() && loc.getRow() == ant.getLoc().getCol())
+            if (loc.getCol() == ant.getLoc().getCol() && loc.getRow() == ant.getLoc().getRow())
             {
                 if(!ant.takeDamage(dmg))
                     d.add(ant);
