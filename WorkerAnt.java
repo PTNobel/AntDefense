@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.LinkedList;
+import java.util.ListIterator;
 /**
  * Write a description of class WorkerAnt here.
  * 
@@ -16,24 +18,23 @@ public class WorkerAnt extends Ant
 
     public List<Defender> act(List<Defender> defenders)
     {
-        List<Defender> d = new ArrayList<Defender>();
+        List<Defender> d = new LinkedList<Defender>();
         for (Defender defense : defenders)
         {
-
-            if (loc.getCol() < 5 + defense.getLoc().getCol() && loc.getCol() > defense.getLoc().getCol() - 5)
+            if (loc.getCol() == defense.getLoc().getCol() && loc.getRow() == defense.getLoc().getCol())
             {
-                if(defense.takeDamage(swing))
+                if(!defense.takeDamage(swing))
                     d.add(defense);
             }
             else
-                loc = move(loc);
+                move(loc);
 
         }
         return d;
     }
 
-    private Location move(Location loc)
+    private void move(Location loc)
     {
-
+        setLoc(new Location(loc.getX() - 5, loc.getY()));
     }
 }
