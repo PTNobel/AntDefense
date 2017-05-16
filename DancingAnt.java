@@ -2,18 +2,19 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
 /**
- * Write a description of class WorkerAnt here.
+ * Write a description of class DancingAnt here.
  * 
  * @author Ignatius Widjaja
  * @version 0.0
  */
-public class WorkerAnt extends Ant
+public class DancingAnt extends Ant
 {
     private int swing;
-    public WorkerAnt(int baseHP, Location loc)
+    
+    public DancingAnt(int baseHP, Location loc)
     {
         super(baseHP, loc);
-        swing = 10;
+        swing = 12;
     }
 
     public List<Defender> act(List<Defender> defenders)
@@ -35,6 +36,7 @@ public class WorkerAnt extends Ant
 
     private void move(Location loc)
     {
-        setLoc(new Location(loc.getX() - 5, loc.getY()));
+        int thing = (int)(Math.random()*8)*45;
+        
     }
 }
