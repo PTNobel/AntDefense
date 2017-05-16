@@ -10,20 +10,19 @@ import java.util.List;
  */
 public class Model
 {
-    private final int NUM_ROWS, NUM_COLS, NUM_STORE_ITEMS, NUM_ATTACKERS;
+    private final int NUM_ROWS, NUM_COLS, NUM_ATTACKERS;
     private Defender[][] board;
     private List<Defender> defenderList;
     private List<Ant> antList;
 
-
     private int gold;
-    private int curSelectedDefender = -1;
+    private StoreItem curSelectedDefender = null;
+
     public Model()
     {
         NUM_ATTACKERS = 20;
         NUM_ROWS = 5;
         NUM_COLS = 10;
-        NUM_STORE_ITEMS = 6;
         board = new Defender[NUM_ROWS][NUM_COLS];
         antList = new LinkedList<Ant>();
         defenderList = new LinkedList<Defender>();
@@ -53,19 +52,18 @@ public class Model
             return false;
     }
     
-    public int getNumRows(){
+    public int getNumRows()
+    {
         return NUM_ROWS;
     }
     
-    public int getNumCols(){
+    public int getNumCols()
+    {
         return NUM_COLS;
     }
     
-    public int getNumStoreItems(){
-        return NUM_STORE_ITEMS;
-    }
-    
-    public int getNumAttackers(){
+    public int getNumAttackers()
+    {
         return NUM_ATTACKERS;
     }
 
@@ -129,26 +127,29 @@ public class Model
         return output;
     }
 
-    public boolean selectDefenderToPlace(int i)
+    public boolean selectDefenderToPlace(StoreItem si)
     {
-        curSelectedDefender = i;
+        curSelectedDefender = si;
 
         // Switch for defender cost
+        switch (si)
+        {
+        }
+
         // check if player can afford defender
             // subtract from gold if they can
             // return true
         // Can't afford it?
             // return false;
-            //
         return false;
     }
 
-    public boolean placeDefender(Location loc)
+    public Defender placeDefender(Location loc)
     {
         // Switch curSelectedDefender
         // init and place if valid
-        // else return false
-        return false;
+        // else return null
+        return null;
     }
 
 }
