@@ -15,15 +15,17 @@ public class Controller
     {
         v = view;
     }
+
     public void loop()
     {
         boolean cakeEaten = false, gameWon = false;
-        
+
         while (!cakeEaten && !gameWon)
         {
+            safeToAct = false;
             ActResult move = m.act();
             v.setProgress(move.progress);
-            
+
             for (Character charac: move.deadCharacters)
             {
                 v.removeCharacter(charac);
@@ -38,20 +40,30 @@ public class Controller
             {
                 // v.moveCharacter(charac);
             }
-        }
 
-        do {
-            try {
-                Thread.sleep(100);
-            }
-            catch (Exception e)
-            {
-            }
-        } while (!safeToAct);
+            safeToAct = true;
+            do {
+                try {
+                    Thread.sleep(100);
+                }
+                catch (Exception e)
+                {
+                }
+            } while (!safeToAct);
+        }
     }
 
     public void pickDefender(StoreItem si)
     {
+        while (!safeToAct){
+            try {
+                Thread.sleep(25);
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
         safeToAct = false;
         if (m.selectDefenderToPlace(si))
         {
@@ -62,6 +74,15 @@ public class Controller
 
     public void placeDefender(Location loc)
     {
+        while (!safeToAct){
+            try {
+                Thread.sleep(25);
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
         safeToAct = false;
         Defender newDef = m.placeDefender(loc);
         if (newDef != null)
