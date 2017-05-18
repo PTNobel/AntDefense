@@ -8,9 +8,12 @@ import java.util.List;
  */
 public abstract class Defender extends Character
 {
-    public Defender(int baseHP, Location loc)
+    int cost;
+    
+    public Defender(int baseHP, Location loc, int cost)
     {
         super(baseHP, loc);
+        this.cost = cost;
     }
 
     /**
@@ -18,4 +21,8 @@ public abstract class Defender extends Character
      * Returns ants killed.
      */   
     abstract public List<Ant> processAnts(List<Ant> ants);
+    
+    public int getCost(){
+        return cost;
+    }
 }
