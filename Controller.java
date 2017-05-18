@@ -24,19 +24,19 @@ public class Controller
         {
             safeToAct = false;
             ActResult move = m.act();
-            v.setProgress(move.progress);
+            v.setProgress(move.getProgress());
 
-            for (Character charac: move.deadCharacters)
+            for (Character charac: move.getDeadCharacters())
             {
                 v.removeCharacter(charac);
             }
 
-            for (Character charac: move.newCharacters)
+            for (Character charac: move.getNewCharacters())
             {
                 v.addCharacter(charac);
             }
 
-            for (Character charac: move.movedCharacters)
+            for (Character charac: move.getMovedCharacters())
             {
                 // v.moveCharacter(charac);
             }

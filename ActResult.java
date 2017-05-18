@@ -32,11 +32,11 @@ public class ActResult
         this.movedCharacters = movedCharacters;
     }
     
-    public List<Character> setMovedCharacters(){
+    public List<Character> getMovedCharacters(){
         return movedCharacters;
     }
     
-    public void setCakeEater(boolean eaten){
+    public void setCakeEaten(boolean eaten){
         cakeEaten = eaten;
     }
     
@@ -54,11 +54,11 @@ public class ActResult
         return this.gold;
     }
     
-    public void progressIncreased(){
-        // finish later
+    public void setProgress(int prog){
+        progress = prog;
     }
     
-    public void getProgress(){
-        // finish later
+    public int getProgress(){
+        return progress;
     }
 }
