@@ -9,4 +9,17 @@ public enum StoreItem
         COST = cost;
     }
 
+    public Defender getDefender(Location loc){
+        switch(this){
+            case POISONFOOD:
+                return new PoisonFood(loc);
+                break;
+            case POISONSPRAY:
+                return new PoisonSpray(loc);
+                break;
+            default:
+                return null;
+                break;
+        }
+    }
 }
