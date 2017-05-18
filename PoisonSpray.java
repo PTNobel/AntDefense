@@ -7,7 +7,7 @@ import java.util.ListIterator;
  * @author Tiffany Nguyen
  * @version 0.0
  */
-public abstract class PoisonSpray extends Defender
+public class PoisonSpray extends Defender
 {
     // instance variables - replace the example below with your own
     private int dmg;
@@ -17,7 +17,7 @@ public abstract class PoisonSpray extends Defender
      */
     public PoisonSpray(Location loc)
     {
-        super(500, loc); 
+        super(500, loc, 10); 
         dmg = 15;
     }
 
