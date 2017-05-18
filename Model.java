@@ -129,20 +129,33 @@ public class Model
 
     public boolean selectDefenderToPlace(StoreItem si)
     {
-        curSelectedDefender = si;
-
-        // check if player can afford defender
-            // return true
-        return gold < si.COST;
+        if(gold > si.COST){
+            curSelectedDefender = si;
+            return true;
+        } else {
+            return false;
+        }
     }
 
+    /*
+     * pre-condition: gold > curSelectedDefender.getCost()
+     */
     public Defender placeDefender(Location loc)
     {
-        // subtract from gold
-        // Switch curSelectedDefender
-        // init and place if valid
-        // else return null
-        return null;
+        if(curSelectedDefender == null){
+            return null;
+        } else if(getDefenderAtLoc(loc) != null){
+            return null;
+        } else {
+            switch(curSelectedDefender){
+                
+            }
+            Defender def = curSelectedDefender.getDefender();
+            gold -= def.getCost();
+            setDefenderAtLoc(def);
+            curSelectedDefender = null;
+            return def;
+        }
     }
 
 }
