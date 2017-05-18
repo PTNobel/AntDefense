@@ -22,6 +22,7 @@ public class View extends JFrame
     private final int NUM_ROWS, NUM_COLS, NUM_ATTACKERS;
     private JButton[][] boardArray;
     private JButton[] store;
+    private JLabel goldLabel;
     private JProgressBar progressBar;
 
     /**
@@ -102,8 +103,15 @@ public class View extends JFrame
 
             // store[r].setIcon(game.getStore[r].getIcon());
         }
+        /* CODE FOR GOLD LABEL */
+        // Create Gold Label
+        goldLabel = new JLabel("0", JLabel.LEFT);
 
-        /**CODE FOR THE PROGRESS BAR**/
+        goldLabel.setBounds(175, 8, 20000, 20); // NOTE: EVERYTHING IN THIS LINE IS A MAGIC NUMBER
+
+        
+
+        /* CODE FOR THE PROGRESS BAR */
         // Create progress bar
         progressBar = new JProgressBar(0, NUM_ATTACKERS);                                // constructs progressBar
         Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), HEIGHT/10);   // dimensions of the progressBar
@@ -119,6 +127,7 @@ public class View extends JFrame
         add(progressBar);       // adds progressBar to the screen     
         add(boardUI);           // adds boardUI to the screen
         add(storeUI);           // adds storeUI to the screen
+        add(goldLabel);
         setVisible(true);       // makes the screen visable
 
         // needed to close application
@@ -185,5 +194,10 @@ public class View extends JFrame
     public void setProgress(int prog)
     {
         progressBar.setValue(prog);
+    }
+    
+    public void setGoldLabel(int gold)
+    {
+        goldLabel.setText("" + gold);
     }
 }
