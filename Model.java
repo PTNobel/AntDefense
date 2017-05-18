@@ -150,7 +150,7 @@ public class Model
             switch(curSelectedDefender){
                 
             }
-            Defender def = curSelectedDefender.getDefender();
+            Defender def = curSelectedDefender.getDefender(loc);
             gold -= def.getCost();
             setDefenderAtLoc(def);
             curSelectedDefender = null;
