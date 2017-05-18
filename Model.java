@@ -131,21 +131,14 @@ public class Model
     {
         curSelectedDefender = si;
 
-        // Switch for defender cost
-        switch (si)
-        {
-        }
-
         // check if player can afford defender
-            // subtract from gold if they can
             // return true
-        // Can't afford it?
-            // return false;
-        return false;
+        return gold < si.COST;
     }
 
     public Defender placeDefender(Location loc)
     {
+        // subtract from gold
         // Switch curSelectedDefender
         // init and place if valid
         // else return null
