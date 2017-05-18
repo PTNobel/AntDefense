@@ -1,8 +1,27 @@
+import javax.swing.JOptionPane;
+
 public class AntDefense
 {
     public static void main(String[] args)
     {
-        Model game = new Model();
+        // Create the dialog.
+        String[] possibleValues = { "Trivial", "Easy", "Medium", "Hard"};
+        Integer selectedValue = JOptionPane.showOptionDialog(null,
+                "Choose a difficulty.", "Ant Defense",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                null,  possibleValues, possibleValues[0]);
+        LevelGenerator lg;
+        switch (selectedValue)
+        {
+            case 0: lg = new TrivialGenerator();
+                break;
+
+            default: lg = new TrivialGenerator();
+                break;
+        }
+
+
+        Model game = new Model(lg);
         Controller control = new Controller(game);
         View view = new View(game, control);
         control.setView(view);
