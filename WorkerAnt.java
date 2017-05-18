@@ -12,7 +12,7 @@ public class WorkerAnt extends Ant
     private int swing;
     public WorkerAnt(Location loc)
     {
-        super(100 loc);
+        super(100, loc);
         swing = 10;
     }
 
