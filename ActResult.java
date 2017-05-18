@@ -2,11 +2,11 @@ import java.util.List;
 
 public class ActResult
 {
-    public List<Character> deadCharacters;
-    public List<Character> newCharacters;
-    public boolean cakeEaten;
-    public int progress;
-    List<Character> movedCharacters;
+    private List<Character> deadCharacters;
+    private List<Character> newCharacters;
+    private boolean cakeEaten;
+    private int progress, gold;
+    private List<Character> movedCharacters;
     
     public ActResult(){
         // do we need anything in here?
@@ -42,6 +42,16 @@ public class ActResult
     
     public boolean getCakeEaten(){
         return cakeEaten;
+    }
+
+    public void setGold(int gold)
+    {
+        this.gold = gold;
+    }
+
+    public int getGold()
+    {
+        return this.gold;
     }
     
     public void progressIncreased(){
