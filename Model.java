@@ -30,30 +30,6 @@ public class Model
 	gold = 50;
     }
 
-    public void addAnts(Ant... ants)
-    {
-        for (Ant ant: ants)
-        {
-            antList.add(ant);
-        }
-    }
-
-    /**
-     * Returns true if defender was placed;
-     * Returns false if defender was not placed.
-     */
-    public boolean addDefender(Defender defend)
-    {
-        if (getDefenderAtLoc(defend.getLoc()) == null)
-        {
-            setDefenderAtLoc(defend);
-            defenderList.add(defend);
-            return true;
-        } 
-        else
-            return false;
-    }
-    
     public int getNumRows()
     {
         return NUM_ROWS;
@@ -81,6 +57,30 @@ public class Model
 	defenderList.add(def);
     }
 
+    public void addAnts(Ant... ants)
+    {
+        for (Ant ant: ants)
+        {
+            antList.add(ant);
+        }
+    }
+
+    /**
+     * Returns true if defender was placed;
+     * Returns false if defender was not placed.
+     */
+    public boolean addDefender(Defender defend)
+    {
+        if (getDefenderAtLoc(defend.getLoc()) == null)
+        {
+            setDefenderAtLoc(defend);
+            defenderList.add(defend);
+            return true;
+        } 
+        else
+            return false;
+    }
+ 
     /**
      * Returns a List containing all the ants that died because of the defender run.
      */
@@ -197,5 +197,4 @@ public class Model
             return def;
         }
     }
-
 }
