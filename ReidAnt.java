@@ -37,4 +37,9 @@ public class ReidAnt extends Ant
     {
         setLoc(new Location(loc.getX() - 20, loc.getY()));
     }
+
+    public int getGold()
+    {
+	    return 10;
+    }
 }

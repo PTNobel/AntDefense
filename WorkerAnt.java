@@ -37,4 +37,9 @@ public class WorkerAnt extends Ant
     {
         setLoc(new Location(loc.getX() - 5, loc.getY()));
     }
+    
+    public int getGold()
+    {
+	    return 5;
+    }
 }

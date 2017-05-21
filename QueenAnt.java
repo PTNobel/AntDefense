@@ -37,4 +37,9 @@ public class QueenAnt extends Ant
     {
         setLoc(new Location(loc.getX() - 10, loc.getY()));
     }
+
+    public int getGold()
+    {
+	    return 100;
+    }
 }

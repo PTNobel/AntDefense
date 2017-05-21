@@ -25,6 +25,11 @@ public abstract class Ant extends Character
     }
 
     /**
+     * REturns the appropriate gold amount gained from killing the Ant.
+     */
+    abstract public int getGold();
+
+    /**
      * Ant should act. If it kills a defender, then it should 
      * return an instance of them.
      */

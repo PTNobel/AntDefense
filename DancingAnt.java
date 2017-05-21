@@ -39,4 +39,9 @@ public class DancingAnt extends Ant
         int thing = (int)(Math.random()*8)*45;
         
     }
+
+    public int getGold()
+    {
+	    return 20;
+    }
 }
