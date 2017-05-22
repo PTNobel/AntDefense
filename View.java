@@ -109,10 +109,7 @@ public class View extends JFrame
         /* CODE FOR GOLD LABEL */
         // Create Gold Label
         goldLabel = new JLabel("0", JLabel.LEFT);
-
         goldLabel.setBounds(175, 8, 20000, 20); // NOTE: EVERYTHING IN THIS LINE IS A MAGIC NUMBER
-
-        
 
         /* CODE FOR THE PROGRESS BAR */
         // Create progress bar
@@ -126,17 +123,18 @@ public class View extends JFrame
         // set position of progressBar
         progressBar.setBounds(progressBarxPos, progressBaryPos, (int)progressBarSize.getWidth(), (int)progressBarSize.getHeight()); // puts progressBar at (x,y) and sets width/height
 
+        /* CODE FOR THE BACKGROUND */
         JLabel backgroundLabel;
         ImageIcon backgroundImage = new ImageIcon("AntDefenseUI.png", "Background");
         backgroundLabel = new JLabel(backgroundImage);
         backgroundLabel.setBounds(0, 0, 960, 720);
 
         // Set window size and show window
-        add(backgroundLabel);
+        add(backgroundLabel);   // adds background image
         add(progressBar);       // adds progressBar to the screen     
         add(boardUI);           // adds boardUI to the screen
         add(storeUI);           // adds storeUI to the screen
-        add(goldLabel);
+        add(goldLabel);         // adds goldLabel
         setVisible(true);       // makes the screen visable
 
         // needed to close application
