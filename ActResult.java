@@ -66,7 +66,7 @@ public class ActResult
         this.gameOver = gameOver;
     }
     
-    public boolean getGameOver(){
+    public boolean getGameWon(){
         return gameOver;
     }
 }
