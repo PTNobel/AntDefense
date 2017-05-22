@@ -130,11 +130,11 @@ public class View extends JFrame
         backgroundLabel.setBounds(0, 0, 960, 720);
 
         // Set window size and show window
-        add(backgroundLabel);   // adds background image
         add(progressBar);       // adds progressBar to the screen     
         add(boardUI);           // adds boardUI to the screen
         add(storeUI);           // adds storeUI to the screen
         add(goldLabel);         // adds goldLabel
+        add(backgroundLabel);   // adds background image
         setVisible(true);       // makes the screen visable
 
         // needed to close application
