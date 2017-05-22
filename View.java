@@ -13,6 +13,8 @@ import java.awt.event.*;    // import event listener
 
 public class View extends JFrame
 {
+	private static final long serialVersionUID = 1L;
+    
     // instance variables
     private Model myGame;
     private Controller control;
