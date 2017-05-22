@@ -26,7 +26,7 @@ public class Model
         board = new Defender[NUM_ROWS][NUM_COLS];
         antList = new LinkedList<Ant>();
         defenderList = new LinkedList<Defender>();
-	progress = 0;
+        progress = 0;
 	gold = 50;
     }
 
@@ -54,7 +54,7 @@ public class Model
     {
         Location loc = def.getLoc();
         board[loc.getRow()][loc.getCol()] = def;
-	defenderList.add(def);
+    defenderList.add(def);
     }
 
     public void addAnts(Ant... ants)
@@ -122,51 +122,52 @@ public class Model
     public ActResult act()
     {
         ActResult output = new ActResult();
-	List<Character> deadCharacters = new LinkedList<Character>();
-	List<Character> newCharacters = new LinkedList<Character>();
-	List<Character> movedCharacters = new LinkedList<Character>();
-        output.setCakeEaten(true);
-	// move ants
-	for (Ant ant:antList)
-	{
-	    Location oldLoc = ant.getLoc();
+        List<Character> deadCharacters = new LinkedList<Character>();
+        List<Character> newCharacters = new LinkedList<Character>();
+        List<Character> movedCharacters = new LinkedList<Character>();
+        output.setCakeEaten(false);
+        // move ants
+        for (Ant ant:antList)
+        {
+            Location oldLoc = ant.getLoc();
             for (Defender def: ant.act(defenderList))
             {
                 deadCharacters.add(def);
                 defenderList.remove(def);
             }
-	    if (!oldLoc.equals(ant.getLoc()))
-	    {
-		movedCharacters.add(ant);
-	    }
-	    if (ant.getLoc().getX() < 0)
-		    output.setCakeEaten(true);
-	}
+            if (!oldLoc.equals(ant.getLoc()))
+            {
+                movedCharacters.add(ant);
+            }
+            if (ant.getLoc().getX() < 0)
+                output.setCakeEaten(true);
+        }
         // add new ants
-	for (Ant newAnt: lg.generateAnts())
-	{
-		antList.add(newAnt);
-		newCharacters.add(newAnt);
-	}
+        for (Ant newAnt: lg.generateAnts())
+        {
+            antList.add(newAnt);
+            newCharacters.add(newAnt);
+        }
         // process defenders
-         for (Defender def: defenderList)
+        for (Defender def: defenderList)
         {
             for (Ant ant: def.processAnts(antList))
             {
                 deadCharacters.add(ant);
                 antList.remove(ant);
-		progress++;
-		gold += ant.getGold();
+                progress++;
+                gold += ant.getGold();
             }
         }
 
 
-	//
-	output.setDeadCharacters(deadCharacters);
-	output.setNewCharacters(newCharacters);
-	output.setMovedCharacters(movedCharacters);
-	output.setProgress(progress);
-	output.setGold(gold);
+        //
+        output.setDeadCharacters(deadCharacters);
+        output.setNewCharacters(newCharacters);
+        output.setMovedCharacters(movedCharacters);
+        output.setProgress(progress);
+        output.setGold(gold);
+
         return output;
     }
 
