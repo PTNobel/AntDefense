@@ -153,10 +153,10 @@ public class View extends JFrame
     public void addCharacter(Character thing)
     {
         Location loc = thing.getLoc();
-        JLabel jl = thing.getJLabel();
         // TODO: Generate JLabel
-
-        jl.setLocation(loc.getPoint());
+        ImageIcon imgIcon = thing.getInitialImageIcon();
+        JLabel jl = new JLabel(imgIcon);
+        jl.setBounds(loc.getX(), loc.getY(), imgIcon.getIconWidth(), imgIcon.getIconHeight());
 
         boardUI.add(jl);
     }

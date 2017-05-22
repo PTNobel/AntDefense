@@ -1,4 +1,5 @@
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 /**
  * Characters is the base class of all defenders and actors
  * 
@@ -46,4 +47,6 @@ abstract public class Character
     {
         return this.jLabel;
     }
+
+    abstract public ImageIcon getInitialImageIcon();
 }
