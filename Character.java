@@ -36,7 +36,7 @@ abstract public class Character
         return hp <= 0;
     }
 
-    private JLabel jLabel;
+    private JLabel jLabel = null;
     public void setJLabel(JLabel jl)
     {
         jLabel = jl;
