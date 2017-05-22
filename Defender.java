@@ -1,4 +1,5 @@
 import java.util.List;
+import javax.swing.ImageIcon;
 
 /**
  * Abstract class Defender - It is the base design for all defenders.
@@ -24,5 +25,10 @@ public abstract class Defender extends Character
     
     public int getCost(){
         return cost;
+    }
+
+    public ImageIcon getInitialImageIcon()
+    {
+        return new ImageIcon("NullDefender.png");
     }
 }
