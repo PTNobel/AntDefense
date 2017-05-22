@@ -126,7 +126,13 @@ public class View extends JFrame
         // set position of progressBar
         progressBar.setBounds(progressBarxPos, progressBaryPos, (int)progressBarSize.getWidth(), (int)progressBarSize.getHeight()); // puts progressBar at (x,y) and sets width/height
 
+        JLabel backgroundLabel;
+        ImageIcon backgroundImage = new ImageIcon("AntDefenseUI.png", "Background");
+        backgroundLabel = new JLabel(backgroundImage);
+        backgroundLabel.setBounds(0, 0, 960, 720);
+
         // Set window size and show window
+        add(backgroundLabel);
         add(progressBar);       // adds progressBar to the screen     
         add(boardUI);           // adds boardUI to the screen
         add(storeUI);           // adds storeUI to the screen
