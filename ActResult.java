@@ -4,7 +4,7 @@ public class ActResult
 {
     private List<Character> deadCharacters;
     private List<Character> newCharacters;
-    private boolean cakeEaten;
+    private boolean cakeEaten, gameOver;
     private int progress, gold;
     private List<Character> movedCharacters;
     
@@ -60,5 +60,13 @@ public class ActResult
     
     public int getProgress(){
         return progress;
+    }
+    
+    public void setGameOver(boolean gameOver){
+        this.gameOver = gameOver;
+    }
+    
+    public boolean getGameOver(){
+        return gameOver;
     }
 }
