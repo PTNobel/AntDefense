@@ -27,7 +27,7 @@ public class Model
         antList = new LinkedList<Ant>();
         defenderList = new LinkedList<Defender>();
         progress = 0;
-	gold = 50;
+        gold = 50;
     }
 
     public int getNumRows()
@@ -197,5 +197,9 @@ public class Model
             curSelectedDefender = null;
             return def;
         }
+    }
+    
+    public boolean getGameWon(){
+        return NUM_ATTACKERS == progress;
     }
 }
