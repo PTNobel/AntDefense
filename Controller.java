@@ -48,6 +48,9 @@ public class Controller
                 v.moveCharacter(charac);
             }
 
+            gameWon = move.getGameWon();
+            cakeEaten = move.getCakeEaten();
+            
             safeToAct = true;
             do {
                 try {
