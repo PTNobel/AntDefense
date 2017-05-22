@@ -15,7 +15,7 @@ public class TrivialGenerator implements LevelGenerator
         if (completed < max)
         {
             if (Math.random() > 0.75)
-            output.add(new WorkerAnt(new Location(0, 0)));
+            output.add(new WorkerAnt(new Location(40, 100)));
         }
         return output;
     }
