@@ -13,17 +13,6 @@ public abstract class Ant extends Character
         super(baseHP, loc);
     }
 
-    private Icon icon;
-    public void setIcon(Icon icon)
-    {
-        this.icon = icon;
-    }
-    
-    public Icon getIcon()
-    {
-        return this.icon;
-    }
-
     /**
      * REturns the appropriate gold amount gained from killing the Ant.
      */

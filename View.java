@@ -143,21 +143,21 @@ public class View extends JFrame
 
     public void moveCharacter(Character thing)
     {
-	Location loc = thing.getLocation();
+	Location loc = thing.getLoc();
 
-	thing.getIcon().setLocation(loc.getPoint()):
+	thing.getJLabel().setLocation(loc.getPoint());
 	
 	
     }
 
     public void addCharacter(Character thing)
     {
-	Location loc = thing.getLocation();
-	Icon icon = thing.getIcon();
+	Location loc = thing.getLoc();
+	JLabel jl = thing.getJLabel();
 	
-	icon.setLocation(loc.getPoint());
+	jl.setLocation(loc.getPoint());
 
-	boardUI.add(icon);
+	boardUI.add(jl);
     }
 
     public void removeCharacter(Character thing)

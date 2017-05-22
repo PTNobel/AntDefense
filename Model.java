@@ -129,17 +129,17 @@ public class Model
 	// move ants
 	for (Ant ant:antList)
 	{
-	    Location oldLoc = ant.getLocation();
+	    Location oldLoc = ant.getLoc();
             for (Defender def: ant.act(defenderList))
             {
                 deadCharacters.add(def);
                 defenderList.remove(def);
             }
-	    if (!oldLoc.equals(ant.getLocation()))
+	    if (!oldLoc.equals(ant.getLoc()))
 	    {
 		movedCharacters.add(ant);
 	    }
-	    if (ant.getLocation().getX() < 0)
+	    if (ant.getLoc().getX() < 0)
 		    output.setCakeEaten(true);
 	}
         // add new ants

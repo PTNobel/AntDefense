@@ -1,4 +1,4 @@
-
+import javax.swing.JLabel;
 /**
  * Characters is the base class of all defenders and actors
  * 
@@ -36,4 +36,14 @@ abstract public class Character
         return hp <= 0;
     }
 
+    private JLabel jLabel;
+    public void setJLabel(JLabel jl)
+    {
+        jLabel = jl;
+    }
+    
+    public JLabel getJLabel()
+    {
+        return this.jLabel;
+    }
 }
