@@ -1,5 +1,12 @@
 import java.util.List;
 
+/**
+ * This class communicates information from the Model to the View and vica
+ * versa
+ *
+ * @author Parth Nobel and Chase Carnaroli
+ * @version 0.0
+ */
 public class Controller
 {
     private Model m;
@@ -38,7 +45,7 @@ public class Controller
 
             for (Character charac: move.getMovedCharacters())
             {
-                // v.moveCharacter(charac);
+                v.moveCharacter(charac);
             }
 
             safeToAct = true;
