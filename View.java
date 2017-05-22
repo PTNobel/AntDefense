@@ -1,7 +1,7 @@
 /**
- * Write a description of class Model here.
+ * Handles all Graphics
  * 
- * @author Chase Carnaroli
+ * @author Chase Carnaroli and Parth Nobel
  * @version 0.0
  */
 
@@ -24,6 +24,7 @@ public class View extends JFrame
     private JButton[] store;
     private JLabel goldLabel;
     private JProgressBar progressBar;
+    private JLayeredPane boardUI;
 
     /**
      * Constructor for objects of class Model
@@ -47,7 +48,7 @@ public class View extends JFrame
 
         /**CODE FOR THE BOARD ON THE SCREEN**/
         // Create board
-        JLayeredPane boardUI = new JLayeredPane();                                  // constructs boardUI pane
+        boardUI = new JLayeredPane();                                  // constructs boardUI pane
         Dimension boardSize = new Dimension(WIDTH-(WIDTH/6), HEIGHT-(2*HEIGHT/5));  // dimensions of the board
         int boardUIxPos = origin.x+(WIDTH/12);                                      // x position of boardUI
         int boardUIyPos = origin.y+(HEIGHT/5);                                      // y position of the boardUI
@@ -140,14 +141,28 @@ public class View extends JFrame
         );
     }
 
+    public void moveCharacter(Character thing)
+    {
+	Location loc = thing.getLocation();
+
+	thing.getIcon().setLocation(loc.getPoint()):
+	
+	
+    }
+
     public void addCharacter(Character thing)
     {
+	Location loc = thing.getLocation();
+	Icon icon = thing.getIcon();
+	
+	icon.setLocation(loc.getPoint());
 
+	boardUI.add(icon);
     }
 
     public void removeCharacter(Character thing)
     {
-
+	
     }
 
     public void resetField()
@@ -160,7 +175,6 @@ public class View extends JFrame
         System.exit(0);
     }
 
-    // THE CODE BELOW THIS IS NOT DONE
     private class StoreMouseHandler extends MouseAdapter
     {
         public StoreItem si;
