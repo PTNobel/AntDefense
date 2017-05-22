@@ -101,10 +101,9 @@ public class View extends JFrame
         // places buttons on store
         for(int r = 0; r < storeItems.length; r++){
             store[r] = new JButton();                   // instantiate each JButton with a row/col label
-            storeUI.add(store[r]);                      // add the JButton to the pane
+            store[r].setIcon(storeItems[r].INIT_IMAGE);
             store[r].addMouseListener(new StoreMouseHandler(storeItems[r]));    // register the JButton with the mouse handler
-
-            // store[r].setIcon(game.getStore[r].getIcon());
+            storeUI.add(store[r]);                      // add the JButton to the pane
         }
         /* CODE FOR GOLD LABEL */
         // Create Gold Label
