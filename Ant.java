@@ -1,8 +1,7 @@
 import java.util.List;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 /**
- * 
- * 
  * @author Parth
  * @version 0.0
  */
@@ -23,4 +22,8 @@ public abstract class Ant extends Character
      * return an instance of them.
      */
     abstract public List<Defender> act(List<Defender> defenders);
+    
+    public ImageIcon getInitialImageIcon(){
+        return new ImageIcon("NullAnt.png");
+    }
 }
