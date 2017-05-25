@@ -37,4 +37,9 @@ public class Location
     {
         return pt.y;
     }
+    
+    public boolean equals(Location loc)
+    {
+        return loc.getCol() == getCol() && loc.getRow() == getRow();
+    }
 }
