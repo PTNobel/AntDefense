@@ -51,7 +51,7 @@ public class View extends JFrame
         /**CODE FOR THE BOARD ON THE SCREEN**/
         // Create board
         boardUI = new JLayeredPane();                                  // constructs boardUI pane
-        Dimension boardSize = new Dimension(WIDTH-(WIDTH/6), HEIGHT-(2*HEIGHT/5));  // dimensions of the board
+        Dimension boardSize = new Dimension(NUM_COLS*80, NUM_ROWS*80);  // dimensions of the board
         int boardUIxPos = origin.x+(WIDTH/12);                                      // x position of boardUI
         int boardUIyPos = origin.y+(HEIGHT/5);                                      // y position of the boardUI
 
@@ -71,7 +71,6 @@ public class View extends JFrame
                 boardUI.add(boardArray[r][c]);                      // add the JButton to the pane
                 BoardMouseHandler bmh = new BoardMouseHandler(r, c);
                 boardArray[r][c].addMouseListener(bmh);    // register the JButton with the mouse handler
-
                 boardArray[r][c].setContentAreaFilled(false);     // Makes button transparent
                 // Code below is not needed but we're keeping it for reference later
                 //boardArray[r][c].setOpaque(false);              // Dont know why this is needed
@@ -79,8 +78,8 @@ public class View extends JFrame
             }
         }
         // Let's share the constants Location needs
-        jbuttonHeight = boardArray[0][0].getHeight();
-        jbuttonWidth = boardArray[0][0].getWidth();
+        jbuttonHeight = 80;
+        jbuttonWidth = 80;
         
         /**CODE FOR THE STORE ON THE SCREEN**/
         // Create store
@@ -151,6 +150,20 @@ public class View extends JFrame
         Location loc = thing.getLoc();
 
         thing.getJLabel().setLocation(loc.getPoint());
+    }
+
+    /**
+     * true denotes Player Win
+     * false denotes Player loss
+     */
+    public void announceWinOrLoss(boolean wOrL)
+    {
+        String[] possibleValues = { "OK"};
+        Integer selectedValue = JOptionPane.showOptionDialog(null,
+                (wOrL)?"You won": "You lost", "Ant Defense",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                null,  possibleValues, possibleValues[0]);
+ 
     }
 
     public void addCharacter(Character thing)

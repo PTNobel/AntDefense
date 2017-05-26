@@ -61,7 +61,14 @@ public class Controller
                 {
                 }
             } while (!safeToAct);
+
+            System.out.println("Game: "+ gameWon + "\tCake: " + cakeEaten);
         }
+        
+        if (gameWon)
+            v.announceWinOrLoss(true);
+        if (cakeEaten)
+            v.announceWinOrLoss(false);
     }
 
     public void pickDefender(StoreItem si)
