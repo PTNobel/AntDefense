@@ -202,4 +202,9 @@ public class Model
     public boolean getGameWon(){
         return NUM_ATTACKERS == progress;
     }
+
+    public int getGold()
+    {
+        return gold;
+    }
 }
