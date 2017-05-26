@@ -21,6 +21,7 @@ public class Controller
     public void setView(View view)
     {
         v = view;
+        v.setGoldLabel(m.getGold());
     }
 
     public void loop()
