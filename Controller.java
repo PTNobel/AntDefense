@@ -27,6 +27,7 @@ public class Controller
     public void loop()
     {
         boolean cakeEaten = false, gameWon = false;
+        int turn = 0;
 
         while (!cakeEaten && !gameWon)
         {
@@ -51,7 +52,7 @@ public class Controller
 
             gameWon = move.getGameWon();
             cakeEaten = move.getCakeEaten();
-            
+            turn++;
             safeToAct = true;
             do {
                 try {
@@ -62,7 +63,7 @@ public class Controller
                 }
             } while (!safeToAct);
 
-            System.out.println("Game: "+ gameWon + "\tCake: " + cakeEaten);
+            System.out.println("Game: "+ gameWon + "\tCake: " + cakeEaten + "\tTurn: " + turn);
         }
         
         if (gameWon)
