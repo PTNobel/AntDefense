@@ -1,12 +1,10 @@
 import java.util.List;
 import java.util.LinkedList;
-public class TrivialGenerator implements LevelGenerator
+public class TrivialGenerator extends LevelGenerator
 {
-    private int completed = 0, max = 1;
-
-    public int getNumAttackers()
+    public TrivialGenerator()
     {
-        return max;
+        super(3);
     }
 
     public List<Ant> generateAnts()
@@ -14,9 +12,9 @@ public class TrivialGenerator implements LevelGenerator
         List<Ant> output = new LinkedList<Ant>();
         if (completed < max)
         {
-            if (Math.random() > 0.95)
+            if (Math.random() < 0.2)
             {
-                output.add(new WorkerAnt(new Location(400, 100)));
+                output.add(new WorkerAnt(selectRandomRow()));
                 completed++;
             }
         }
