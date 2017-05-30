@@ -37,9 +37,14 @@ public class Location
     {
         return pt.y;
     }
-    
+
+    public String toString()
+    {
+        return "Location: (" + pt.x + ", " + pt.y + ")";
+    }
+
     public boolean equals(Location loc)
     {
-        return loc.getCol() == getCol() && loc.getRow() == getRow();
+        return loc.getX() == getX() && loc.getY() == getY();
     }
 }

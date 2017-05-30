@@ -175,6 +175,7 @@ public class View extends JFrame
         jl.setBounds(loc.getX(), loc.getY(), imgIcon.getIconWidth(), imgIcon.getIconHeight());
 
         boardUI.add(jl);
+        thing.setJLabel(jl);
     }
 
     public void removeCharacter(Character thing)
