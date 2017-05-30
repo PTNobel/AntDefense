@@ -81,44 +81,6 @@ public class Model
             return false;
     }
  
-    /**
-     * Returns a List containing all the ants that died because of the defender run.
-     */
-    public List<Ant> runDefenders()
-    {
-        List<Ant> output = new LinkedList<Ant>();
-
-        for (Defender def: defenderList)
-        {
-            for (Ant ant: def.processAnts(antList))
-            {
-                output.add(ant);
-                antList.remove(ant);
-            }
-        }
-
-        return output;
-    }
-
-    /**
-     * Returns a List containing all the ants that died because of the defender run.
-     */
-    public List<Defender> runAnts()
-    {
-        List<Defender> output = new LinkedList<Defender>();
-
-        for (Ant ant: antList)
-        {
-            for (Defender def: ant.act(defenderList))
-            {
-                output.add(def);
-                defenderList.remove(def);
-            }
-        }
-
-        return output;
-    }
-
     public ActResult act()
     {
         ActResult output = new ActResult();
@@ -130,7 +92,8 @@ public class Model
         for (Ant ant:antList)
         {
             Location oldLoc = ant.getLoc();
-            for (Defender def: ant.act(defenderList))
+            List<Defender> killedDefs = ant.act(defenderList);
+            for (Defender def: killedDefs)
             {
                 deadCharacters.add(def);
                 defenderList.remove(def);
