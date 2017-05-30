@@ -130,13 +130,14 @@ public class Model
         output.setMovedCharacters(movedCharacters);
         output.setProgress(progress);
         output.setGold(gold);
+        output.setGameOver(progress==NUM_ATTACKERS);
 
         return output;
     }
 
     public boolean selectDefenderToPlace(StoreItem si)
     {
-        if(gold > si.COST){
+        if(gold >= si.COST){
             curSelectedDefender = si;
             return true;
         } else {
