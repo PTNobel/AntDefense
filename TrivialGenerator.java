@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.LinkedList;
 public class TrivialGenerator implements LevelGenerator
 {
-    private int completed = 0, max = 3;
+    private int completed = 0, max = 1;
 
     public int getNumAttackers()
     {
@@ -16,7 +16,7 @@ public class TrivialGenerator implements LevelGenerator
         {
             if (Math.random() > 0.95)
             {
-                output.add(new WorkerAnt(new Location(40, 100)));
+                output.add(new WorkerAnt(new Location(400, 100)));
                 completed++;
             }
         }
