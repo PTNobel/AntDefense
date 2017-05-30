@@ -62,8 +62,6 @@ public class Controller
                 {
                 }
             } while (!safeToAct);
-
-            System.out.println("Game: "+ gameWon + "\tCake: " + cakeEaten + "\tTurn: " + turn);
         }
         
         if (gameWon)
