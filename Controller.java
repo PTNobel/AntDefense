@@ -33,7 +33,6 @@ public class Controller
         {
             safeToAct = false;
             ActResult move = m.act();
-            v.setProgress(move.getProgress());
 
             for (Character charac: move.getDeadCharacters())
             {
@@ -50,9 +49,13 @@ public class Controller
                 v.moveCharacter(charac);
             }
 
+            v.setProgress(move.getProgress());
+            v.setGoldLabel(move.getGold());
             gameWon = move.getGameWon();
             cakeEaten = move.getCakeEaten();
             turn++;
+
+
             safeToAct = true;
             do {
                 try {
