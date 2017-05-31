@@ -21,17 +21,21 @@ public class ReidAnt extends Ant
     public List<Defender> act(List<Defender> defenders)
     {
         List<Defender> d = new LinkedList<Defender>();
+
+        boolean blocked = false;
         for (Defender defense : defenders)
         {
             if (loc.getCol() == defense.getLoc().getCol() && loc.getRow() == defense.getLoc().getRow())
             {
                 if(!defense.takeDamage(swing))
                     d.add(defense);
+                else
+                    blocked = true;
             }
-            else
-                move(loc);
-
         }
+
+        if (!blocked)
+            move(loc);
         return d;
     }
 
