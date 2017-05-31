@@ -27,6 +27,10 @@ public class PictureLoader
             built = true;
         }
         catch (Exception e)
-        {}
+        {
+            System.out.println("Failed to load pictures: " + e.getMessage());
+        }
+
+        System.out.println("Built: " + built);
     }
 }
