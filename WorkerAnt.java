@@ -50,6 +50,6 @@ public class WorkerAnt extends Ant
     }
 
     public ImageIcon getInitialImageIcon(){
-        return new ImageIcon("workerAnt.png");
+        return PictureLoader.workerAnt;
     }
 }
