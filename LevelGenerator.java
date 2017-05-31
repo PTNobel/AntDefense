@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 
 public abstract class LevelGenerator
 {
@@ -7,8 +8,8 @@ public abstract class LevelGenerator
     protected int max;
     
     // location variables
-    private int numRows = 5
-    private int yGap = 40
+    private int numRows = 5;
+    private int yGap = 40;
     private int xStart = 760;
     protected List<Location> rows = new ArrayList<Location>();
     protected Location row1 = new Location(xStart, yGap);
@@ -16,12 +17,16 @@ public abstract class LevelGenerator
     protected Location row3 = new Location(xStart, yGap * 3);
     protected Location row4 = new Location(xStart, yGap * 4);
     protected Location row5 = new Location(xStart, yGap * 5);
-    rows.add(row1);
-    rows.add(row2);
-    rows.add(row3);
-    rows.add(row4);
-    rows.add(row5);
-    
+  
+    public LevelGenerator()
+    {
+        rows.add(row1);
+        rows.add(row2);
+        rows.add(row3);
+        rows.add(row4);
+        rows.add(row5);
+    }
+
     public LevelGenerator(int max){
         this.max = max;
     }
