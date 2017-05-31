@@ -1,6 +1,9 @@
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  * Write a description of class DancingAnt here.
  * 
@@ -43,5 +46,9 @@ public class DancingAnt extends Ant
     public int getGold()
     {
 	    return 20;
+    }
+
+    public ImageIcon getInitialImageIcon(){
+        return new ImageIcon("dancingAnt.png");
     }
 }
