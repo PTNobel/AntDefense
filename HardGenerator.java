@@ -47,12 +47,12 @@ public class HardGenerator extends LevelGenerator
                     output.add(new DancingAnt(selectRandomRow()));
                     completed++;
                 }
-                if (Math.random < 0.5)
+                if (Math.random() < 0.5)
                 {
                     output.add(new WarriorAnt(selectRandomRow()));
                     completed++;
                 }
-                else if (Math.random < 0.5)
+                else if (Math.random() < 0.5)
                 {
                     output.add(new ReidAnt(selectRandomRow()));
                     completed++;
