@@ -9,7 +9,7 @@ public class PictureLoader
     public static ImageIcon poisonFood, poisonSpray, squirtGun, woodenBlock;
     public static ImageIcon dancingAnt, reidAnt, warriorAnt, workerAnt;
 
-    public void PictureLoader()
+    public PictureLoader()
     {
         if (built)
             return;
