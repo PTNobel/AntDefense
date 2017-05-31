@@ -122,7 +122,7 @@ public class View extends JFrame
 
         /* CODE FOR THE BACKGROUND */
         JLabel backgroundLabel;
-        ImageIcon backgroundImage = new ImageIcon("AntDefenseUI.png", "Background");
+        ImageIcon backgroundImage = PictureLoader.antDefenseUI;
         backgroundLabel = new JLabel(backgroundImage);
         backgroundLabel.setBounds(0, 0, 960, 720);
 
