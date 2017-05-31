@@ -18,7 +18,7 @@ public class PoisonFood extends Defender
      */
     public PoisonFood(Location loc)
     {
-        super(200, loc, 5);
+        super(500, loc);
         dmg = 20;
     }
 

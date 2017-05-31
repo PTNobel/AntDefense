@@ -10,22 +10,17 @@ import javax.swing.ImageIcon;
  */
 public class WoodenBlock extends Defender
 {
-    // instance variables - replace the example below with your own
-    private int dmg;
-
     /**
      * Constructor for objects of class PoisonFood
      */
     public WoodenBlock(Location loc)
     {
-        super(300, loc, 2);
-        dmg = 0;
+        super(2000, loc);
     }
 
     public List<Ant> processAnts(List<Ant> ants)
     {
-        List<Ant> d = new LinkedList<Ant>();
-        return d;                               //returns an empty list since no damage is done
+        return new LinkedList<Ant>(); //returns an empty list since no damage is done
     }
     
     public ImageIcon getInitialImageIcon()

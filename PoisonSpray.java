@@ -18,8 +18,8 @@ public class PoisonSpray extends Defender
      */
     public PoisonSpray(Location loc)
     {
-        super(500, loc, 10); 
-        dmg = 15;
+        super(200, loc); 
+        dmg = 30;
     }
 
     public List<Ant> processAnts(List<Ant> ants)

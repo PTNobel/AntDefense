@@ -18,20 +18,38 @@ public class SquirtGun extends Defender
      */
     public SquirtGun(Location loc)
     {
-        super(400, loc, 8);
-        dmg = 30;
+        super(200, loc);
+        dmg = 50;
     }
 
     public List<Ant> processAnts(List<Ant> ants)
     {
-        List<Ant> d = new LinkedList<Ant>();
-        for (Ant ant : ants)
+        // Finds closest in column ant
+        Ant closestAnt = null;
+        for (Ant ant: ants)
         {
-            if (loc.getCol() == ant.getLoc().getCol() && loc.getRow() == ant.getLoc().getRow())
+            if (ant.getLoc().getRow() == loc.getRow())
             {
-                if(!ant.takeDamage(dmg))
-                    d.add(ant);
+                Location antLoc = ant.getLoc();
+                if (loc.getX() < antLoc.getX())
+                {
+                    if (closestAnt == null)
+                    {
+                        closestAnt = ant;
+                    }
+                    else if (closestAnt.getLoc().getX() > antLoc.getX())
+                    {
+                        closestAnt = ant;
+                    }
+                }
             }
+        }
+
+        List<Ant> d = new LinkedList<Ant>();
+        if (closestAnt != null)
+        {
+            if(!closestAnt.takeDamage(dmg))
+                d.add(closestAnt);
         }
         return d;
     }
