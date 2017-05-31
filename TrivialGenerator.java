@@ -16,6 +16,10 @@ public class TrivialGenerator extends LevelGenerator
             {
                 output.add(new WorkerAnt(selectRandomRow()));
                 completed++;
+            } else if (Math.random() < 0.01)
+            {
+                output.add(new DancingAnt(selectRandomRow()));
+                completed++;
             }
         }
         return output;

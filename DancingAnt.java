@@ -13,11 +13,15 @@ import javax.swing.ImageIcon;
 public class DancingAnt extends Ant
 {
     private int swing;
+    private int turnsInDir;
+    private int dir;
     
     public DancingAnt(Location loc)
     {
         super(100, loc);
         swing = 12;
+        turnsInDir = 0;
+        dir = 0;
     }
 
     public List<Defender> act(List<Defender> defenders)
@@ -29,10 +33,13 @@ public class DancingAnt extends Ant
         {
             if (loc.getCol() == defense.getLoc().getCol() && loc.getRow() == defense.getLoc().getRow())
             {
-                if(!defense.takeDamage(swing))
-                    d.add(defense);
+                turnsInDir = 10;
+                if (loc.getCol() == 0)
+                    dir = 2; // down
+                if (loc.getCol() == 5)
+                    dir = 3; // down
                 else
-                    blocked = true;
+                    dir = (Math.random() > .5)? 2: 3;
             }
         }
 
@@ -43,25 +50,40 @@ public class DancingAnt extends Ant
 
     private void move(Location loc)
     {
-        int thing = (int)(Math.random()*8);
-        Location newLoc;
-        switch (thing)
+        if (turnsInDir <= 0)
         {
-            case 0: newLoc = new Location(loc.getX() - 1, loc.getY());
+            dir = (int)(Math.random()*8);
+        }
+        else
+        {
+            turnsInDir--;
+        }
+
+        Location newLoc;
+        switch (dir)
+        {
+            // Move forward
+            case 5:
+            case 0: newLoc = new Location(loc.getX() - 4, loc.getY());
+                turnsInDir = 10;
                 break;
-            case 1: newLoc = new Location(loc.getX() + 1, loc.getY());
+            // Move diagnoally down
+            case 7:
+            case 1: newLoc = new Location(loc.getX() - 2, loc.getY() - 2);
+                turnsInDir = 20;
                 break;
-            case 2: newLoc = new Location(loc.getX(), loc.getY() - 1);
+            // Move down
+            case 2: newLoc = new Location(loc.getX(), loc.getY() - 4);
+                turnsInDir = 10;
                 break;
-            case 3: newLoc = new Location(loc.getX(), loc.getY() + 1);
+            // Move up
+            case 3: newLoc = new Location(loc.getX(), loc.getY() + 4);
+                turnsInDir = 10;
                 break;
-            case 4: newLoc = new Location(loc.getX() - 1, loc.getY() - 1);
-                break;
-            case 5: newLoc = new Location(loc.getX() - 1, loc.getY() + 1);
-                break;
-            case 6: newLoc = new Location(loc.getX() + 1, loc.getY() - 1);
-                break;
-            case 7: newLoc = new Location(loc.getX() + 1, loc.getY() + 1);
+            // Move diagnoally up
+            case 6:
+            case 4: newLoc = new Location(loc.getX() - 2, loc.getY() - 2);
+                turnsInDir = 20;
                 break;
             default: newLoc = null;
                 break;

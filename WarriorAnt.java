@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import javax.swing.ImageIcon;
 /**
  * Write a description of class WarriorAnt here.
  * 
@@ -45,5 +46,10 @@ public class WarriorAnt extends Ant
     public int getGold()
     {
 	    return 10;
+    }
+
+    public ImageIcon getInitialImageIcon()
+    {
+        return new ImageIcon("warriorAnt.png");
     }
 }
