@@ -27,7 +27,7 @@ public class Model
         antList = new LinkedList<Ant>();
         defenderList = new LinkedList<Defender>();
         progress = 0;
-        gold = 50;
+        gold = 500;
     }
 
     public int getNumRows()
@@ -54,7 +54,14 @@ public class Model
     {
         Location loc = def.getLoc();
         board[loc.getRow()][loc.getCol()] = def;
-    defenderList.add(def);
+        defenderList.add(def);
+    }
+
+    public void removeDefender(Defender def)
+    {
+        Location loc = def.getLoc();
+        board[loc.getRow()][loc.getCol()] = null;
+        defenderList.remove(def);
     }
 
     public void addAnts(Ant... ants)
@@ -96,7 +103,7 @@ public class Model
             for (Defender def: killedDefs)
             {
                 deadCharacters.add(def);
-                defenderList.remove(def);
+                removeDefender(def);
             }
             if (!oldLoc.equals(ant.getLoc()))
             {
@@ -130,7 +137,7 @@ public class Model
         output.setMovedCharacters(movedCharacters);
         output.setProgress(progress);
         output.setGold(gold);
-        output.setGameOver(progress==NUM_ATTACKERS);
+        output.setGameOver(progress == NUM_ATTACKERS);
 
         return output;
     }
@@ -156,7 +163,9 @@ public class Model
             return null;
         } else {
             Defender def = curSelectedDefender.getDefender(loc);
-            gold -= def.getCost();
+            if (def == null)
+                return null;
+            gold -= curSelectedDefender.COST;
             setDefenderAtLoc(def);
             curSelectedDefender = null;
             return def;
