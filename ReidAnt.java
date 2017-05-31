@@ -1,6 +1,8 @@
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 /**
  * Write a description of class ReidAnt here.
  * 
@@ -41,5 +43,8 @@ public class ReidAnt extends Ant
     public int getGold()
     {
 	    return 10;
+    }
+    public ImageIcon getInitialImageIcon(){
+        return new ImageIcon("reidAnt.png");
     }
 }

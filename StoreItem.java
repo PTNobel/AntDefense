@@ -2,8 +2,8 @@ import javax.swing.ImageIcon;
 
 public enum StoreItem
 {
-    POISONFOOD (50),
-    POISONSPRAY (500);
+    POISONFOOD (25, new ImageIcon("poisonFood.png")),
+    POISONSPRAY (50, new ImageIcon("poisonSpray.png"));
 
     public final int COST;
     public final ImageIcon INIT_IMAGE;
@@ -17,6 +17,7 @@ public enum StoreItem
     {
         this(cost, new ImageIcon("NullDefender.png"));
     }
+
     public Defender getDefender(Location loc){
         switch(this){
             case POISONFOOD:
