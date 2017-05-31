@@ -23,7 +23,4 @@ public abstract class Ant extends Character
      */
     abstract public List<Defender> act(List<Defender> defenders);
     
-    public ImageIcon getInitialImageIcon(){
-        return new ImageIcon("NullAnt.png");
-    }
 }
