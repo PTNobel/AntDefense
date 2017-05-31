@@ -15,11 +15,6 @@ public enum StoreItem
         INIT_IMAGE = imgIcon;
     }
 
-    StoreItem(int cost)
-    {
-        this(cost, new ImageIcon("NullDefender.png"));
-    }
-
     public Defender getDefender(Location loc){
         switch(this){
             case POISONFOOD:

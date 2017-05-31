@@ -50,6 +50,6 @@ public class WarriorAnt extends Ant
 
     public ImageIcon getInitialImageIcon()
     {
-        return new ImageIcon("warriorAnt.png");
+        return PictureLoader.warriorAnt;
     }
 }

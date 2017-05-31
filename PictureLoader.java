@@ -30,7 +30,5 @@ public class PictureLoader
         {
             System.out.println("Failed to load pictures: " + e.getMessage());
         }
-
-        System.out.println("Built: " + built);
     }
 }
