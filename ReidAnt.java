@@ -15,7 +15,7 @@ public class ReidAnt extends Ant
     public ReidAnt(Location loc)
     {
         super(400, loc);
-        swing = 50;
+        swing = 15;
     }
 
     public List<Defender> act(List<Defender> defenders)
@@ -41,12 +41,12 @@ public class ReidAnt extends Ant
 
     private void move(Location loc)
     {
-        setLoc(new Location(loc.getX() - 20, loc.getY()));
+        setLoc(new Location(loc.getX() - 10, loc.getY()));
     }
 
     public int getGold()
     {
-	    return 10;
+	    return 30;
     }
     public ImageIcon getInitialImageIcon(){
         return PictureLoader.reidAnt;

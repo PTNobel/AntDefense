@@ -15,7 +15,7 @@ public class WoodenBlock extends Defender
      */
     public WoodenBlock(Location loc)
     {
-        super(2000, loc);
+        super(4000, loc);
     }
 
     public List<Ant> processAnts(List<Ant> ants)

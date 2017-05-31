@@ -35,7 +35,7 @@ public class QueenAnt extends Ant
 
     private void move(Location loc)
     {
-        setLoc(new Location(loc.getX() - 10, loc.getY()));
+        setLoc(new Location(loc.getX() - 2, loc.getY()));
     }
 
     public int getGold()

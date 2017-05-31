@@ -19,7 +19,7 @@ public class DancingAnt extends Ant
     public DancingAnt(Location loc)
     {
         super(100, loc);
-        swing = 12;
+        swing = 5;
         turnsInDir = 0;
         dir = 0;
     }

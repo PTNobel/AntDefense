@@ -19,7 +19,7 @@ public class PoisonFood extends Defender
     public PoisonFood(Location loc)
     {
         super(500, loc);
-        dmg = 20;
+        dmg = 15;
     }
 
     public List<Ant> processAnts(List<Ant> ants)

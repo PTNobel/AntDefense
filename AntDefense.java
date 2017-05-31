@@ -1,4 +1,4 @@
-import javax.swing.JOptionPane;
+import javax.swing.JOptionPane; 
 
 public class AntDefense
 {
@@ -15,13 +15,13 @@ public class AntDefense
         LevelGenerator lg;
         switch (selectedValue)
         {
-            /*
+
             case 0: lg = new EasyGenerator();
                 break;
-
+            
             case 1: lg = new MediumGenerator();
                 break;
-            */
+            
             case 2: lg = new HardGenerator();
                 break;
 

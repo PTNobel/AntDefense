@@ -103,7 +103,7 @@ public class View extends JFrame
             storeUI.add(jl);
         }
 
-        /* CODE FOR GOLD LABEL */
+        /** CODE FOR GOLD LABEL **/
         // Create Gold Label
         goldLabel = new JLabel("0", JLabel.LEFT);
         goldLabel.setBounds(175, 8, 20000, 20); // NOTE: EVERYTHING IN THIS LINE IS A MAGIC NUMBER
@@ -120,7 +120,18 @@ public class View extends JFrame
         // set position of progressBar
         progressBar.setBounds(progressBarxPos, progressBaryPos, (int)progressBarSize.getWidth(), (int)progressBarSize.getHeight()); // puts progressBar at (x,y) and sets width/height
 
-        /* CODE FOR THE BACKGROUND */
+        
+        /** CODE FOR THE PAUSE BUTTON **/
+        JButton pauseButton = new JButton();
+        Dimension pauseButtonSize = new Dimension(JBUTTONWIDTH, JBUTTONHEIGHT/2);
+        pauseButton.setText("PAUSE");
+        int pauseButtonX = boardUIxPos + (int)boardSize.getWidth() - JBUTTONWIDTH;
+        int pauseButtonY = storeUIyPos;
+        pauseButton.setBounds(pauseButtonX, pauseButtonY, (int)pauseButtonSize.getWidth(), (int)pauseButtonSize.getHeight());
+        pauseButton.addMouseListener(new PauseListener());
+        
+        
+        /** CODE FOR THE BACKGROUND **/
         JLabel backgroundLabel;
         ImageIcon backgroundImage = PictureLoader.antDefenseUI;
         backgroundLabel = new JLabel(backgroundImage);
@@ -131,6 +142,7 @@ public class View extends JFrame
         add(boardUI);           // adds boardUI to the screen
         add(storeUI);           // adds storeUI to the screen
         add(goldLabel);         // adds goldLabel
+        add(pauseButton);
         add(backgroundLabel);   // adds background image
         setVisible(true);       // makes the screen visable
 
@@ -220,6 +232,17 @@ public class View extends JFrame
         {
             Location loc = new Location(col*JBUTTONWIDTH , row*JBUTTONHEIGHT);
             control.placeDefender(loc);
+        }
+    }
+    
+    private class PauseListener extends MouseAdapter
+    {
+        public PauseListener(){
+           // nothing needed
+        }
+        
+        public void mouseClicked(MouseEvent event){
+            control.pauseGame();
         }
     }
 

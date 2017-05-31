@@ -16,7 +16,7 @@ public class SquirtGun extends Defender
     public SquirtGun(Location loc)
     {
         super(200, loc);
-        dmg = 2;
+        dmg = 3;
     }
 
     public List<Ant> processAnts(List<Ant> ants)

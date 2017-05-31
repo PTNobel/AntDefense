@@ -14,7 +14,7 @@ public class WarriorAnt extends Ant
     public WarriorAnt(Location loc)
     {
         super(250, loc);
-        swing = 15;
+        swing = 10;
     }
 
     public List<Defender> act(List<Defender> defenders)
@@ -40,12 +40,12 @@ public class WarriorAnt extends Ant
 
     private void move(Location loc)
     {
-        setLoc(new Location(loc.getX() - 10, loc.getY()));
+        setLoc(new Location(loc.getX() - 5, loc.getY()));
     }
 
     public int getGold()
     {
-	    return 10;
+	    return 15;
     }
 
     public ImageIcon getInitialImageIcon()
