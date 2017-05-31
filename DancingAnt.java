@@ -62,6 +62,9 @@ public class DancingAnt extends Ant
             case 6: newLoc = new Location(loc.getX() + 1, loc.getY() - 1);
                 break;
             case 7: newLoc = new Location(loc.getX() + 1, loc.getY() + 1);
+                break;
+            default: newLoc = null;
+                break;
         }
         
         if(newLoc.getY() <= 0 || newLoc.getY() >= 400)
