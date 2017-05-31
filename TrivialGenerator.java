@@ -12,7 +12,7 @@ public class TrivialGenerator extends LevelGenerator
         List<Ant> output = new LinkedList<Ant>();
         if (completed < max)
         {
-            if (Math.random() < 0.2)
+            if (Math.random() < 0.02)
             {
                 output.add(new WorkerAnt(selectRandomRow()));
                 completed++;
