@@ -16,6 +16,16 @@ public class AntDefense
             case 0: lg = new TrivialGenerator();
                 break;
 
+            /*
+            case 1: lg = new EasyGenerator();
+                break;
+
+            case 2: lg = new MediumGenerator();
+                break;
+            */
+            case 3: lg = new HardGenerator();
+                break;
+
             default: lg = new TrivialGenerator();
                 break;
         }
