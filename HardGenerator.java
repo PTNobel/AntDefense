@@ -42,24 +42,17 @@ public class HardGenerator extends LevelGenerator
                     output.add(new WorkerAnt(selectRandomRow()));
                     completed++;
                 }
-                else (Math.random() < 0.05)
+                else if (Math.random() < 0.05)
                 {
                     output.add(new DancingAnt(selectRandomRow()));
                     completed++;
                 }
-<<<<<<< HEAD
-                if (Math.random() < 0.5)
-=======
-                if (Math.random < 0.02)
->>>>>>> 39ba8abc982d1a0d89bedd260c00757a285f1163
+                if (Math.random() < 0.02)
                 {
                     output.add(new WarriorAnt(selectRandomRow()));
                     completed++;
                 }
-<<<<<<< HEAD
-                else if (Math.random() < 0.5)
-=======
-                else if (Math.random < 0.01)
+                else if (Math.random() < 0.01)
                 {
                     output.add(new ReidAnt(selectRandomRow()));
                     completed++;
@@ -84,7 +77,6 @@ public class HardGenerator extends LevelGenerator
                     completed++;
                 }
                 else if (Math.random() < 0.015)
->>>>>>> 39ba8abc982d1a0d89bedd260c00757a285f1163
                 {
                     output.add(new ReidAnt(selectRandomRow()));
                     completed++;
@@ -93,7 +85,7 @@ public class HardGenerator extends LevelGenerator
             }
             else if (completed < 500)
             {
-                if (Math.random < 0.1)
+                if (Math.random() < 0.1)
                 {
                     output.add(new WorkerAnt(selectRandomRow()));
                     completed++;
@@ -117,7 +109,7 @@ public class HardGenerator extends LevelGenerator
             }
             else if (completed < 520)
             {
-                if (Math.random < 0.2)
+                if (Math.random() < 0.2)
                 {
                     output.add(new WorkerAnt(selectRandomRow()));
                     completed++;
@@ -140,7 +132,7 @@ public class HardGenerator extends LevelGenerator
             }
             else if (completed < 750)
             {
-                if (Math.random < 0.12)
+                if (Math.random() < 0.12)
                 {
                     output.add(new WorkerAnt(selectRandomRow()));
                     completed++;
@@ -163,7 +155,7 @@ public class HardGenerator extends LevelGenerator
             }
             else if (completed < 950)
             {
-                if (Math.random < 0.15)
+                if (Math.random() < 0.15)
                 {
                     output.add(new WorkerAnt(selectRandomRow()));
                     completed++;
@@ -186,7 +178,7 @@ public class HardGenerator extends LevelGenerator
             }
             else if (completed < 1000)
             {
-                if (Math.random < 0.3)
+                if (Math.random() < 0.3)
                 {
                     output.add(new WorkerAnt(selectRandomRow()));
                     completed++;
