@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import javax.swing.ImageIcon;
 /**
  * Class PoisonSpray - It is the defender that hurts ants that walk into its location.
  * 
@@ -34,5 +35,9 @@ public class PoisonSpray extends Defender
             }
         }
         return a;
+    }
+
+    public ImageIcon getInitialImageIcon(){
+        return new ImageIcon("poisonSpray.png");
     }
 }

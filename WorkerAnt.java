@@ -1,6 +1,8 @@
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 /**
  * Write a description of class WorkerAnt here.
  * 
@@ -39,11 +41,15 @@ public class WorkerAnt extends Ant
 
     private void move(Location loc)
     {
-        setLoc(new Location(loc.getX() - 1, loc.getY()));
+        setLoc(new Location(loc.getX() - 3, loc.getY()));
     }
     
     public int getGold()
     {
 	    return 5;
+    }
+
+    public ImageIcon getInitialImageIcon(){
+        return new ImageIcon("workerAnt.png");
     }
 }

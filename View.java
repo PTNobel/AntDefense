@@ -218,7 +218,7 @@ public class View extends JFrame
         }
         public void mouseClicked(MouseEvent event)
         {
-            Location loc = new Location(row*jbuttonWidth, col*jbuttonHeight);
+            Location loc = new Location(col*jbuttonHeight , row*jbuttonWidth);
             control.placeDefender(loc);
         }
     }
