@@ -53,7 +53,7 @@ public class DancingAnt extends Ant
         if (turnsInDir <= 0)
         {
             dir = (int)(Math.random()*8);
-            turnsInDir = 10;
+            turnsInDir = 15;
         }
         else
         {
@@ -88,12 +88,12 @@ public class DancingAnt extends Ant
         if(newLoc.getY() <= 0)
         {
             dir = 3;
-            turnsInDir = 10;
+            turnsInDir = 15;
         }
         else if (newLoc.getY() >= 400)
         {
             dir = 2;
-            turnsInDir = 10;
+            turnsInDir = 15;
         } 
         else 
         {
