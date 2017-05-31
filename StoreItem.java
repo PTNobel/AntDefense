@@ -5,7 +5,7 @@ public enum StoreItem
     POISONFOOD (25, new ImageIcon("poisonFood.png")),
     WOODENBLOCK (25, new ImageIcon("woodenBlock.png")),
     POISONSPRAY (50, new ImageIcon("poisonSpray.png")),
-    SQUIRTGUN (100, new ImageIcon("squirtGun.png"));
+    SQUIRTGUN (75, new ImageIcon("squirtGun.png"));
 
     public final int COST;
     public final ImageIcon INIT_IMAGE;

@@ -13,13 +13,10 @@ public class SquirtGun extends Defender
     // instance variables - replace the example below with your own
     private int dmg;
 
-    /**
-     * Constructor for objects of class PoisonFood
-     */
     public SquirtGun(Location loc)
     {
         super(200, loc);
-        dmg = 50;
+        dmg = 2;
     }
 
     public List<Ant> processAnts(List<Ant> ants)
