@@ -13,7 +13,7 @@ import java.awt.event.*;    // import event listener
 
 public class View extends JFrame
 {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     
     // instance variables
     private Model myGame;
@@ -59,8 +59,6 @@ public class View extends JFrame
         boardUI.setBounds(boardUIxPos, boardUIyPos, (int)boardSize.getWidth(), (int)boardSize.getHeight());     // puts boardUI at (x,y) and sets width/height
 
         // add buttons to board
-        //boardUI.setLayout(new GridLayout(NUM_ROWS, NUM_COLS));  // creates grid layout for the buttons
-
         boardArray = new JButton[NUM_ROWS][NUM_COLS];           // instantiates boardArray
 
         // places buttons on boardArray
@@ -82,18 +80,15 @@ public class View extends JFrame
         
         /**CODE FOR THE STORE ON THE SCREEN**/
         // Create store
-        JLayeredPane storeUI = new JLayeredPane();                                                  // constructs storeUI pane                        
-        Dimension storeItemSize = new Dimension((HEIGHT/5)-(HEIGHT/10), (HEIGHT/5)-(HEIGHT/10));    // dimensions of each storeItem button
-        int storeUIxPos = origin.x+(WIDTH/24);                                                      // x position of storeUI
-        int storeUIyPos = origin.y+(HEIGHT/20);                                                     // y position of storeUI
+        JLayeredPane storeUI = new JLayeredPane();  // constructs storeUI pane                        
+        int storeUIxPos = origin.x+(WIDTH/24);      // x position of storeUI
+        int storeUIyPos = origin.y+(HEIGHT/20);     // y position of storeUI
 
         StoreItem[] storeItems = StoreItem.values();
         // set position of storeUI
-        storeUI.setBounds(storeUIxPos, storeUIyPos, (int)storeItemSize.getWidth() * storeItems.length, (int)storeItemSize.getHeight());     // puts boardUI at (x,y) and sets width/height
+        storeUI.setBounds(storeUIxPos, storeUIyPos, JBUTTONWIDTH * storeItems.length, JBUTTONHEIGHT+10);   // puts boardUI at (x,y) and sets width/height
 
         // add buttons to store
-        storeUI.setLayout(new GridLayout(1, storeItems.length));  // creates grid layout for the buttons
-
         store = new JButton[storeItems.length];                   // instantiates store
 
         // places buttons on store
@@ -101,8 +96,13 @@ public class View extends JFrame
             store[r] = new JButton();                   // instantiate each JButton with a row/col label
             store[r].setIcon(storeItems[r].INIT_IMAGE);
             store[r].addMouseListener(new StoreMouseHandler(storeItems[r]));    // register the JButton with the mouse handler
+            store[r].setBounds(r*JBUTTONWIDTH, 0, JBUTTONWIDTH, JBUTTONHEIGHT);
             storeUI.add(store[r]);                      // add the JButton to the pane
+            JLabel jl = new JLabel("" + storeItems[r].COST);
+            jl.setBounds(r*JBUTTONWIDTH, JBUTTONHEIGHT, JBUTTONWIDTH, 10);
+            storeUI.add(jl);
         }
+
         /* CODE FOR GOLD LABEL */
         // Create Gold Label
         goldLabel = new JLabel("0", JLabel.LEFT);
@@ -111,7 +111,7 @@ public class View extends JFrame
         /* CODE FOR THE PROGRESS BAR */
         // Create progress bar
         progressBar = new JProgressBar(0, NUM_ATTACKERS);                                // constructs progressBar
-        Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), HEIGHT/10);   // dimensions of the progressBar
+        Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), HEIGHT/20);   // dimensions of the progressBar
 
         // set coordinate
         int progressBarxPos = boardUIxPos + (int)boardSize.getWidth() - (int)progressBarSize.getWidth();    // x position of progress bar
@@ -179,6 +179,7 @@ public class View extends JFrame
 
     public void removeCharacter(Character thing)
     {
+        thing.getJLabel().setVisible(false);
         boardUI.remove(thing.getJLabel());
     }
 
