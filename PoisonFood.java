@@ -37,6 +37,6 @@ public class PoisonFood extends Defender
     }
     
     public ImageIcon getInitialImageIcon(){
-        return new ImageIcon("poisonFood.png");
+        return PictureLoader.poisonFood;
     }
 }

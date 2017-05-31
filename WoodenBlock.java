@@ -25,6 +25,6 @@ public class WoodenBlock extends Defender
     
     public ImageIcon getInitialImageIcon()
     {
-        return new ImageIcon("woodenBlock.png");
+        return PictureLoader.woodenBlock;
     }
 }

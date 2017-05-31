@@ -53,6 +53,6 @@ public class SquirtGun extends Defender
     
     public ImageIcon getInitialImageIcon()
     {
-        return new ImageIcon("squirtGun.png");
+        return PictureLoader.squirtGun;
     }
 }
