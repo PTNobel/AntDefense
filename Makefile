@@ -1,5 +1,7 @@
 
-all: *.class
+all: AntDefense.jar
+
+AntDefense.jar: *.class *.png
 	jar cfe AntDefense.jar AntDefense *.class *.png
 
 %.class: %.java
