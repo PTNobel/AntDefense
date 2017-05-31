@@ -53,6 +53,7 @@ public class DancingAnt extends Ant
         if (turnsInDir <= 0)
         {
             dir = (int)(Math.random()*8);
+            turnsInDir = 10;
         }
         else
         {
@@ -65,33 +66,34 @@ public class DancingAnt extends Ant
             // Move forward
             case 5:
             case 0: newLoc = new Location(loc.getX() - 4, loc.getY());
-                turnsInDir = 10;
                 break;
             // Move diagnoally down
             case 7:
             case 1: newLoc = new Location(loc.getX() - 2, loc.getY() - 2);
-                turnsInDir = 20;
                 break;
             // Move down
             case 2: newLoc = new Location(loc.getX(), loc.getY() - 4);
-                turnsInDir = 10;
                 break;
             // Move up
             case 3: newLoc = new Location(loc.getX(), loc.getY() + 4);
-                turnsInDir = 10;
                 break;
             // Move diagnoally up
             case 6:
             case 4: newLoc = new Location(loc.getX() - 2, loc.getY() - 2);
-                turnsInDir = 20;
                 break;
             default: newLoc = null;
                 break;
         }
         
-        if(newLoc.getY() <= 0 || newLoc.getY() >= 400)
+        if(newLoc.getY() <= 0)
         {
-            move(loc);
+            dir = 3;
+            turnsInDir = 10;
+        }
+        else if (newLoc.getY() >= 400)
+        {
+            dir = 2;
+            turnsInDir = 10;
         } 
         else 
         {
@@ -105,6 +107,6 @@ public class DancingAnt extends Ant
     }
 
     public ImageIcon getInitialImageIcon(){
-        return new ImageIcon("dancingAnt.png");
+        return PictureLoader.dancingAnt;
     }
 }

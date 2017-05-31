@@ -20,8 +20,4 @@ public abstract class Defender extends Character
      */   
     abstract public List<Ant> processAnts(List<Ant> ants);
     
-    public ImageIcon getInitialImageIcon()
-    {
-        return new ImageIcon("NullDefender.png");
-    }
 }

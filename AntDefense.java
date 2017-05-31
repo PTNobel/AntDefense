@@ -4,6 +4,7 @@ public class AntDefense
 {
     public static void main(String[] args)
     {
+        new PictureLoader();
         // Create the dialog.
         // String[] possibleValues = {"Trivial", "Easy", "Medium", "Hard"};
         String[] possibleValues = {"Easy", "Medium", "Hard"};
