@@ -5,25 +5,23 @@ public class AntDefense
     public static void main(String[] args)
     {
         // Create the dialog.
-        String[] possibleValues = {"Trivial", "Easy", "Medium", "Hard"};
+        // String[] possibleValues = {"Trivial", "Easy", "Medium", "Hard"};
+        String[] possibleValues = {"Easy", "Medium", "Hard"};
         Integer selectedValue = JOptionPane.showOptionDialog(null,
                 "Choose a difficulty.", "Ant Defense",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                null,  possibleValues, possibleValues[1]);
+                null,  possibleValues, possibleValues[0]);
         LevelGenerator lg;
         switch (selectedValue)
         {
-            case 0: lg = new TrivialGenerator();
-                break;
-
             /*
-            case 1: lg = new EasyGenerator();
+            case 0: lg = new EasyGenerator();
                 break;
 
-            case 2: lg = new MediumGenerator();
+            case 1: lg = new MediumGenerator();
                 break;
             */
-            case 3: lg = new HardGenerator();
+            case 2: lg = new HardGenerator();
                 break;
 
             default: lg = new TrivialGenerator();
