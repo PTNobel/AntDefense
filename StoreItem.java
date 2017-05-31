@@ -2,10 +2,10 @@ import javax.swing.ImageIcon;
 
 public enum StoreItem
 {
-    POISONFOOD (25, new ImageIcon("poisonFood.png")),
-    WOODENBLOCK (25, new ImageIcon("woodenBlock.png")),
-    POISONSPRAY (50, new ImageIcon("poisonSpray.png")),
-    SQUIRTGUN (75, new ImageIcon("squirtGun.png"));
+    POISONFOOD (25, PictureLoader.poisonFood),
+    WOODENBLOCK (25, PictureLoader.woodenBlock),
+    POISONSPRAY (50, PictureLoader.poisonSpray),
+    SQUIRTGUN (75, PictureLoader.squirtGun);
 
     public final int COST;
     public final ImageIcon INIT_IMAGE;
