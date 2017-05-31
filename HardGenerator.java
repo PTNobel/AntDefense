@@ -16,7 +16,7 @@ public class HardGenerator extends LevelGenerator
         {
             if (completed < 5)
             {
-                if (Math.random() < 0.5)
+                if (Math.random() < 0.02)
                 {
                     output.add(new WorkerAnt(selectRandomRow()));
                     completed++;
@@ -24,12 +24,12 @@ public class HardGenerator extends LevelGenerator
             }
             else if (completed < 25)
             {
-                if (Math.random() < 0.75)
+                if (Math.random() < 0.03)
                 {
                     output.add(new WorkerAnt(selectRandomRow()));
                     completed++;
                 }
-                else if (Math.random() < 0.25)
+                else if (Math.random() < 0.02)
                 {
                     output.add(new WarriorAnt(selectRandomRow()));
                     completed++;
@@ -37,28 +37,177 @@ public class HardGenerator extends LevelGenerator
             }
             else if (completed < 100)
             {
-                if (Math.random() < 0.8)
+                if (Math.random() < 0.05)
                 {
                     output.add(new WorkerAnt(selectRandomRow()));
                     completed++;
                 }
-                else
+                else (Math.random() < 0.05)
                 {
                     output.add(new DancingAnt(selectRandomRow()));
                     completed++;
                 }
+<<<<<<< HEAD
                 if (Math.random() < 0.5)
+=======
+                if (Math.random < 0.02)
+>>>>>>> 39ba8abc982d1a0d89bedd260c00757a285f1163
                 {
                     output.add(new WarriorAnt(selectRandomRow()));
                     completed++;
                 }
+<<<<<<< HEAD
                 else if (Math.random() < 0.5)
+=======
+                else if (Math.random < 0.01)
+                {
+                    output.add(new ReidAnt(selectRandomRow()));
+                    completed++;
+                }
+            
+            }
+            else if (completed < 250)
+            {
+                if (Math.random() < 0.08)
+                {
+                    output.add(new WorkerAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.06)
+                {
+                    output.add(new DancingAnt(selectRandomRow()));
+                    completed++;
+                }
+                if (Math.random() < 0.03)
+                {
+                    output.add(new WarriorAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.015)
+>>>>>>> 39ba8abc982d1a0d89bedd260c00757a285f1163
                 {
                     output.add(new ReidAnt(selectRandomRow()));
                     completed++;
                 }
                 
             }
+            else if (completed < 500)
+            {
+                if (Math.random < 0.1)
+                {
+                    output.add(new WorkerAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.08)
+                {
+                    output.add(new DancingAnt(selectRandomRow()));
+                    completed++;
+                }
+                if (Math.random() < 0.05)
+                {
+                    output.add(new WarriorAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.03)
+                {
+                    output.add(new ReidAnt(selectRandomRow()));
+                    completed++;
+                }
+                
+            }
+            else if (completed < 520)
+            {
+                if (Math.random < 0.2)
+                {
+                    output.add(new WorkerAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.1)
+                {
+                    output.add(new DancingAnt(selectRandomRow()));
+                    completed++;
+                }
+                if (Math.random() < 0.08)
+                {
+                    output.add(new WarriorAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.08)
+                {
+                    output.add(new ReidAnt(selectRandomRow()));
+                    completed++;
+                }
+            }
+            else if (completed < 750)
+            {
+                if (Math.random < 0.12)
+                {
+                    output.add(new WorkerAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.1)
+                {
+                    output.add(new DancingAnt(selectRandomRow()));
+                    completed++;
+                }
+                if (Math.random() < 0.07)
+                {
+                    output.add(new WarriorAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.04)
+                {
+                    output.add(new ReidAnt(selectRandomRow()));
+                    completed++;
+                }
+            }
+            else if (completed < 950)
+            {
+                if (Math.random < 0.15)
+                {
+                    output.add(new WorkerAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.12)
+                {
+                    output.add(new DancingAnt(selectRandomRow()));
+                    completed++;
+                }
+                if (Math.random() < 0.09)
+                {
+                    output.add(new WarriorAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.05)
+                {
+                    output.add(new ReidAnt(selectRandomRow()));
+                    completed++;
+                }
+            }
+            else if (completed < 1000)
+            {
+                if (Math.random < 0.3)
+                {
+                    output.add(new WorkerAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.2)
+                {
+                    output.add(new DancingAnt(selectRandomRow()));
+                    completed++;
+                }
+                if (Math.random() < 0.1)
+                {
+                    output.add(new WarriorAnt(selectRandomRow()));
+                    completed++;
+                }
+                else if (Math.random() < 0.1)
+                {
+                    output.add(new ReidAnt(selectRandomRow()));
+                    completed++;
+                }
+            }
+            
         }
         return output;
     }
