@@ -7,4 +7,4 @@ all: *.class
 
 clean:
 	rm *.class
-
+	rm AntDefense.jar
