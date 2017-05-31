@@ -18,16 +18,12 @@ public abstract class LevelGenerator
     protected Location row4 = new Location(xStart, yGap * 4);
     protected Location row5 = new Location(xStart, yGap * 5);
   
-    public LevelGenerator()
-    {
+    public LevelGenerator(int max){
         rows.add(row1);
         rows.add(row2);
         rows.add(row3);
         rows.add(row4);
         rows.add(row5);
-    }
-
-    public LevelGenerator(int max){
         this.max = max;
     }
     
