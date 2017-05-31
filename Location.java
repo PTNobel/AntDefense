@@ -15,12 +15,12 @@ public class Location
 
     public int getRow()
     {
-        return pt.x/View.jbuttonWidth;
+        return pt.x/View.JBUTTONWIDTH;
     }
 
     public int getCol()
     {
-        return pt.y/View.jbuttonWidth;
+        return pt.y/View.JBUTTONHEIGHT;
     }
 
     public Point getPoint()

@@ -20,7 +20,7 @@ public class View extends JFrame
     private Controller control;
     private static final int WIDTH = 960;
     private static final int HEIGHT = 720;
-    public static int jbuttonHeight = 1, jbuttonWidth = 1;
+    public static final int JBUTTONHEIGHT = 80, JBUTTONWIDTH = 80;
     private final int NUM_ROWS, NUM_COLS, NUM_ATTACKERS;
     private JButton[][] boardArray;
     private JButton[] store;
@@ -59,7 +59,7 @@ public class View extends JFrame
         boardUI.setBounds(boardUIxPos, boardUIyPos, (int)boardSize.getWidth(), (int)boardSize.getHeight());     // puts boardUI at (x,y) and sets width/height
 
         // add buttons to board
-        boardUI.setLayout(new GridLayout(NUM_ROWS, NUM_COLS));  // creates grid layout for the buttons
+        //boardUI.setLayout(new GridLayout(NUM_ROWS, NUM_COLS));  // creates grid layout for the buttons
 
         boardArray = new JButton[NUM_ROWS][NUM_COLS];           // instantiates boardArray
 
@@ -67,7 +67,9 @@ public class View extends JFrame
         for(int r = 0; r < NUM_ROWS; r++){
             for (int c = 0; c < NUM_COLS; c++)
             {
+
                 boardArray[r][c] = new JButton();                   // instantiate each JButton with a row/col label
+                boardArray[r][c].setBounds(JBUTTONWIDTH*c, JBUTTONHEIGHT*r, JBUTTONWIDTH, JBUTTONHEIGHT);
                 boardUI.add(boardArray[r][c]);                      // add the JButton to the pane
                 BoardMouseHandler bmh = new BoardMouseHandler(r, c);
                 boardArray[r][c].addMouseListener(bmh);    // register the JButton with the mouse handler
@@ -77,9 +79,6 @@ public class View extends JFrame
                 //boardArray[r][c].setBorderPainted(true);        // Keeps border outlines
             }
         }
-        // Let's share the constants Location needs
-        jbuttonHeight = 80;
-        jbuttonWidth = 80;
         
         /**CODE FOR THE STORE ON THE SCREEN**/
         // Create store
@@ -218,7 +217,7 @@ public class View extends JFrame
         }
         public void mouseClicked(MouseEvent event)
         {
-            Location loc = new Location(col*jbuttonHeight , row*jbuttonWidth);
+            Location loc = new Location(col*JBUTTONWIDTH , row*JBUTTONHEIGHT);
             control.placeDefender(loc);
         }
     }
