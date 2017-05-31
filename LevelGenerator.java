@@ -13,10 +13,10 @@ public abstract class LevelGenerator
     private int xStart = 760;
     protected List<Location> rows = new ArrayList<Location>();
     protected Location row1 = new Location(xStart, yGap);
-    protected Location row2 = new Location(xStart, yGap * 2);
-    protected Location row3 = new Location(xStart, yGap * 3);
-    protected Location row4 = new Location(xStart, yGap * 4);
-    protected Location row5 = new Location(xStart, yGap * 5);
+    protected Location row2 = new Location(xStart, yGap * 3);
+    protected Location row3 = new Location(xStart, yGap * 5);
+    protected Location row4 = new Location(xStart, yGap * 7);
+    protected Location row5 = new Location(xStart, yGap * 9);
   
     public LevelGenerator(int max){
         rows.add(row1);
@@ -34,6 +34,7 @@ public abstract class LevelGenerator
 
     public Location selectRandomRow(){
         int randomRow = (int)(Math.random()*numRows);
+        //System.out.print(randomRow);
         return rows.get(randomRow);
     }
 

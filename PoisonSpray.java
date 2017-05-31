@@ -18,7 +18,7 @@ public class PoisonSpray extends Defender
      */
     public PoisonSpray(Location loc)
     {
-        super(200, loc); 
+        super(500, loc); 
         dmg = 30;
     }
 
@@ -28,7 +28,12 @@ public class PoisonSpray extends Defender
         for (Ant ant : ants)
         {
             if (loc.getCol() == ant.getLoc().getCol()+1 && (loc.getRow() == ant.getLoc().getRow() || 
-            loc.getRow() == ant.getLoc().getRow()+1 ||  loc.getRow() == ant.getLoc().getRow()-1))
+                loc.getRow() == ant.getLoc().getRow()+1 ||  loc.getRow() == ant.getLoc().getRow()-1))
+            {
+                if(!ant.takeDamage(dmg))
+                    a.add(ant);
+            }
+            else if (loc.getCol() == ant.getLoc().getCol() && loc.getRow() == ant.getLoc().getRow())
             {
                 if(!ant.takeDamage(dmg))
                     a.add(ant);

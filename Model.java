@@ -27,7 +27,7 @@ public class Model
         antList = new LinkedList<Ant>();
         defenderList = new LinkedList<Defender>();
         progress = 0;
-        gold = 500;
+        gold = 250;
     }
 
     public int getNumRows()

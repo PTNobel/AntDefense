@@ -15,7 +15,7 @@ public class WorkerAnt extends Ant
     public WorkerAnt(Location loc)
     {
         super(100, loc);
-        swing = 10;
+        swing = 5;
     }
 
     public List<Defender> act(List<Defender> defenders)
