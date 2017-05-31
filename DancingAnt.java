@@ -107,6 +107,6 @@ public class DancingAnt extends Ant
     }
 
     public ImageIcon getInitialImageIcon(){
-        return new ImageIcon("dancingAnt.png");
+        return PictureLoader.dancingAnt;
     }
 }
