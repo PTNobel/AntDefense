@@ -12,6 +12,7 @@ public class Controller
     private Model m;
     private View v;
     private boolean safeToAct = true;
+    private boolean paused = false;
 
     public Controller(Model model)
     {
@@ -110,5 +111,11 @@ public class Controller
             v.addCharacter(newDef);
         }
         safeToAct = true;
+    }
+    
+    public void pauseGame()
+    {
+        paused = !paused;
+        safeToAct = !paused;
     }
 }
