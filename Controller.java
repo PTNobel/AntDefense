@@ -76,6 +76,9 @@ public class Controller
 
     public void pickDefender(StoreItem si)
     {
+        if (paused)
+            return;
+
         while (!safeToAct){
             try {
                 Thread.sleep(25);
@@ -95,6 +98,9 @@ public class Controller
 
     public void placeDefender(Location loc)
     {
+        if (paused)
+            return;
+
         while (!safeToAct){
             try {
                 Thread.sleep(25);
@@ -115,6 +121,15 @@ public class Controller
     
     public void pauseGame()
     {
+        while (!safeToAct && !paused){
+            try {
+                Thread.sleep(25);
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
         paused = !paused;
         safeToAct = !paused;
     }
