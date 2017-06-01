@@ -15,6 +15,7 @@ public class DancingAnt extends Ant
     private int swing;
     private int turnsInDir;
     private int dir;
+    private int blockedDir;
     
     public DancingAnt(Location loc)
     {
@@ -22,29 +23,45 @@ public class DancingAnt extends Ant
         swing = 5;
         turnsInDir = 0;
         dir = 0;
+        blockedDir = (Math.random() < .5)? 3: 4;
     }
 
     public List<Defender> act(List<Defender> defenders)
     {
         List<Defender> d = new LinkedList<Defender>();
 
-        boolean blocked = false;
         for (Defender defense : defenders)
         {
+            // If we're colliding with this defense
             if (loc.getCol() == defense.getLoc().getCol() && loc.getRow() == defense.getLoc().getRow())
             {
-                turnsInDir = 10;
-                if (loc.getCol() == 0)
-                    dir = 2; // down
-                if (loc.getCol() == 5)
-                    dir = 3; // down
+                // Ensures move doesn't randomize direction.
+                // by making turnsInDir > 0
+                turnsInDir = 5;
+                // If this in top row
+                if (loc.getY() <= 40)
+                {
+                    // See move method for definition of dir, moves downard
+                    dir = 4;
+                    // Create new blockedir biased down,
+                    blockedDir = (Math.random() < .75)? 4: 3;
+                }
+                // If we're in the fifth (bottom) row
+                else if (loc.getY() >= 5*80 - 40)
+                {
+                    // See move method for definition of dir, moves upward
+                    dir = 3;
+                    // Create new blockedir biased up,
+                    blockedDir = (Math.random() < .75)? 3: 4;
+                }
                 else
-                    dir = (Math.random() > .5)? 2: 3;
+                {
+                    dir = blockedDir;
+                }
             }
         }
 
-        if (!blocked)
-            move(loc);
+        move(loc);
         return d;
     }
 
@@ -52,7 +69,7 @@ public class DancingAnt extends Ant
     {
         if (turnsInDir <= 0)
         {
-            dir = (int)(Math.random()*8);
+            dir = (int)(Math.random()*3);
             turnsInDir = 15;
         }
         else
@@ -64,35 +81,33 @@ public class DancingAnt extends Ant
         switch (dir)
         {
             // Move forward
-            case 5:
             case 0: newLoc = new Location(loc.getX() - 4, loc.getY());
                 break;
             // Move diagnoally down
-            case 7:
             case 1: newLoc = new Location(loc.getX() - 2, loc.getY() - 2);
                 break;
+            // Move diagnoally up
+            case 2: newLoc = new Location(loc.getX() - 2, loc.getY() + 2);
+                break;
             // Move down
-            case 2: newLoc = new Location(loc.getX(), loc.getY() - 4);
+            case 3: newLoc = new Location(loc.getX(), loc.getY() - 4);
                 break;
             // Move up
-            case 3: newLoc = new Location(loc.getX(), loc.getY() + 4);
+            case 4: newLoc = new Location(loc.getX(), loc.getY() + 4);
                 break;
-            // Move diagnoally up
-            case 6:
-            case 4: newLoc = new Location(loc.getX() - 2, loc.getY() - 2);
-                break;
+
             default: newLoc = null;
                 break;
         }
         
         if(newLoc.getY() <= 0)
         {
-            dir = 3;
+            dir = 2;
             turnsInDir = 15;
         }
         else if (newLoc.getY() >= 400)
         {
-            dir = 2;
+            dir = 1;
             turnsInDir = 15;
         } 
         else 
