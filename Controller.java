@@ -91,16 +91,16 @@ public class Controller
         safeToAct = false;
         if (m.selectDefenderToPlace(si))
         {
-            // Update screen, with selection and Gold
+            // Update screen, with selection
+            v.setStoreButtonPressed(si, true);
         }
         safeToAct = true;
     }
 
-    public boolean placeDefender(Location loc)
+    public void placeDefender(Location loc)
     {
-        boolean placed = false;
         if (paused)
-            return false;
+            return;
 
         while (!safeToAct){
             try {
@@ -116,10 +116,9 @@ public class Controller
         if (newDef != null)
         {
             v.addCharacter(newDef);
-            placed = true;
+            v.setStoreButtonPressed(null, false);
         }
         safeToAct = true;
-        return placed;
     }
     
     public void pauseGame()

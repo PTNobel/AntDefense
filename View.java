@@ -270,9 +270,7 @@ public class View extends JFrame
         public void mouseClicked(MouseEvent event)
         {
             Location loc = new Location(col*JBUTTONWIDTH , row*JBUTTONHEIGHT);
-            if(control.placeDefender(loc)){
-                setStoreButtonPressed(null, false);
-            }
+            control.placeDefender(loc);
         }
     }
     
