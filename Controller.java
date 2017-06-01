@@ -96,10 +96,11 @@ public class Controller
         safeToAct = true;
     }
 
-    public void placeDefender(Location loc)
+    public boolean placeDefender(Location loc)
     {
+        boolean placed = false;
         if (paused)
-            return;
+            return false;
 
         while (!safeToAct){
             try {
@@ -115,8 +116,10 @@ public class Controller
         if (newDef != null)
         {
             v.addCharacter(newDef);
+            placed = true;
         }
         safeToAct = true;
+        return placed;
     }
     
     public void pauseGame()
