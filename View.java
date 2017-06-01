@@ -24,6 +24,7 @@ public class View extends JFrame
     private final int NUM_ROWS, NUM_COLS, NUM_ATTACKERS;
     private JButton[][] boardArray;
     private JButton[] store;
+    private StoreItem[] storeItems;
     private JLabel goldLabel;
     private JProgressBar progressBar;
     private JLayeredPane boardUI;
@@ -86,7 +87,7 @@ public class View extends JFrame
         int storeUIxPos = origin.x+(WIDTH/24);      // x position of storeUI
         int storeUIyPos = origin.y+(HEIGHT/20);     // y position of storeUI
 
-        StoreItem[] storeItems = StoreItem.values();
+        storeItems = StoreItem.values();
         // set position of storeUI
         storeUI.setBounds(storeUIxPos, storeUIyPos, JBUTTONWIDTH * storeItems.length, JBUTTONHEIGHT+10);   // puts boardUI at (x,y) and sets width/height
 
@@ -191,7 +192,8 @@ public class View extends JFrame
                 (wOrL)?"You won": "You lost", "Ant Defense",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
                 null,  possibleValues, possibleValues[0]);
- 
+        
+        endProgram();
     }
 
     public void addCharacter(Character thing)
@@ -212,12 +214,18 @@ public class View extends JFrame
         boardUI.remove(thing.getJLabel());
     }
     
-    public void setStoreButtonPressed(JButton button, boolean pressed){
-        for(JButton storeButton: store){
-            storeButton.setBorder(new LineBorder(Color.GRAY));
+    public void setStoreButtonPressed(StoreItem si, boolean pressed){
+        JButton button = null;
+        for (int r = 0; r < store.length; r++)
+        {
+            store[r].setBorder(new LineBorder(Color.GRAY));
+            if (storeItems[r].equals(si))
+            {
+                button = store[r];
+            }
         }
-            
-        if(pressed){
+
+        if(pressed && button != null){
             button.setBorder(new LineBorder(Color.GRAY, 3));
         }
     }
@@ -246,7 +254,6 @@ public class View extends JFrame
         public void mouseClicked(MouseEvent event)
         {
             control.pickDefender(si);
-            setStoreButtonPressed(button, true);
         }
     }
     
