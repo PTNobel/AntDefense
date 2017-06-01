@@ -27,6 +27,8 @@ public class View extends JFrame
     private JLabel goldLabel;
     private JProgressBar progressBar;
     private JLayeredPane boardUI;
+    private JButton pauseButton;
+    private JLayeredPane pauseMenu;
 
     /**
      * Constructor for objects of class Model
@@ -95,7 +97,7 @@ public class View extends JFrame
         for(int r = 0; r < storeItems.length; r++){
             store[r] = new JButton();                   // instantiate each JButton with a row/col label
             store[r].setIcon(storeItems[r].INIT_IMAGE);
-            store[r].addMouseListener(new StoreMouseHandler(storeItems[r]));    // register the JButton with the mouse handler
+            store[r].addMouseListener(new StoreMouseHandler(storeItems[r], store[r]));    // register the JButton with the mouse handler
             store[r].setBounds(r*JBUTTONWIDTH, 0, JBUTTONWIDTH, JBUTTONHEIGHT);
             storeUI.add(store[r]);                      // add the JButton to the pane
             JLabel jl = new JLabel("" + storeItems[r].COST);
@@ -108,7 +110,7 @@ public class View extends JFrame
         goldLabel = new JLabel("0", JLabel.LEFT);
         goldLabel.setBounds(175, 8, 20000, 20); // NOTE: EVERYTHING IN THIS LINE IS A MAGIC NUMBER
 
-        /* CODE FOR THE PROGRESS BAR */
+        /** CODE FOR THE PROGRESS BAR **/
         // Create progress bar
         progressBar = new JProgressBar(0, NUM_ATTACKERS);                                // constructs progressBar
         Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), HEIGHT/20);   // dimensions of the progressBar
@@ -122,13 +124,27 @@ public class View extends JFrame
 
         
         /** CODE FOR THE PAUSE BUTTON **/
-        JButton pauseButton = new JButton();
+        pauseButton = new JButton();
         Dimension pauseButtonSize = new Dimension(JBUTTONWIDTH, JBUTTONHEIGHT/2);
         pauseButton.setText("PAUSE");
         int pauseButtonX = boardUIxPos + (int)boardSize.getWidth() - JBUTTONWIDTH;
         int pauseButtonY = storeUIyPos;
         pauseButton.setBounds(pauseButtonX, pauseButtonY, (int)pauseButtonSize.getWidth(), (int)pauseButtonSize.getHeight());
         pauseButton.addMouseListener(new PauseListener());
+        
+        /** CODE FOR PAUSE MENU **/
+        pauseMenu = new JLayeredPane();
+        Dimension pauseMenuSize = new Dimension(WIDTH/3,HEIGHT/3);
+        int pauseMenuUIxPos = origin.x+(WIDTH/2) - (int)pauseMenuSize.getWidth()/2;                      // x position of storeUI
+        int pauseMenuUIyPos = origin.y+(HEIGHT/2) - (int)pauseMenuSize.getHeight()/2;                     // y position of storeUI
+
+        // set position of pauseMenu
+        pauseMenu.setBounds(pauseMenuUIxPos, pauseMenuUIyPos, (int)pauseMenuSize.getWidth(), (int)pauseMenuSize.getHeight());   // puts boardUI at (x,y) and sets width/height
+        
+        JPanel pauseMenuBackground = new JPanel();
+        pauseMenuBackground.setBackground(Color.GRAY);
+        pauseMenu.add(pauseMenuBackground);
+        
         
         
         /** CODE FOR THE BACKGROUND **/
@@ -139,10 +155,11 @@ public class View extends JFrame
 
         // Set window size and show window
         add(progressBar);       // adds progressBar to the screen     
+        add(pauseMenu);         // adds pauseMenu
         add(boardUI);           // adds boardUI to the screen
         add(storeUI);           // adds storeUI to the screen
         add(goldLabel);         // adds goldLabel
-        add(pauseButton);
+        add(pauseButton);       // adds pauseButton
         add(backgroundLabel);   // adds background image
         setVisible(true);       // makes the screen visable
 
@@ -194,6 +211,16 @@ public class View extends JFrame
         thing.getJLabel().setVisible(false);
         boardUI.remove(thing.getJLabel());
     }
+    
+    public void setStoreButtonPressed(JButton button, boolean pressed){
+        for(JButton storeButton: store){
+            storeButton.setBorder(new LineBorder(Color.GRAY));
+        }
+            
+        if(pressed){
+            button.setBorder(new LineBorder(Color.GRAY, 3));
+        }
+    }
 
     public void resetField()
     {
@@ -208,30 +235,37 @@ public class View extends JFrame
     private class StoreMouseHandler extends MouseAdapter
     {
         public StoreItem si;
+        public JButton button;
 
-        public StoreMouseHandler(StoreItem si)
+        public StoreMouseHandler(StoreItem si, JButton button)
         {
             this.si = si;
+            this.button = button;
         }
         
         public void mouseClicked(MouseEvent event)
         {
             control.pickDefender(si);
+            setStoreButtonPressed(button, true);
         }
     }
     
     private class BoardMouseHandler extends MouseAdapter
     {
         public int row, col;
+        
         public BoardMouseHandler(int r, int c)
         {
             row = r;
             col = c;
         }
+        
         public void mouseClicked(MouseEvent event)
         {
             Location loc = new Location(col*JBUTTONWIDTH , row*JBUTTONHEIGHT);
-            control.placeDefender(loc);
+            if(control.placeDefender(loc)){
+                setStoreButtonPressed(null, false);
+            }
         }
     }
     
