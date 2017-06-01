@@ -29,7 +29,7 @@ public class View extends JFrame
     private JProgressBar progressBar;
     private JLayeredPane boardUI;
     private JButton pauseButton;
-    private JLayeredPane pauseMenu;
+    private JPanel pauseMenu;
 
     /**
      * Constructor for objects of class Model
@@ -134,17 +134,32 @@ public class View extends JFrame
         pauseButton.addMouseListener(new PauseListener());
         
         /** CODE FOR PAUSE MENU **/
-        pauseMenu = new JLayeredPane();
-        Dimension pauseMenuSize = new Dimension(WIDTH/3,HEIGHT/3);
+        pauseMenu = new JPanel();
+        pauseMenu.setLayout(null);
+        Dimension pauseMenuSize = new Dimension(WIDTH/5,HEIGHT/5);
         int pauseMenuUIxPos = origin.x+(WIDTH/2) - (int)pauseMenuSize.getWidth()/2;                      // x position of storeUI
         int pauseMenuUIyPos = origin.y+(HEIGHT/2) - (int)pauseMenuSize.getHeight()/2;                     // y position of storeUI
-
+        //pauseMenu.setBackground(Color.GRAY);
+        
         // set position of pauseMenu
         pauseMenu.setBounds(pauseMenuUIxPos, pauseMenuUIyPos, (int)pauseMenuSize.getWidth(), (int)pauseMenuSize.getHeight());   // puts boardUI at (x,y) and sets width/height
         
-        JPanel pauseMenuBackground = new JPanel();
-        pauseMenuBackground.setBackground(Color.GRAY);
-        pauseMenu.add(pauseMenuBackground);
+        // pause menu text
+        JLabel gamePauseText = new JLabel("Game Paused", SwingConstants.CENTER);
+        gamePauseText.setBounds(0,20, (int)pauseMenuSize.getWidth(), 30);
+        pauseMenu.add(gamePauseText);
+        
+        // resume button
+        JButton resumeButton = new JButton("Resume");
+        resumeButton.addMouseListener(new ResumeListener());
+        resumeButton.setBounds((int)pauseMenuSize.getWidth()/2-50,(int)pauseMenuSize.getHeight()-(int)pauseMenuSize.getHeight()/2, 100,40);
+        pauseMenu.add(resumeButton);
+        
+        // reset button
+        JButton resetButton = new JButton("Reset");
+        resetButton.addMouseListener(new ResetListener());
+        resetButton.setBounds((int)pauseMenuSize.getWidth()-150,(int)pauseMenuSize.getHeight()-(int)pauseMenuSize.getHeight()/3, 100,40);
+        //pauseMenu.add(resetButton);
         
         
         
@@ -157,6 +172,7 @@ public class View extends JFrame
         // Set window size and show window
         add(progressBar);       // adds progressBar to the screen     
         add(pauseMenu);         // adds pauseMenu
+        pauseMenu.setVisible(false);
         add(boardUI);           // adds boardUI to the screen
         add(storeUI);           // adds storeUI to the screen
         add(goldLabel);         // adds goldLabel
@@ -192,7 +208,7 @@ public class View extends JFrame
                 (wOrL)?"You won": "You lost", "Ant Defense",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
                 null,  possibleValues, possibleValues[0]);
-        
+
         endProgram();
     }
 
@@ -229,10 +245,30 @@ public class View extends JFrame
             button.setBorder(new LineBorder(Color.GRAY, 3));
         }
     }
+    
+    public void setStoreEnabled(boolean enabled){
+        for(JButton storeButton: store){
+            storeButton.setEnabled(enabled);
+        }
+    }
 
     public void resetField()
     {
-
+        /*
+        Model tempModel = myGame;
+        myGame = new Model(tempModel.getOriginalLevelGenerator());
+        control = new Controller(myGame);
+        
+        //control.setView(this);
+        control.loop();
+        */
+    }
+    
+    public void unPause(){
+        pauseMenu.setVisible(false);
+            pauseButton.setEnabled(true);
+            setStoreEnabled(true);
+            control.pauseGame();
     }
 
     public void endProgram()
@@ -273,15 +309,43 @@ public class View extends JFrame
             control.placeDefender(loc);
         }
     }
+
+    private class ResetListener extends MouseAdapter
+    {
+        public ResetListener(){
+            // nothing needed
+        }
+        
+        public void mouseClicked(MouseEvent event){
+            resetField();
+            unPause();
+        }
+    }
+    
+    private class ResumeListener extends MouseAdapter
+    {
+        public ResumeListener(){
+            // nothing needed
+        }
+        
+        public void mouseClicked(MouseEvent event){
+            unPause();
+        }
+    }
     
     private class PauseListener extends MouseAdapter
     {
         public PauseListener(){
            // nothing needed
         }
-        
+
         public void mouseClicked(MouseEvent event){
-            control.pauseGame();
+            if(!pauseMenu.isVisible()){
+                pauseButton.setEnabled(false);
+                pauseMenu.setVisible(true);
+                setStoreEnabled(false);
+                control.pauseGame();
+            }
         }
     }
 
