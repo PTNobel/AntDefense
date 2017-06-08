@@ -30,7 +30,7 @@ public class PoisonFood extends Defender
             if (loc.getCol() == ant.getLoc().getCol() && loc.getRow() == ant.getLoc().getRow())
             {
                 // Don't damage dancing ants, they are not damaging us
-                if (!(ant instanceof DancingAnt))
+                if (!(ant instanceof HarmlessAnt))
                 {
                     if(!ant.takeDamage(dmg))
                         d.add(ant);

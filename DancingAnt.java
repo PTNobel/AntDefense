@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
  * @author Ignatius Widjaja
  * @version 0.0
  */
-public class DancingAnt extends Ant
+public class DancingAnt extends Ant implements HarmlessAnt
 {
     private int swing;
     private int turnsInDir;
