@@ -152,14 +152,14 @@ public class View extends JFrame
         // resume button
         JButton resumeButton = new JButton("Resume");
         resumeButton.addMouseListener(new ResumeListener());
-        resumeButton.setBounds((int)pauseMenuSize.getWidth()/2-50,(int)pauseMenuSize.getHeight()-(int)pauseMenuSize.getHeight()/2, 100,40);
+        resumeButton.setBounds((int)pauseMenuSize.getWidth()/2-50,(int)pauseMenuSize.getHeight()-2*(int)pauseMenuSize.getHeight()/3, 100,40);
         pauseMenu.add(resumeButton);
         
         // reset button
         JButton resetButton = new JButton("Reset");
         resetButton.addMouseListener(new ResetListener());
-        resetButton.setBounds((int)pauseMenuSize.getWidth()-150,(int)pauseMenuSize.getHeight()-(int)pauseMenuSize.getHeight()/3, 100,40);
-        //pauseMenu.add(resetButton);
+        resetButton.setBounds((int)pauseMenuSize.getWidth()/2-50,(int)pauseMenuSize.getHeight()-(int)pauseMenuSize.getHeight()/3, 100,40);
+        pauseMenu.add(resetButton);
         
         
         
@@ -203,13 +203,26 @@ public class View extends JFrame
      */
     public void announceWinOrLoss(boolean wOrL)
     {
-        String[] possibleValues = { "OK"};
+        String[] possibleValues = {"I'll try a different level", "I'll try again", "I'm done"};
         Integer selectedValue = JOptionPane.showOptionDialog(null,
-                (wOrL)?"You won": "You lost", "Ant Defense",
+                ((wOrL)?"You won.": "You lost.") + " What next?", "Ant Defense",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                null,  possibleValues, possibleValues[0]);
+                null,  possibleValues, possibleValues[2]);
 
-        endProgram();
+        switch (selectedValue)
+        {
+            case 0: LevelGenerator lg = AntDefense.getDifficulty();
+                    control.resetGame(lg);
+                    control.loop();
+                break;
+            case 1: resetField();
+                    control.loop();
+                break;
+            case 2:
+            default:
+                endProgram();
+                break;
+        }
     }
 
     public void addCharacter(Character thing)
@@ -252,23 +265,25 @@ public class View extends JFrame
         }
     }
 
+    public void setBoardEnabled(boolean enabled){
+        for(JButton[] boardRow: boardArray)
+        {
+            for (JButton boardButton: boardRow)
+                boardButton.setEnabled(enabled);
+        }
+    }
+
     public void resetField()
     {
-        /*
-        Model tempModel = myGame;
-        myGame = new Model(tempModel.getOriginalLevelGenerator());
-        control = new Controller(myGame);
-        
-        //control.setView(this);
-        control.loop();
-        */
+        control.resetGame();
     }
     
     public void unPause(){
         pauseMenu.setVisible(false);
-            pauseButton.setEnabled(true);
-            setStoreEnabled(true);
-            control.pauseGame();
+        pauseButton.setEnabled(true);
+        setStoreEnabled(true);
+        setBoardEnabled(true);
+        control.pauseGame();
     }
 
     public void endProgram()
@@ -344,11 +359,17 @@ public class View extends JFrame
                 pauseButton.setEnabled(false);
                 pauseMenu.setVisible(true);
                 setStoreEnabled(false);
+                setBoardEnabled(false);
                 control.pauseGame();
             }
         }
     }
 
+    public void setMaxProgress(int max)
+    {
+        progressBar.setMaximum(max);
+    }
+    
     public void setProgress(int prog)
     {
         progressBar.setValue(prog);

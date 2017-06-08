@@ -11,7 +11,7 @@ import java.util.List;
 public class Model
 {
     private static final int NUM_ROWS = 5, NUM_COLS = 10;
-    private final int NUM_ATTACKERS;
+    private int NUM_ATTACKERS;
     private Defender[][] board;
     private List<Defender> defenderList;
     private List<Ant> antList;
@@ -171,7 +171,37 @@ public class Model
             return def;
         }
     }
-    
+   
+    /**
+     * Postcondition: Returns all characters currently stored in model.
+     *      Resets the rest of model.
+     */
+    public List<Character> resetModel()
+    {
+        // Create the list
+        List<Character> output = new LinkedList<Character>();
+
+        output.addAll(antList);
+        antList = new LinkedList<Ant>();
+        output.addAll(defenderList);
+        defenderList = new LinkedList<Defender>();
+
+        gold = 250;
+        progress = 0;
+        board = new Defender[NUM_ROWS][NUM_COLS];
+        lg.resetGenerator();
+
+        return output;
+    }
+
+    public List<Character> changeGenerator(LevelGenerator levelGenerator)
+    {
+        lg = levelGenerator;
+        NUM_ATTACKERS = lg.getNumAttackers();
+
+        return resetModel();
+    }
+
     public boolean getGameWon(){
         return NUM_ATTACKERS == progress;
     }

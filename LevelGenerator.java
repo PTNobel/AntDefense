@@ -1,29 +1,20 @@
 import java.util.List;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public abstract class LevelGenerator
 {
     // instance variables
     protected int completed = 0; 
     protected int max;
+    protected List<Ant> cachedAnts;
     
     // location variables
     private int numRows = 5;
     private int yGap = 40;
     private int xStart = 760;
-    protected List<Location> rows = new ArrayList<Location>();
-    protected Location row1 = new Location(xStart, yGap);
-    protected Location row2 = new Location(xStart, yGap * 3);
-    protected Location row3 = new Location(xStart, yGap * 5);
-    protected Location row4 = new Location(xStart, yGap * 7);
-    protected Location row5 = new Location(xStart, yGap * 9);
   
     public LevelGenerator(int max){
-        rows.add(row1);
-        rows.add(row2);
-        rows.add(row3);
-        rows.add(row4);
-        rows.add(row5);
+        cachedAnts = new LinkedList<Ant>();
         this.max = max;
     }
     
@@ -34,8 +25,12 @@ public abstract class LevelGenerator
 
     public Location selectRandomRow(){
         int randomRow = (int)(Math.random()*numRows);
-        //System.out.print(randomRow);
-        return rows.get(randomRow);
+        
+        // yStart = Odd number in [1, 9] times yGap plus 10 + random number [0, 30]
+        int yStart = (2*(int)(Math.random()*numRows))*yGap + 10 + (int)(Math.random() * 30);
+
+        //return rows.get(randomRow);
+        return new Location(xStart, yStart);
     }
 
     // Each turn this will be called. It will return a list of ants for that
@@ -45,4 +40,23 @@ public abstract class LevelGenerator
     // On turn 50 it may return a queen ant and three warrior ants
     // These ants will recieve their location from level generator.
     public abstract List<Ant> generateAnts();
+
+    /**
+     * Resets the generator to the initial state.
+     * Must be overridden if a sub-class keeps track of other variables then
+     * completed.
+     */
+    public void resetGenerator()
+    {
+        completed = 0;
+    }
+
+    // Adds ants to the cached list.
+    // Generators should pull everything from cachedAnts at the beginning of a
+    // generateAnts, if possible.
+    // If progress = max, don't.
+    public void addAnts(List<Ant> ants)
+    {
+        cachedAnts.addAll(ants);
+    }
 }

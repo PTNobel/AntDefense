@@ -120,7 +120,7 @@ public class Controller
         }
         safeToAct = true;
     }
-    
+
     public void pauseGame()
     {
         while (!safeToAct && !paused){
@@ -134,5 +134,59 @@ public class Controller
 
         paused = !paused;
         safeToAct = !paused;
+    }
+
+    public void resetGame()
+    {
+        while (!safeToAct && !paused){
+            try {
+                Thread.sleep(25);
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        boolean origPaused = paused;
+        paused = false;
+        safeToAct = false;
+
+        for (Character charac: m.resetModel())
+        {
+            v.removeCharacter(charac);
+        }
+    
+        v.setGoldLabel(m.getGold());
+        v.setProgress(0);
+        v.setMaxProgress(m.getNumAttackers());
+
+        paused = origPaused;
+        safeToAct = !origPaused;
+    }
+
+    public void resetGame(LevelGenerator lg)
+    {
+        while (!safeToAct && !paused){
+            try {
+                Thread.sleep(25);
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        paused = false;
+        safeToAct = false;
+
+        for (Character charac: m.changeGenerator(lg))
+        {
+            v.removeCharacter(charac);
+        }
+    
+        v.setGoldLabel(m.getGold());
+        v.setProgress(0);
+        v.setMaxProgress(m.getNumAttackers());
+
+        safeToAct = true;
     }
 }
