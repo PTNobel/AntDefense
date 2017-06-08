@@ -5,7 +5,7 @@ public class TrivialGenerator extends LevelGenerator
 {
     public TrivialGenerator()
     {
-        super(3);
+        super(300);
     }
 
     public List<Ant> generateAnts()
@@ -21,7 +21,12 @@ public class TrivialGenerator extends LevelGenerator
                 completed++;
             }
 
-            if (Math.random() < 0.02)
+            if (completed == 0)
+            {
+                output.add(new QueenAnt(this));
+                completed++;
+            }
+            else if (Math.random() < 0.02)
             {
                 output.add(new DancingAnt(selectRandomRow()));
                 completed++;
@@ -33,5 +38,4 @@ public class TrivialGenerator extends LevelGenerator
         }
         return output;
     }
-
 }
