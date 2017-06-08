@@ -13,31 +13,67 @@ public class QueenAnt extends Ant implements HarmlessAnt
     private int swing;
     private LevelGenerator lg;
 
-    public QueenAnt(Location loc, LevelGenerator lg)
+    public QueenAnt(LevelGenerator lg)
     {
-        super(2000, loc);
+        // Queen Ant always starts in the center column
+        super(2000, new Location(760, 200));
         swing = 0;
         this.lg = lg;
     }
 
     public List<Defender> act(List<Defender> defenders)
     {
-        List<Defender> d = new LinkedList<Defender>();
+
+        boolean blocked = false;
         for (Defender defense : defenders)
         {
             if (loc.getCol() == defense.getLoc().getCol() && loc.getRow() == defense.getLoc().getRow())
             {
-                if(!defense.takeDamage(swing))
-                    d.add(defense);
+                blocked = true;
             }
-            else
-                move(loc);
-
         }
-        return d;
+
+        if (Math.random() < .05)
+        {
+            List<Ant> newAnts = new LinkedList<Ant>();
+
+            // Random number [-1, 1)
+            double yMod = Math.random()*2 - 1;
+
+            newAnts.add(
+                    new WorkerAnt(
+                        new Location(loc.getX(), loc.getY() + (int)(yMod*80))
+                        )
+                    );
+
+            if (Math.random() < .05)
+            {
+                 newAnts.add(
+                    new WarriorAnt(
+                        new Location(loc.getX(), loc.getY() - (int)(yMod*80))
+                        )
+                    );
+
+
+            } else if (Math.random() < 0.001)
+            {
+                newAnts.add(
+                    new ReidAnt(
+                        new Location(loc.getX(), loc.getY() - (int)(yMod*80))
+                        )
+                    );
+            }
+
+            lg.addAnts(newAnts);
+        }
+        
+        if (!blocked)
+            move();
+
+        return new LinkedList<Defender>();
     }
 
-    private void move(Location loc)
+    private void move()
     {
         setLoc(new Location(loc.getX() - 2, loc.getY()));
     }
