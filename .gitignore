@@ -2,3 +2,5 @@
 *.class
 *.ctxt
 *.jar
+package.bluej
+README.TXT
