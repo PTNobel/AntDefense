@@ -5,6 +5,17 @@ public class AntDefense
     public static void main(String[] args)
     {
         PictureLoader picLoader =  new PictureLoader();
+
+        Model game = new Model(getDifficulty());
+        Controller control = new Controller(game);
+        View view = new View(game, control);
+        control.setView(view);
+
+        control.loop();
+    }
+
+    public static LevelGenerator getDifficulty()
+    {
         // Create the dialog.
         // String[] possibleValues = {"Trivial", "Easy", "Medium", "Hard"};
         String[] possibleValues = {"Easy", "Medium", "Hard"};
@@ -29,12 +40,6 @@ public class AntDefense
                 break;
         }
 
-
-        Model game = new Model(lg);
-        Controller control = new Controller(game);
-        View view = new View(game, control);
-        control.setView(view);
-
-        control.loop();
+        return lg;
     }
 }
