@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ListIterator;
 import java.util.LinkedList;
 
 public class HardGenerator extends LevelGenerator
@@ -14,6 +15,14 @@ public class HardGenerator extends LevelGenerator
         List<Ant> output = new LinkedList<Ant>();
         if (completed < max)
         {
+            ListIterator<Ant> iter = cachedAnts.listIterator();
+            while (completed < max && iter.hasNext())
+            {
+                output.add(iter.next());
+                iter.remove();
+                completed++;
+            }
+
             if (completed < 5)
             {
                 if (Math.random() < 0.02)
