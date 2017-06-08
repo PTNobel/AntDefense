@@ -1,4 +1,5 @@
 import java.util.List;
+import javax.swing.ImageIcon;
 import java.util.LinkedList;
 import java.util.ListIterator;
 /**
@@ -7,13 +8,16 @@ import java.util.ListIterator;
  * @author Ignatius Widjaja
  * @version 0.0
  */
-public class QueenAnt extends Ant
+public class QueenAnt extends Ant implements HarmlessAnt
 {
     private int swing;
-    public QueenAnt(Location loc)
+    private LevelGenerator lg;
+
+    public QueenAnt(Location loc, LevelGenerator lg)
     {
-        super(200, loc);
-        swing = 25;
+        super(2000, loc);
+        swing = 0;
+        this.lg = lg;
     }
 
     public List<Defender> act(List<Defender> defenders)
@@ -41,5 +45,10 @@ public class QueenAnt extends Ant
     public int getGold()
     {
 	    return 100;
+    }
+
+    public ImageIcon getInitialImageIcon()
+    {
+        return new ImageIcon("NullAnt.png");
     }
 }
