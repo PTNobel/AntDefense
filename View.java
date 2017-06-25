@@ -54,7 +54,7 @@ public class View extends JFrame
     /**
      * Constructor for objects of class Model
      */
-    public View(Controller control)
+    public View()
     {
         super("Ant Defense");
         // initialise instance variables
