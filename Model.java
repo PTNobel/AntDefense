@@ -51,16 +51,16 @@ public class Model
         gold = 250;
     }
 
-    public int getNumRows()
+    public static int getNumRows()
     {
         return NUM_ROWS;
     }
-    
-    public int getNumCols()
+   
+    public static int getNumCols()
     {
         return NUM_COLS;
     }
-    
+
     public int getNumAttackers()
     {
         return NUM_ATTACKERS;
@@ -83,30 +83,6 @@ public class Model
         Location loc = def.getLoc();
         board[loc.getRow()][loc.getCol()] = null;
         defenderList.remove(def);
-    }
-
-    public void addAnts(Ant... ants)
-    {
-        for (Ant ant: ants)
-        {
-            antList.add(ant);
-        }
-    }
-
-    /**
-     * Returns true if defender was placed;
-     * Returns false if defender was not placed.
-     */
-    public boolean addDefender(Defender defend)
-    {
-        if (getDefenderAtLoc(defend.getLoc()) == null)
-        {
-            setDefenderAtLoc(defend);
-            defenderList.add(defend);
-            return true;
-        } 
-        else
-            return false;
     }
  
     public ActResult act()
