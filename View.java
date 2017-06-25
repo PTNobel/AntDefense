@@ -60,8 +60,8 @@ public class View extends JFrame
         super("Ant Defense");
         // initialise instance variables
         myGame = game;
-        NUM_ROWS = game.getNumRows();
-        NUM_COLS = game.getNumCols();
+        NUM_ROWS = Model.getNumRows();
+        NUM_COLS = Model.getNumCols();
         NUM_ATTACKERS = game.getNumAttackers();
         this.control = control;
 

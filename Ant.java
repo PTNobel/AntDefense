@@ -34,7 +34,7 @@ public abstract class Ant extends Character
     }
 
     /**
-     * REturns the appropriate gold amount gained from killing the Ant.
+     * Returns the appropriate gold amount gained from killing the Ant.
      */
     abstract public int getGold();
 
