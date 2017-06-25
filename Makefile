@@ -10,3 +10,6 @@ AntDefense.jar: *.class *.png
 clean:
 	rm *.class
 	rm AntDefense.jar
+
+run: AntDefense.jar
+	java -jar AntDefense.jar
