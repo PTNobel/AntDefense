@@ -29,10 +29,6 @@ public class ActResult
     private int progress, gold;
     private List<Character> movedCharacters;
     
-    public ActResult(){
-        // do we need anything in here?
-    }
-    
     public void setDeadCharacters(List<Character> deadCharacters){
         this.deadCharacters = deadCharacters;
     }

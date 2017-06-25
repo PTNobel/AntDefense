@@ -84,30 +84,6 @@ public class Model
         board[loc.getRow()][loc.getCol()] = null;
         defenderList.remove(def);
     }
-
-    public void addAnts(Ant... ants)
-    {
-        for (Ant ant: ants)
-        {
-            antList.add(ant);
-        }
-    }
-
-    /**
-     * Returns true if defender was placed;
-     * Returns false if defender was not placed.
-     */
-    public boolean addDefender(Defender defend)
-    {
-        if (getDefenderAtLoc(defend.getLoc()) == null)
-        {
-            setDefenderAtLoc(defend);
-            defenderList.add(defend);
-            return true;
-        } 
-        else
-            return false;
-    }
  
     public ActResult act()
     {
