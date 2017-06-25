@@ -51,16 +51,16 @@ public class Model
         gold = 250;
     }
 
-    public int getNumRows()
+    public static int getNumRows()
     {
         return NUM_ROWS;
     }
-    
-    public int getNumCols()
+   
+    public static int getNumCols()
     {
         return NUM_COLS;
     }
-    
+
     public int getNumAttackers()
     {
         return NUM_ATTACKERS;
