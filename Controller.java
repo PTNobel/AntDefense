@@ -44,6 +44,7 @@ public class Controller
     {
         v = view;
         v.setGoldLabel(m.getGold());
+        v.setMaxProgress(m.getNumAttackers());
     }
 
     public void loop()
