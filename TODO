@@ -1,7 +1,9 @@
 * Make Queen generated WorkerAnts start next to the Queen, and then go to their location.
 * Let Queen appear in other rows.
-* Create Menu
-  * Create Help Menu
+* Create Welcome menu
+* Create Help Menu
 * Make Queen Icon
-* Add Difficulty on Screen
+* Add level difficulty screen
 * Add Help to Game/Pause
+* Make Welcome Screen Background Art
+* Make level difficulty screen background art
