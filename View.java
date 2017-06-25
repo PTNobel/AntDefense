@@ -209,6 +209,11 @@ public class View extends JFrame
         );
     }
 
+    public void setControl(Controller control)
+    {
+        this.control = control;
+    }
+
     public void moveCharacter(Character thing)
     {
         Location loc = thing.getLoc();

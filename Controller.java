@@ -43,6 +43,7 @@ public class Controller
     public void setView(View view)
     {
         v = view;
+        v.setControl(this);
         v.setGoldLabel(m.getGold());
         v.setMaxProgress(m.getNumAttackers());
     }

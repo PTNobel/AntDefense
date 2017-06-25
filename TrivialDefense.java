@@ -31,7 +31,7 @@ public class TrivialDefense
 
         Model game = new Model(lg);
         Controller control = new Controller(game);
-        View view = new View(control);
+        View view = new View();
         control.setView(view);
 
         control.loop();
