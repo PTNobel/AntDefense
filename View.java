@@ -37,7 +37,6 @@ public class View extends JFrame
     private static final long serialVersionUID = 1L;
     
     // instance variables
-    private Model myGame;
     private Controller control;
     private static final int WIDTH = 960;
     private static final int HEIGHT = 720;
@@ -55,14 +54,13 @@ public class View extends JFrame
     /**
      * Constructor for objects of class Model
      */
-    public View(Model game, Controller control)
+    public View(Controller control)
     {
         super("Ant Defense");
         // initialise instance variables
-        myGame = game;
         NUM_ROWS = Model.getNumRows();
         NUM_COLS = Model.getNumCols();
-        NUM_ATTACKERS = game.getNumAttackers();
+        NUM_ATTACKERS = 1;
         this.control = control;
 
         // set up window

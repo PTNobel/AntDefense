@@ -29,7 +29,7 @@ public class AntDefense
 
         Model game = new Model(getDifficulty());
         Controller control = new Controller(game);
-        View view = new View(game, control);
+        View view = new View(control);
         control.setView(view);
 
         control.loop();
