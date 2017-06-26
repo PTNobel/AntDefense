@@ -22,7 +22,7 @@
 import java.util.List; 
 
 /**
- * This class communicates information from the Model to the View and vica
+ * This class communicates information from the Model to the GameView and vica
  * versa
  *
  * @author Parth Nobel and Chase Carnaroli
@@ -31,7 +31,7 @@ import java.util.List;
 public class Controller
 {
     private Model m;
-    private View v;
+    private GameView v;
     private boolean safeToAct = true;
     private boolean paused = false;
 
@@ -40,7 +40,7 @@ public class Controller
         m = model;
     }
 
-    public void setView(View view)
+    public void setGameView(GameView view)
     {
         v = view;
         v.setControl(this);

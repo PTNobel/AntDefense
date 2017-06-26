@@ -47,14 +47,6 @@ public class TrivialDefense
         
 
         PictureLoader picLoader =  new PictureLoader();
-        LevelGenerator lg = new TrivialGenerator();
-
-
-        Model game = new Model(lg);
-        Controller control = new Controller(game);
-        View view = new View();
-        control.setView(view);
-
-        control.loop();
+        new Window(new GameView());
     }
 }

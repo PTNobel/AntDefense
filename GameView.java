@@ -32,14 +32,12 @@ import javax.swing.*;       // import JFrame
 import javax.swing.border.*;
 import java.awt.event.*;    // import event listener
 
-public class View extends JFrame
+public class GameView extends JRootPane
 {
     private static final long serialVersionUID = 1L;
     
     // instance variables
     private Controller control;
-    private static final int WIDTH = 960;
-    private static final int HEIGHT = 720;
     public static final int JBUTTONHEIGHT = 80, JBUTTONWIDTH = 80;
     private final int NUM_ROWS, NUM_COLS, NUM_ATTACKERS;
     private JButton[][] boardArray;
@@ -54,22 +52,18 @@ public class View extends JFrame
     /**
      * Constructor for objects of class Model
      */
-    public View()
+    public GameView()
     {
-        super("Ant Defense");
         // initialise instance variables
         NUM_ROWS = Model.getNumRows();
         NUM_COLS = Model.getNumCols();
         NUM_ATTACKERS = 1;
         this.control = control;
 
-        // set up window
-        setSize(WIDTH, HEIGHT);                                                 // sets size in pixels
-        setResizable(false);                                                    // makes it resizable or not (true == resizable screen)
-        this.getContentPane().setLayout(null);                                  // this allows us to place components wherever we want on the screen
-
         Point origin = new Point(0,0);  // variable for the origin
 
+        setSize(Window.WIDTH, Window.HEIGHT);
+        setLayout(null);
         /**CODE FOR THE BOARD ON THE SCREEN**/
         // Create board
         boardUI = new JLayeredPane();                                  // constructs boardUI pane
@@ -197,16 +191,9 @@ public class View extends JFrame
         add(goldLabel);         // adds goldLabel
         add(pauseButton);       // adds pauseButton
         add(backgroundLabel);   // adds background image
-        setVisible(true);       // makes the screen visable
+        //setVisible(true);       // makes the screen visable
 
-        // needed to close application
-        addWindowListener(new java.awt.event.WindowAdapter() 
-            {
-                public void windowClosing(WindowEvent evt) {
-                    System.exit(0);
-                }
-            }
-        );
+        
     }
 
     public void setControl(Controller control)
