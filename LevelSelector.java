@@ -1,4 +1,7 @@
 import javax.swing.JRootPane;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LevelSelector extends JRootPane
 {
@@ -11,18 +14,45 @@ public class LevelSelector extends JRootPane
         setSize(Window.WIDTH, Window.HEIGHT);
         setLayout(null);
 
-        JButton playButton = new JButton();
-        playButton.setText("PLAY");
-        playButton.setBounds( (Window.WIDTH - 80)/2, 300, 80, 40);
-        playButton.addMouseListener(new PauseListener());
+        JButton easyButton = new JButton();
+        easyButton.setText("EASY");
+        easyButton.setBounds( (Window.WIDTH - 80)/2, 300, 80, 40);
+        easyButton.addMouseListener(new LevelSelectListner(0));
 
-        JButton helpButton = new JButton();
-        helpButton.setText("HELP");
-        helpButton.setBounds( (Window.WIDTH - 80)/2, 360, 80, 40);
 
-        add(playButton);
-        add(helpButton);
+        add(easyButton);
     }
 
+    private class LevelSelectListner extends MouseAdapter
+    {
+        private int diff;
+        public LevelSelectListner(int difficutly)
+        {
+            diff = difficutly;
+        }
+
+        public void mouseClicked(MouseEvent event){
+            LevelGenerator lg;
+            switch (diff)
+            {
+            case 0: lg = new EasyGenerator();
+                break;
+            
+            case 1: lg = new MediumGenerator();
+                break;
+            
+            case 2: lg = new HardGenerator();
+                break;
+
+            default: lg = new TrivialGenerator();
+                break;
+            }
+            Model model = new Model(lg);
+            GameView gv = new GameView();
+            Controller control = new Controller(model, gv);
+            control.setGameView(gv);
+            window.setNewContentPane(gv);
+        }
+    }
 
 }

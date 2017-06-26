@@ -390,4 +390,9 @@ public class GameView extends JRootPane
     {
         goldLabel.setText("" + gold);
     }
+
+    public void startGame()
+    {
+        control.loop();
+    }
 }

@@ -35,7 +35,7 @@ public class WelcomeScreen extends JRootPane
 
         public void mouseClicked(MouseEvent event){
             LevelSelector ls = new LevelSelector(window);
-            window.setContentPane(ls);
+            window.setNewContentPane(ls);
         }
     }
 

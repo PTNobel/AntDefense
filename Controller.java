@@ -35,9 +35,10 @@ public class Controller
     private boolean safeToAct = true;
     private boolean paused = false;
 
-    public Controller(Model model)
+    public Controller(Model model, GameView view)
     {
         m = model;
+        setGameView(view);
     }
 
     public void setGameView(GameView view)
