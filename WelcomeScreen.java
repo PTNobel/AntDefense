@@ -26,8 +26,8 @@ public class WelcomeScreen extends JRootPane
         
         JButton creditsButton = new JButton();
         creditsButton.setText("CREDITS");
-        creditsButton.setBounds( ((Window.WIDTH - 80)/2, 420, 80, 40);
-        creditsButton.addMouseListener(new CreditsListener);
+        creditsButton.setBounds( (Window.WIDTH - 80)/2, 420, 80, 40);
+        creditsButton.addMouseListener(new CreditsListener());
 
         add(playButton);        // adds play button to screen
         add(helpButton);        // adds help button to screen
