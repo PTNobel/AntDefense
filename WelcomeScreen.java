@@ -19,6 +19,7 @@ public class WelcomeScreen extends JRootPane
         // PLAY BUTTON
         JButton playButton = new JButton();
         playButton.setText("PLAY");
+        // button location and size
         int playWidth = (int) buttonSize.getWidth();    // width
         int playHeight = (int) buttonSize.getHeight();  // height
         int playX = (Window.WIDTH - playWidth)/2;       // x-position
@@ -29,6 +30,7 @@ public class WelcomeScreen extends JRootPane
         // HELP BUTTON
         JButton helpButton = new JButton();
         helpButton.setText("HELP");
+        // button location and size
         int helpWidth = (int) buttonSize.getWidth();    // width
         int helpHeight = (int) buttonSize.getHeight();  // height
         int helpX = (Window.WIDTH - helpWidth)/2;       // x-position
@@ -39,6 +41,7 @@ public class WelcomeScreen extends JRootPane
         // CREDITS BUTTON
         JButton creditsButton = new JButton();
         creditsButton.setText("CREDITS");
+        // button location and size
         int creditsWidth = (int) buttonSize.getWidth()+20; // width
         int creditsHeight = (int) buttonSize.getHeight();  // height
         int creditsX = (Window.WIDTH - creditsWidth)/2;    // x-position
