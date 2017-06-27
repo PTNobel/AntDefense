@@ -3,6 +3,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JRootPane;
 import javax.swing.JButton;
+import java.awt.Dimension;
 
 public class WelcomeScreen extends JRootPane
 {
@@ -13,22 +14,39 @@ public class WelcomeScreen extends JRootPane
     {
         setSize(Window.WIDTH, Window.HEIGHT);
         setLayout(null);
+        Dimension buttonSize = new Dimension(80,40);
 
+        // PLAY BUTTON
         JButton playButton = new JButton();
         playButton.setText("PLAY");
-        playButton.setBounds( (Window.WIDTH - 80)/2, 300, 80, 40);
+        int playWidth = (int) buttonSize.getWidth();    // width
+        int playHeight = (int) buttonSize.getHeight();  // height
+        int playX = (Window.WIDTH - playWidth)/2;       // x-position
+        int playY = 300;                                // y-position
+        playButton.setBounds(playX, playY, playWidth, playHeight);
         playButton.addMouseListener(new PlayListener());
 
+        // HELP BUTTON
         JButton helpButton = new JButton();
         helpButton.setText("HELP");
-        helpButton.setBounds( (Window.WIDTH - 80)/2, 360, 80, 40);
+        int helpWidth = (int) buttonSize.getWidth();    // width
+        int helpHeight = (int) buttonSize.getHeight();  // height
+        int helpX = (Window.WIDTH - helpWidth)/2;       // x-position
+        int helpY = 360;                                // y-position
+        helpButton.setBounds(helpX, helpY, helpWidth, helpHeight);
         helpButton.addMouseListener(new HelpListener());
 
+        // CREDITS BUTTON
         JButton creditsButton = new JButton();
         creditsButton.setText("CREDITS");
-        creditsButton.setBounds( (Window.WIDTH - 100)/2, 420, 100, 40);
+        int creditsWidth = (int) buttonSize.getWidth()+20; // width
+        int creditsHeight = (int) buttonSize.getHeight();  // height
+        int creditsX = (Window.WIDTH - creditsWidth)/2;    // x-position
+        int creditsY = 420;                                // y-position
+        creditsButton.setBounds(creditsX, creditsY, creditsWidth, creditsHeight);
         creditsButton.addMouseListener(new CreditsListener());
 
+        // Add buttons to screen
         add(playButton);        // adds play button to screen
         add(helpButton);        // adds help button to screen
         add(creditsButton);     // adds credits button to screen
