@@ -23,10 +23,10 @@ public class WelcomeScreen extends JRootPane
         helpButton.setText("HELP");
         helpButton.setBounds( (Window.WIDTH - 80)/2, 360, 80, 40);
         helpButton.addMouseListener(new HelpListener());
-        
+
         JButton creditsButton = new JButton();
         creditsButton.setText("CREDITS");
-        creditsButton.setBounds( (Window.WIDTH - 80)/2, 420, 80, 40);
+        creditsButton.setBounds( (Window.WIDTH - 100)/2, 420, 100, 40);
         creditsButton.addMouseListener(new CreditsListener());
 
         add(playButton);        // adds play button to screen
@@ -56,7 +56,7 @@ public class WelcomeScreen extends JRootPane
             // Code to open help screen
         }
     }
-    
+
     private class CreditsListener extends MouseAdapter
     {
         public CreditsListener()
