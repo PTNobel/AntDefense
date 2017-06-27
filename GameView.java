@@ -391,12 +391,10 @@ public class GameView extends JRootPane
         }
 
         public void mouseClicked(MouseEvent event){
-            /* THIS CODE BREAKS THE GAME
             control.quitGame();
             WelcomeScreen ws = new WelcomeScreen();
             ws.setWindow(window);
             window.setNewContentPane(ws);
-            */
         }
     }
 

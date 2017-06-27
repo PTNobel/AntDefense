@@ -81,7 +81,6 @@ public class Controller
             cakeEaten = move.getCakeEaten();
             turn++;
 
-
             safeToAct = true;
             do {
                 try {
@@ -90,7 +89,7 @@ public class Controller
                 catch (Exception e)
                 {
                 }
-            } while (!safeToAct);
+            } while (!safeToAct && !gameQuit);
         }
 
         if (gameWon)
@@ -215,9 +214,7 @@ public class Controller
         safeToAct = true;
     }
 
-    // BROKEN
     public void quitGame() {
-        paused = false;
         gameQuit = true;
     }
 }
