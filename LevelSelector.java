@@ -22,15 +22,15 @@ public class LevelSelector extends JRootPane
 
         // Medium Button
         JButton medButton = new JButton();
-        easyButton.setText("MEDIUM");
-        easyButton.setBounds( (Window.WIDTH - 80)/2, 300, 80, 40);
-        easyButton.addMouseListener(new LevelSelectListner(LevelDifficulty.MEDIUM));
+        medButton.setText("MEDIUM");
+        medButton.setBounds( (Window.WIDTH - 80)/2, 300, 80, 40);
+        medButton.addMouseListener(new LevelSelectListner(LevelDifficulty.MEDIUM));
 
         // Hard Button
         JButton hardButton = new JButton();
-        easyButton.setText("HARD");
-        easyButton.setBounds( (Window.WIDTH - 80)/2 + 100, 300, 80, 40);
-        easyButton.addMouseListener(new LevelSelectListner(LevelDifficulty.HARD));
+        hardButton.setText("HARD");
+        hardButton.setBounds( (Window.WIDTH - 80)/2 + 100, 300, 80, 40);
+        hardButton.addMouseListener(new LevelSelectListner(LevelDifficulty.HARD));
 
         // Add buttons to screen
         add(easyButton);
