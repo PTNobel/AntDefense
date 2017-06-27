@@ -21,7 +21,7 @@
 
 /**
  * Handles all Graphics
- * 
+ *
  * @author Chase Carnaroli and Parth Nobel
  * @version 0.0
  */
@@ -35,7 +35,7 @@ import java.awt.event.*;    // import event listener
 public class GameView extends JRootPane
 {
     private static final long serialVersionUID = 1L;
-    
+
     // instance variables
     private Controller control;
     public static final int JBUTTONHEIGHT = 80, JBUTTONWIDTH = 80;
@@ -48,13 +48,15 @@ public class GameView extends JRootPane
     private JLayeredPane boardUI;
     private JButton pauseButton;
     private JPanel pauseMenu;
+    private Window window;
 
     /**
      * Constructor for objects of class Model
      */
-    public GameView()
+    public GameView(Window window)
     {
         // initialise instance variables
+        this.window = window;
         NUM_ROWS = Model.getNumRows();
         NUM_COLS = Model.getNumCols();
         NUM_ATTACKERS = 1;
@@ -93,10 +95,10 @@ public class GameView extends JRootPane
                 //boardArray[r][c].setBorderPainted(true);        // Keeps border outlines
             }
         }
-        
+
         /**CODE FOR THE STORE ON THE SCREEN**/
         // Create store
-        JLayeredPane storeUI = new JLayeredPane();  // constructs storeUI pane                        
+        JLayeredPane storeUI = new JLayeredPane();  // constructs storeUI pane
         int storeUIxPos = origin.x+(Window.WIDTH/24);      // x position of storeUI
         int storeUIyPos = origin.y+(Window.HEIGHT/20);     // y position of storeUI
 
@@ -136,7 +138,7 @@ public class GameView extends JRootPane
         // set position of progressBar
         progressBar.setBounds(progressBarxPos, progressBaryPos, (int)progressBarSize.getWidth(), (int)progressBarSize.getHeight()); // puts progressBar at (x,y) and sets width/height
 
-        
+
         /** CODE FOR THE PAUSE BUTTON **/
         pauseButton = new JButton();
         Dimension pauseButtonSize = new Dimension(JBUTTONWIDTH, JBUTTONHEIGHT/2);
@@ -145,37 +147,43 @@ public class GameView extends JRootPane
         int pauseButtonY = storeUIyPos;
         pauseButton.setBounds(pauseButtonX, pauseButtonY, (int)pauseButtonSize.getWidth(), (int)pauseButtonSize.getHeight());
         pauseButton.addMouseListener(new PauseListener());
-        
+
         /** CODE FOR PAUSE MENU **/
         pauseMenu = new JPanel();
         pauseMenu.setLayout(null);
-        Dimension pauseMenuSize = new Dimension(Window.WIDTH/5,Window.HEIGHT/5);
-        int pauseMenuUIxPos = origin.x+(Window.WIDTH/2) - (int)pauseMenuSize.getWidth()/2;                      // x position of storeUI
-        int pauseMenuUIyPos = origin.y+(Window.HEIGHT/2) - (int)pauseMenuSize.getHeight()/2;                     // y position of storeUI
+        Dimension pauseMenuSize = new Dimension(Window.WIDTH/4,Window.HEIGHT/2);
+        int pauseMenuUIxPos = origin.x+(Window.WIDTH/2) - (int)pauseMenuSize.getWidth()/2;          // x position of storeUI
+        int pauseMenuUIyPos = origin.y+(Window.HEIGHT/2) - (int)pauseMenuSize.getHeight()/2;        // y position of storeUI
         //pauseMenu.setBackground(Color.GRAY);
-        
+
         // set position of pauseMenu
         pauseMenu.setBounds(pauseMenuUIxPos, pauseMenuUIyPos, (int)pauseMenuSize.getWidth(), (int)pauseMenuSize.getHeight());   // puts boardUI at (x,y) and sets width/height
-        
+
         // pause menu text
         JLabel gamePauseText = new JLabel("Game Paused", SwingConstants.CENTER);
         gamePauseText.setBounds(0,20, (int)pauseMenuSize.getWidth(), 30);
         pauseMenu.add(gamePauseText);
-        
+
         // resume button
         JButton resumeButton = new JButton("Resume");
         resumeButton.addMouseListener(new ResumeListener());
-        resumeButton.setBounds((int)pauseMenuSize.getWidth()/2-50,(int)pauseMenuSize.getHeight()-2*(int)pauseMenuSize.getHeight()/3, 100,40);
+        resumeButton.setBounds((int)pauseMenuSize.getWidth()/2-50,(int)pauseMenuSize.getHeight()-2*(int)pauseMenuSize.getHeight()/3+10, 100,40);
         pauseMenu.add(resumeButton);
-        
+
         // reset button
         JButton resetButton = new JButton("Reset");
         resetButton.addMouseListener(new ResetListener());
-        resetButton.setBounds((int)pauseMenuSize.getWidth()/2-50,(int)pauseMenuSize.getHeight()-(int)pauseMenuSize.getHeight()/3, 100,40);
+        resetButton.setBounds((int)pauseMenuSize.getWidth()/2-50,(int)pauseMenuSize.getHeight()-(int)pauseMenuSize.getHeight()/2, 100,40);
         pauseMenu.add(resetButton);
-        
-        
-        
+
+        // quit button
+        JButton quitButton = new JButton("Quit");
+        quitButton.addMouseListener(new QuitListener());
+        quitButton.setBounds((int)pauseMenuSize.getWidth()/2-50,(int)pauseMenuSize.getHeight()-(int)pauseMenuSize.getHeight()/2+50, 100,40);
+        pauseMenu.add(quitButton);
+
+
+
         /** CODE FOR THE BACKGROUND **/
         JLabel backgroundLabel;
         ImageIcon backgroundImage = PictureLoader.antDefenseUI;
@@ -183,7 +191,7 @@ public class GameView extends JRootPane
         backgroundLabel.setBounds(0, 0, 960, 720);
 
         // Set window size and show window
-        add(progressBar);       // adds progressBar to the screen     
+        add(progressBar);       // adds progressBar to the screen
         add(pauseMenu);         // adds pauseMenu
         pauseMenu.setVisible(false);
         add(boardUI);           // adds boardUI to the screen
@@ -193,7 +201,7 @@ public class GameView extends JRootPane
         add(backgroundLabel);   // adds background image
         //setVisible(true);       // makes the screen visable
 
-        
+
     }
 
     public void setControl(Controller control)
@@ -253,7 +261,7 @@ public class GameView extends JRootPane
         thing.getJLabel().setVisible(false);
         boardUI.remove(thing.getJLabel());
     }
-    
+
     public void setStoreButtonPressed(StoreItem si, boolean pressed){
         JButton button = null;
         for (int r = 0; r < store.length; r++)
@@ -269,7 +277,7 @@ public class GameView extends JRootPane
             button.setBorder(new LineBorder(Color.GRAY, 3));
         }
     }
-    
+
     public void setStoreEnabled(boolean enabled){
         for(JButton storeButton: store){
             storeButton.setEnabled(enabled);
@@ -288,7 +296,7 @@ public class GameView extends JRootPane
     {
         control.resetGame();
     }
-    
+
     public void unPause(){
         pauseMenu.setVisible(false);
         pauseButton.setEnabled(true);
@@ -312,23 +320,23 @@ public class GameView extends JRootPane
             this.si = si;
             this.button = button;
         }
-        
+
         public void mouseClicked(MouseEvent event)
         {
             control.pickDefender(si);
         }
     }
-    
+
     private class BoardMouseHandler extends MouseAdapter
     {
         public int row, col;
-        
+
         public BoardMouseHandler(int r, int c)
         {
             row = r;
             col = c;
         }
-        
+
         public void mouseClicked(MouseEvent event)
         {
             Location loc = new Location(col*JBUTTONWIDTH , row*JBUTTONHEIGHT);
@@ -336,29 +344,6 @@ public class GameView extends JRootPane
         }
     }
 
-    private class ResetListener extends MouseAdapter
-    {
-        public ResetListener(){
-            // nothing needed
-        }
-        
-        public void mouseClicked(MouseEvent event){
-            resetField();
-            unPause();
-        }
-    }
-    
-    private class ResumeListener extends MouseAdapter
-    {
-        public ResumeListener(){
-            // nothing needed
-        }
-        
-        public void mouseClicked(MouseEvent event){
-            unPause();
-        }
-    }
-    
     private class PauseListener extends MouseAdapter
     {
         public PauseListener(){
@@ -376,16 +361,55 @@ public class GameView extends JRootPane
         }
     }
 
+    private class ResumeListener extends MouseAdapter
+    {
+        public ResumeListener(){
+            // nothing needed
+        }
+
+        public void mouseClicked(MouseEvent event){
+            unPause();
+        }
+    }
+
+    private class ResetListener extends MouseAdapter
+    {
+        public ResetListener(){
+            // nothing needed
+        }
+
+        public void mouseClicked(MouseEvent event){
+            resetField();
+            unPause();
+        }
+    }
+
+    private class QuitListener extends MouseAdapter
+    {
+        public QuitListener(){
+            // nothing needed
+        }
+
+        public void mouseClicked(MouseEvent event){
+            /* THIS CODE BREAKS THE GAME
+            control.quitGame();
+            WelcomeScreen ws = new WelcomeScreen();
+            ws.setWindow(window);
+            window.setNewContentPane(ws);
+            */
+        }
+    }
+
     public void setMaxProgress(int max)
     {
         progressBar.setMaximum(max);
     }
-    
+
     public void setProgress(int prog)
     {
         progressBar.setValue(prog);
     }
-    
+
     public void setGoldLabel(int gold)
     {
         goldLabel.setText("" + gold);

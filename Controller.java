@@ -19,7 +19,7 @@
  *
  */
 
-import java.util.List; 
+import java.util.List;
 
 /**
  * This class communicates information from the Model to the GameView and vica
@@ -34,6 +34,7 @@ public class Controller
     private GameView v;
     private boolean safeToAct = true;
     private boolean paused = false;
+    private boolean gameQuit = false;
 
     public Controller(Model model, GameView view)
     {
@@ -54,7 +55,7 @@ public class Controller
         boolean cakeEaten = false, gameWon = false;
         int turn = 0;
 
-        while (!cakeEaten && !gameWon)
+        while (!cakeEaten && !gameWon && !gameQuit)
         {
             safeToAct = false;
             ActResult move = m.act();
@@ -91,7 +92,7 @@ public class Controller
                 }
             } while (!safeToAct);
         }
-        
+
         if (gameWon)
             v.announceWinOrLoss(true);
         if (cakeEaten)
@@ -179,7 +180,7 @@ public class Controller
         {
             v.removeCharacter(charac);
         }
-    
+
         v.setGoldLabel(m.getGold());
         v.setProgress(0);
         v.setMaxProgress(m.getNumAttackers());
@@ -206,11 +207,17 @@ public class Controller
         {
             v.removeCharacter(charac);
         }
-    
+
         v.setGoldLabel(m.getGold());
         v.setProgress(0);
         v.setMaxProgress(m.getNumAttackers());
 
         safeToAct = true;
+    }
+
+    // BROKEN
+    public void quitGame() {
+        paused = false;
+        gameQuit = true;
     }
 }
