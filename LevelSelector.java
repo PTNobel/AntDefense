@@ -2,34 +2,37 @@ import javax.swing.JRootPane;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Dimension;
 
 public class LevelSelector extends JRootPane
 {
     private static final long serialVersionUID = 1L;
     private Window window;
+    private Dimension buttonSize;
 
     public LevelSelector(Window win)
     {
         window = win;
         setSize(Window.WIDTH, Window.HEIGHT);
         setLayout(null);
+        buttonSize = new Dimension(90,50);
 
         // Easy Button
         JButton easyButton = new JButton();
         easyButton.setText("EASY");
-        easyButton.setBounds( (Window.WIDTH - 80)/2 - 100, 300, 80, 40);
+        easyButton.setBounds( (Window.WIDTH - (int) buttonSize.getWidth())/2 - ((int) buttonSize.getWidth()+20), 300, (int) buttonSize.getWidth(), (int) buttonSize.getHeight());
         easyButton.addMouseListener(new LevelSelectListner(LevelDifficulty.EASY));
 
         // Medium Button
         JButton medButton = new JButton();
         medButton.setText("MEDIUM");
-        medButton.setBounds( (Window.WIDTH - 80)/2, 300, 80, 40);
+        medButton.setBounds( (Window.WIDTH - (int) buttonSize.getWidth())/2, 300, (int) buttonSize.getWidth(), (int) buttonSize.getHeight());
         medButton.addMouseListener(new LevelSelectListner(LevelDifficulty.MEDIUM));
 
         // Hard Button
         JButton hardButton = new JButton();
         hardButton.setText("HARD");
-        hardButton.setBounds( (Window.WIDTH - 80)/2 + 100, 300, 80, 40);
+        hardButton.setBounds( (Window.WIDTH - (int) buttonSize.getWidth())/2 + ((int) buttonSize.getWidth()+20), 300, (int) buttonSize.getWidth(), (int) buttonSize.getHeight());
         hardButton.addMouseListener(new LevelSelectListner(LevelDifficulty.HARD));
 
         // Add buttons to screen
