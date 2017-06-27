@@ -32,14 +32,12 @@ import javax.swing.*;       // import JFrame
 import javax.swing.border.*;
 import java.awt.event.*;    // import event listener
 
-public class View extends JFrame
+public class GameView extends JRootPane
 {
     private static final long serialVersionUID = 1L;
     
     // instance variables
     private Controller control;
-    private static final int WIDTH = 960;
-    private static final int HEIGHT = 720;
     public static final int JBUTTONHEIGHT = 80, JBUTTONWIDTH = 80;
     private final int NUM_ROWS, NUM_COLS, NUM_ATTACKERS;
     private JButton[][] boardArray;
@@ -54,28 +52,24 @@ public class View extends JFrame
     /**
      * Constructor for objects of class Model
      */
-    public View()
+    public GameView()
     {
-        super("Ant Defense");
         // initialise instance variables
         NUM_ROWS = Model.getNumRows();
         NUM_COLS = Model.getNumCols();
         NUM_ATTACKERS = 1;
         this.control = control;
 
-        // set up window
-        setSize(WIDTH, HEIGHT);                                                 // sets size in pixels
-        setResizable(false);                                                    // makes it resizable or not (true == resizable screen)
-        this.getContentPane().setLayout(null);                                  // this allows us to place components wherever we want on the screen
-
         Point origin = new Point(0,0);  // variable for the origin
 
+        setSize(Window.WIDTH, Window.HEIGHT);
+        setLayout(null);
         /**CODE FOR THE BOARD ON THE SCREEN**/
         // Create board
         boardUI = new JLayeredPane();                                  // constructs boardUI pane
         Dimension boardSize = new Dimension(NUM_COLS*80, NUM_ROWS*80);  // dimensions of the board
-        int boardUIxPos = origin.x+(WIDTH/12);                                      // x position of boardUI
-        int boardUIyPos = origin.y+(HEIGHT/5);                                      // y position of the boardUI
+        int boardUIxPos = origin.x+(Window.WIDTH/12);                                      // x position of boardUI
+        int boardUIyPos = origin.y+(Window.HEIGHT/5);                                      // y position of the boardUI
 
         // set position of board
         boardUI.setBounds(boardUIxPos, boardUIyPos, (int)boardSize.getWidth(), (int)boardSize.getHeight());     // puts boardUI at (x,y) and sets width/height
@@ -103,8 +97,8 @@ public class View extends JFrame
         /**CODE FOR THE STORE ON THE SCREEN**/
         // Create store
         JLayeredPane storeUI = new JLayeredPane();  // constructs storeUI pane                        
-        int storeUIxPos = origin.x+(WIDTH/24);      // x position of storeUI
-        int storeUIyPos = origin.y+(HEIGHT/20);     // y position of storeUI
+        int storeUIxPos = origin.x+(Window.WIDTH/24);      // x position of storeUI
+        int storeUIyPos = origin.y+(Window.HEIGHT/20);     // y position of storeUI
 
         storeItems = StoreItem.values();
         // set position of storeUI
@@ -133,12 +127,12 @@ public class View extends JFrame
         /** CODE FOR THE PROGRESS BAR **/
         // Create progress bar
         progressBar = new JProgressBar(0, NUM_ATTACKERS);                                // constructs progressBar
-        Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), HEIGHT/20);   // dimensions of the progressBar
+        Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), Window.HEIGHT/20);   // dimensions of the progressBar
 
         // set coordinate
         int progressBarxPos = boardUIxPos + (int)boardSize.getWidth() - (int)progressBarSize.getWidth();    // x position of progress bar
-        //int progressBaryPos = boardUIyPos + (int)boardSize.getHeight() + HEIGHT/11;                         // y position of progress bar
-        int progressBaryPos = 19*HEIGHT/20 - (int)progressBarSize.getHeight();                         // y position of progress bar
+        //int progressBaryPos = boardUIyPos + (int)boardSize.getHeight() + Window.HEIGHT/11;                         // y position of progress bar
+        int progressBaryPos = 19*Window.HEIGHT/20 - (int)progressBarSize.getHeight();                         // y position of progress bar
         // set position of progressBar
         progressBar.setBounds(progressBarxPos, progressBaryPos, (int)progressBarSize.getWidth(), (int)progressBarSize.getHeight()); // puts progressBar at (x,y) and sets width/height
 
@@ -155,9 +149,9 @@ public class View extends JFrame
         /** CODE FOR PAUSE MENU **/
         pauseMenu = new JPanel();
         pauseMenu.setLayout(null);
-        Dimension pauseMenuSize = new Dimension(WIDTH/5,HEIGHT/5);
-        int pauseMenuUIxPos = origin.x+(WIDTH/2) - (int)pauseMenuSize.getWidth()/2;                      // x position of storeUI
-        int pauseMenuUIyPos = origin.y+(HEIGHT/2) - (int)pauseMenuSize.getHeight()/2;                     // y position of storeUI
+        Dimension pauseMenuSize = new Dimension(Window.WIDTH/5,Window.HEIGHT/5);
+        int pauseMenuUIxPos = origin.x+(Window.WIDTH/2) - (int)pauseMenuSize.getWidth()/2;                      // x position of storeUI
+        int pauseMenuUIyPos = origin.y+(Window.HEIGHT/2) - (int)pauseMenuSize.getHeight()/2;                     // y position of storeUI
         //pauseMenu.setBackground(Color.GRAY);
         
         // set position of pauseMenu
@@ -197,16 +191,9 @@ public class View extends JFrame
         add(goldLabel);         // adds goldLabel
         add(pauseButton);       // adds pauseButton
         add(backgroundLabel);   // adds background image
-        setVisible(true);       // makes the screen visable
+        //setVisible(true);       // makes the screen visable
 
-        // needed to close application
-        addWindowListener(new java.awt.event.WindowAdapter() 
-            {
-                public void windowClosing(WindowEvent evt) {
-                    System.exit(0);
-                }
-            }
-        );
+        
     }
 
     public void setControl(Controller control)
@@ -402,5 +389,10 @@ public class View extends JFrame
     public void setGoldLabel(int gold)
     {
         goldLabel.setText("" + gold);
+    }
+
+    public void startGame()
+    {
+        control.loop();
     }
 }

@@ -47,13 +47,13 @@ public class AntDefense
         }
 
         PictureLoader picLoader =  new PictureLoader();
+   
+        WelcomeScreen ws = new WelcomeScreen();
+        Window window = new Window(ws);
+        ws.setWindow(window);
 
-        Model game = new Model(getDifficulty());
-        Controller control = new Controller(game);
-        View view = new View();
-        control.setView(view);
+        window.startWindowController();
 
-        control.loop();
     }
 
     public static LevelGenerator getDifficulty()

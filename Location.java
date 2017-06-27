@@ -36,12 +36,12 @@ public class Location
 
     public int getRow()
     {
-        return pt.y/View.JBUTTONHEIGHT;
+        return pt.y/GameView.JBUTTONHEIGHT;
     }
 
     public int getCol()
     {
-        return pt.x/View.JBUTTONWIDTH;
+        return pt.x/GameView.JBUTTONWIDTH;
     }
 
     public Point getPoint()
