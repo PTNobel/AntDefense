@@ -47,7 +47,7 @@ public abstract class LevelGenerator
     public Location selectRandomRow(){
         int randomRow = (int)(Math.random()*numRows);
         
-        // yStart = Odd number in [1, 5] times 80 + random number [0, 60]
+        // yStart = Random number in [0, 4] times 80 + random number [0, 55]
         int yStart = ((int)(Math.random()*numRows))*80 + (int)(Math.random() * 55);
 
         //return rows.get(randomRow);

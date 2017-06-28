@@ -68,7 +68,6 @@ public class LevelSelector extends JRootPane
             Model model = new Model(lg);
             GameView gv = new GameView(window);
             Controller control = new Controller(model, gv);
-            control.setGameView(gv);
             window.setNewContentPane(gv);
         }
     }
