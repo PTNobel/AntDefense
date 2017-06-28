@@ -208,7 +208,7 @@ public class GameView extends JRootPane
         int quitHeight = (int) buttonSize.getHeight();  // height
         int quitX = ((int)pauseMenuSize.getWidth() - quitWidth)/2;    // x-position
         int quitY = (int)pauseMenuSize.getHeight()-(int)pauseMenuSize.getHeight()/2+50; // y-position
-        quitButton.setBounds(quitX, quitY, quitWidth, quitHeight);
+        quitButton.setBounds(quitX, quitY, quitWidth, quitHeightG);
         pauseMenu.add(quitButton);
 
 
