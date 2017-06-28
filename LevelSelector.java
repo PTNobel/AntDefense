@@ -16,6 +16,7 @@ public class LevelSelector extends JRootPane
         setSize(Window.WIDTH, Window.HEIGHT);
         setLayout(null);
         buttonSize = new Dimension(90,50);
+        int buttonMargin = 20; // distance between buttons
 
         // EASY BUTTON
         JButton easyButton = new JButton();
@@ -23,8 +24,8 @@ public class LevelSelector extends JRootPane
         // button location and size
         int easyWidth = (int) buttonSize.getWidth();    // width
         int easyHeight = (int) buttonSize.getHeight();  // height
-        int easyX = (Window.WIDTH - easyWidth)/2 - ((int) buttonSize.getWidth()+20);    // x-position
-        int easyY = 300;                                                                // y-position
+        int easyX = (Window.WIDTH - easyWidth)/2 - (easyWidth+buttonMargin);    // x-position
+        int easyY = 300;                                                        // y-position
         easyButton.setBounds(easyX, easyY, easyWidth, easyHeight);
         easyButton.addMouseListener(new LevelSelectListner(LevelDifficulty.EASY));
 
@@ -45,8 +46,8 @@ public class LevelSelector extends JRootPane
         // button location and size
         int hardWidth = (int) buttonSize.getWidth();    // width
         int hardHeight = (int) buttonSize.getHeight();  // height
-        int hardX = (Window.WIDTH - easyWidth)/2 + ((int) buttonSize.getWidth()+20);    // x-position
-        int hardY = 300;                                                                // y-position
+        int hardX = (Window.WIDTH - easyWidth)/2 + (hardWidth+buttonMargin);    // x-position
+        int hardY = 300;                                                        // y-position
         hardButton.setBounds(hardX, hardY, hardWidth, hardHeight);
         hardButton.addMouseListener(new LevelSelectListner(LevelDifficulty.HARD));
 

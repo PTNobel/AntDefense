@@ -15,6 +15,7 @@ public class WelcomeScreen extends JRootPane
         setSize(Window.WIDTH, Window.HEIGHT);
         setLayout(null);
         Dimension buttonSize = new Dimension(80,40);
+        int buttonMargin = 20;  // distance between buttons
 
         // PLAY BUTTON
         JButton playButton = new JButton();
@@ -22,8 +23,8 @@ public class WelcomeScreen extends JRootPane
         // button location and size
         int playWidth = (int) buttonSize.getWidth();    // width
         int playHeight = (int) buttonSize.getHeight();  // height
-        int playX = (Window.WIDTH - playWidth)/2;       // x-position
-        int playY = 300;                                // y-position
+        int playX = (Window.WIDTH - playWidth)/2;                                   // x-position
+        int playY = (Window.HEIGHT - playHeight)/2 - (playHeight + buttonMargin);   // y-position
         playButton.setBounds(playX, playY, playWidth, playHeight);
         playButton.addMouseListener(new PlayListener());
 
@@ -34,7 +35,7 @@ public class WelcomeScreen extends JRootPane
         int helpWidth = (int) buttonSize.getWidth();    // width
         int helpHeight = (int) buttonSize.getHeight();  // height
         int helpX = (Window.WIDTH - helpWidth)/2;       // x-position
-        int helpY = 360;                                // y-position
+        int helpY = (Window.HEIGHT - helpHeight)/2;     // y-position
         helpButton.setBounds(helpX, helpY, helpWidth, helpHeight);
         helpButton.addMouseListener(new HelpListener());
 
@@ -44,8 +45,8 @@ public class WelcomeScreen extends JRootPane
         // button location and size
         int creditsWidth = (int) buttonSize.getWidth()+20; // width
         int creditsHeight = (int) buttonSize.getHeight();  // height
-        int creditsX = (Window.WIDTH - creditsWidth)/2;    // x-position
-        int creditsY = 420;                                // y-position
+        int creditsX = (Window.WIDTH - creditsWidth)/2;                                   // x-position
+        int creditsY = (Window.HEIGHT - creditsHeight)/2 + creditsHeight + buttonMargin;  // y-position
         creditsButton.setBounds(creditsX, creditsY, creditsWidth, creditsHeight);
         creditsButton.addMouseListener(new CreditsListener());
 

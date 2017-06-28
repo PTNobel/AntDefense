@@ -177,6 +177,7 @@ public class GameView extends JRootPane
         pauseMenu.add(gamePauseText);
 
         Dimension buttonSize = new Dimension(100,40);
+        int buttonMargin = 10;  // distance between buttons
 
         // resume button
         JButton resumeButton = new JButton("Resume");
@@ -184,8 +185,8 @@ public class GameView extends JRootPane
         // button location and size
         int resumeWidth = (int) buttonSize.getWidth();    // width
         int resumeHeight = (int) buttonSize.getHeight();  // height
-        int resumeX = ((int)pauseMenuSize.getWidth() - resumeWidth)/2;    // x-position
-        int resumeY = (int)pauseMenuSize.getHeight()-2*(int)pauseMenuSize.getHeight()/3+10; // y-position
+        int resumeX = ((int)pauseMenuSize.getWidth() - resumeWidth)/2;                                    // x-position
+        int resumeY = ((int)pauseMenuSize.getHeight() - resumeHeight)/2 - (resumeHeight + buttonMargin);  // y-position
         resumeButton.setBounds(resumeX, resumeY, resumeWidth, resumeHeight);
         pauseMenu.add(resumeButton);
 
@@ -196,7 +197,7 @@ public class GameView extends JRootPane
         int resetWidth = (int) buttonSize.getWidth();    // width
         int resetHeight = (int) buttonSize.getHeight();  // height
         int resetX = ((int)pauseMenuSize.getWidth() - resetWidth)/2;    // x-position
-        int resetY = (int)pauseMenuSize.getHeight()-(int)pauseMenuSize.getHeight()/2; // y-position
+        int resetY = ((int)pauseMenuSize.getHeight() - resetHeight)/2;  // y-position
         resetButton.setBounds(resetX, resetY, resetWidth, resetHeight);
         pauseMenu.add(resetButton);
 
@@ -206,8 +207,8 @@ public class GameView extends JRootPane
         // button location and size
         int quitWidth = (int) buttonSize.getWidth();    // width
         int quitHeight = (int) buttonSize.getHeight();  // height
-        int quitX = ((int)pauseMenuSize.getWidth() - quitWidth)/2;    // x-position
-        int quitY = (int)pauseMenuSize.getHeight()-(int)pauseMenuSize.getHeight()/2+50; // y-position
+        int quitX = ((int)pauseMenuSize.getWidth() - quitWidth)/2;                               // x-position
+        int quitY = ((int)pauseMenuSize.getHeight() - quitHeight)/2 + quitHeight + buttonMargin; // y-position
         quitButton.setBounds(quitX, quitY, quitWidth, quitHeight);
         pauseMenu.add(quitButton);
 
