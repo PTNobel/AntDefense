@@ -44,9 +44,18 @@ public class TrivialDefense
         catch (IllegalAccessException e) {
             // handle exception
         }
-
-
         PictureLoader picLoader =  new PictureLoader();
-        //new Window(new GameView());
+
+        Window window = new Window();
+
+        Model model = new Model(new TrivialGenerator());
+
+        GameView gv = new GameView(window);
+        Controller control = new Controller(model, gv);
+
+        window.setNewContentPane(gv);
+
+        window.startWindowController();
+
     }
 }

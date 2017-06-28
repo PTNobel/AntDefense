@@ -44,7 +44,7 @@ public class TrivialGenerator extends LevelGenerator
 
             if (completed == 0)
             {
-                output.add(new QueenAnt(this));
+                output.add(new QueenAnt(this, selectRandomRow()));
                 completed++;
             }
             else if (Math.random() < 0.02)
