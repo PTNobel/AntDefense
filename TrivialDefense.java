@@ -19,7 +19,7 @@
  *
  */
 
-import javax.swing.JOptionPane; 
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -31,7 +31,7 @@ public class TrivialDefense
             // Set cross-platform Java L&F (also called "Metal")
             UIManager.setLookAndFeel(
                 UIManager.getCrossPlatformLookAndFeelClassName());
-        } 
+        }
         catch (UnsupportedLookAndFeelException e) {
             // handle exception
         }
@@ -44,9 +44,18 @@ public class TrivialDefense
         catch (IllegalAccessException e) {
             // handle exception
         }
-        
-
         PictureLoader picLoader =  new PictureLoader();
-        new Window(new GameView());
+
+        Window window = new Window();
+
+        Model model = new Model(new TrivialGenerator());
+
+        GameView gv = new GameView(window);
+        Controller control = new Controller(model, gv);
+
+        window.setNewContentPane(gv);
+
+        window.startWindowController();
+
     }
 }

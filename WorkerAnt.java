@@ -60,7 +60,7 @@ public class WorkerAnt extends Ant
         return d;
     }
 
-    private void move(Location loc)
+    protected void move(Location loc)
     {
         setLoc(new Location(loc.getX() - 3, loc.getY()));
     }

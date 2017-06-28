@@ -59,7 +59,7 @@ public class WarriorAnt extends Ant
         return d;
     }
 
-    private void move(Location loc)
+    protected void move(Location loc)
     {
         setLoc(new Location(loc.getX() - 5, loc.getY()));
     }
