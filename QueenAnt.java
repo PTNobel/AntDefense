@@ -24,9 +24,9 @@ import javax.swing.ImageIcon;
 import java.util.LinkedList;
 import java.util.ListIterator;
 /**
- * Write a description of class QueenAnt here.
+ * QueenAnts generate other ants as they move.
  * 
- * @author Ignatius Widjaja
+ * @author Parth Nobel and Ignatius Widjaja
  * @version 0.0
  */
 public class QueenAnt extends Ant implements HarmlessAnt
@@ -34,10 +34,11 @@ public class QueenAnt extends Ant implements HarmlessAnt
     private int swing;
     private LevelGenerator lg;
 
-    public QueenAnt(LevelGenerator lg)
+    public QueenAnt(LevelGenerator lg, Location loc)
     {
         // Queen Ant always starts in the center column
-        super(2000, new Location(760, 200));
+        //super(2000, loc);
+        super(2000, new Location(loc.getX(), 25));
         swing = 0;
         this.lg = lg;
     }
@@ -58,29 +59,25 @@ public class QueenAnt extends Ant implements HarmlessAnt
         {
             List<Ant> newAnts = new LinkedList<Ant>();
 
-            // Random number [-1, 1)
-            double yMod = Math.random()*2 - 1;
-
-            newAnts.add(
-                    new WorkerAnt(
-                        new Location(loc.getX(), loc.getY() + (int)(yMod*80))
-                        )
-                    );
-
             if (Math.random() < .05)
             {
-                 newAnts.add(
+                newAnts.add(
                     new WarriorAnt(
-                        new Location(loc.getX(), loc.getY() - (int)(yMod*80))
+                        getRandomLocation()
                         )
                     );
-
-
             } else if (Math.random() < 0.001)
             {
                 newAnts.add(
                     new ReidAnt(
-                        new Location(loc.getX(), loc.getY() - (int)(yMod*80))
+                        getRandomLocation()
+                    )
+                );
+            } else
+            {
+                newAnts.add(
+                    new WorkerAnt(
+                        getRandomLocation()
                         )
                     );
             }
@@ -88,15 +85,33 @@ public class QueenAnt extends Ant implements HarmlessAnt
             lg.addAnts(newAnts);
         }
         
+        
         if (!blocked)
             move();
 
         return new LinkedList<Defender>();
     }
 
+    private Location getRandomLocation()
+    {
+            // Random number [-1, 1)
+            double yMod = Math.random()*2 - 1;
+            // Same column, variable row
+            Location output = new Location(loc.getX(), loc.getY() + (int)(yMod*80));
+            // if we are off the screen, let's get on the screen
+            if (output.getY() < 0)
+            {
+                output = new Location(loc.getX(), (int)(Math.random()*10));
+            } else if (output.getY() > 375)
+            {
+                output = new Location(loc.getX(), 375 - (int)(Math.random()*10));
+            }
+            return output;
+    }
+
     private void move()
     {
-        setLoc(new Location(loc.getX() - 2, loc.getY()));
+        setLoc(new Location(loc.getX() - 1, loc.getY()));
     }
 
     public int getGold()
