@@ -16,23 +16,39 @@ public class LevelSelector extends JRootPane
         setSize(Window.WIDTH, Window.HEIGHT);
         setLayout(null);
         buttonSize = new Dimension(90,50);
+        int buttonMargin = 20; // distance between buttons
 
-        // Easy Button
+        // EASY BUTTON
         JButton easyButton = new JButton();
         easyButton.setText("EASY");
-        easyButton.setBounds( (Window.WIDTH - (int) buttonSize.getWidth())/2 - ((int) buttonSize.getWidth()+20), 300, (int) buttonSize.getWidth(), (int) buttonSize.getHeight());
+        // button location and size
+        int easyWidth = (int) buttonSize.getWidth();    // width
+        int easyHeight = (int) buttonSize.getHeight();  // height
+        int easyX = (Window.WIDTH - easyWidth)/2 - (easyWidth+buttonMargin);    // x-position
+        int easyY = 300;                                                        // y-position
+        easyButton.setBounds(easyX, easyY, easyWidth, easyHeight);
         easyButton.addMouseListener(new LevelSelectListner(LevelDifficulty.EASY));
 
-        // Medium Button
+        // MEDIUM BUTTON
         JButton medButton = new JButton();
         medButton.setText("MEDIUM");
-        medButton.setBounds( (Window.WIDTH - (int) buttonSize.getWidth())/2, 300, (int) buttonSize.getWidth(), (int) buttonSize.getHeight());
+        // button location and size
+        int medWidth = (int) buttonSize.getWidth();     // width
+        int medHeight = (int) buttonSize.getHeight();   // height
+        int medX = (Window.WIDTH - medWidth)/2;         // x-position
+        int medY = 300;                                 // y-position
+        medButton.setBounds(medX, medY, medWidth, medHeight);
         medButton.addMouseListener(new LevelSelectListner(LevelDifficulty.MEDIUM));
 
-        // Hard Button
+        // HARD BUTTON
         JButton hardButton = new JButton();
         hardButton.setText("HARD");
-        hardButton.setBounds( (Window.WIDTH - (int) buttonSize.getWidth())/2 + ((int) buttonSize.getWidth()+20), 300, (int) buttonSize.getWidth(), (int) buttonSize.getHeight());
+        // button location and size
+        int hardWidth = (int) buttonSize.getWidth();    // width
+        int hardHeight = (int) buttonSize.getHeight();  // height
+        int hardX = (Window.WIDTH - easyWidth)/2 + (hardWidth+buttonMargin);    // x-position
+        int hardY = 300;                                                        // y-position
+        hardButton.setBounds(hardX, hardY, hardWidth, hardHeight);
         hardButton.addMouseListener(new LevelSelectListner(LevelDifficulty.HARD));
 
         // Add buttons to screen
