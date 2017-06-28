@@ -42,7 +42,7 @@ public class Controller
         setGameView(view);
     }
 
-    public void setGameView(GameView view)
+    private void setGameView(GameView view)
     {
         v = view;
         v.setControl(this);
