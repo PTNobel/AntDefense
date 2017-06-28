@@ -25,51 +25,43 @@ import java.util.ListIterator;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 /**
- * Write a description of class ReidAnt here.
- * 
- * @author Ignatius Widjaja
+ * @author Parth Nobel
  * @version 0.0
  */
-public class ReidAnt extends Ant
+public class QueenMadeWorkerAnt extends WorkerAnt
 {
-    private int swing;
-    public ReidAnt(Location loc)
+    private Location targetLoc;
+    public QueenMadeWorkerAnt(Location startingLoc, Location targetLoc)
     {
-        super(400, loc);
-        swing = 15;
+        super(startingLoc);
+        this.targetLoc = targetLoc;
     }
 
     public List<Defender> act(List<Defender> defenders)
     {
-        List<Defender> d = new LinkedList<Defender>();
-
-        boolean blocked = false;
-        for (Defender defense : defenders)
-        {
-            if (loc.getCol() == defense.getLoc().getCol() && loc.getRow() == defense.getLoc().getRow())
-            {
-                if(!defense.takeDamage(swing))
-                    d.add(defense);
-                else
-                    blocked = true;
-            }
-        }
-
-        if (!blocked)
-            move(loc);
-        return d;
+        if (loc.getY() != targetLoc.getY())
+            correctYMove();
+        return super.act(defenders);
     }
+
+    private void correctYMove()
+    {
+        // If we can get to the location in a single move, then let's just
+        // make the move
+        if (Math.abs(loc.getY() - targetLoc.getY()) < 3)
+            setLoc(new Location(loc.getX(), targetLoc.getY()));
+        // If our y is less then we want, let's increase y
+        else if (loc.getY() < targetLoc.getY())
+            setLoc(new Location(loc.getX(), loc.getY() + 3));
+        // If our y is greater then we want, let's decrease y
+        else if (loc.getY() > targetLoc.getY())
+            setLoc(new Location(loc.getX(), loc.getY() - 3));
+    }
+
 
     protected void move(Location loc)
     {
-        setLoc(new Location(loc.getX() - 10, loc.getY()));
-    }
-
-    public int getGold()
-    {
-	    return 30;
-    }
-    public ImageIcon getInitialImageIcon(){
-        return PictureLoader.reidAnt;
+        if (loc.getY() == targetLoc.getY())
+            super.move(loc);
     }
 }

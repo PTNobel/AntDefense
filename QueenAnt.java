@@ -37,8 +37,7 @@ public class QueenAnt extends Ant implements HarmlessAnt
     public QueenAnt(LevelGenerator lg, Location loc)
     {
         // Queen Ant always starts in the center column
-        //super(2000, loc);
-        super(2000, new Location(loc.getX(), 25));
+        super(2000, loc);
         swing = 0;
         this.lg = lg;
     }
@@ -62,24 +61,18 @@ public class QueenAnt extends Ant implements HarmlessAnt
             if (Math.random() < .05)
             {
                 newAnts.add(
-                    new WarriorAnt(
-                        getRandomLocation()
-                        )
-                    );
+                    new QueenMadeWarriorAnt(loc, getRandomLocation())
+                );
             } else if (Math.random() < 0.001)
             {
                 newAnts.add(
-                    new ReidAnt(
-                        getRandomLocation()
-                    )
+                    new QueenMadeReidAnt(loc, getRandomLocation())
                 );
             } else
             {
                 newAnts.add(
-                    new WorkerAnt(
-                        getRandomLocation()
-                        )
-                    );
+                    new QueenMadeWorkerAnt(loc, getRandomLocation())
+                );
             }
 
             lg.addAnts(newAnts);
