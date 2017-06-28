@@ -33,12 +33,38 @@ public class Window extends JFrame
     public static final int HEIGHT = 720;
     private WindowController winControl;
 
+
+    public Window()
+    {
+        super("Ant Defense");
+        // set up window
+        setSize(WIDTH, HEIGHT);    // sets size in pixels
+        setResizable(false);   // makes it resizable or not (true == resizable screen)
+        winControl = new WindowController(this);
+
+        JLabel loadingNotice = new JLabel("Loading...");
+
+        add(loadingNotice);
+
+        setVisible(true);
+
+        // needed to close application
+        addWindowListener(new java.awt.event.WindowAdapter() 
+            {
+                public void windowClosing(WindowEvent evt) {
+                    exit();
+                }
+            }
+        );
+    }
+
     public Window(JRootPane initialPane)
     {
         super("Ant Defense");
         // set up window
         setSize(WIDTH, HEIGHT);    // sets size in pixels
         setResizable(false);   // makes it resizable or not (true == resizable screen)
+        winControl = new WindowController(this);
 
         setContentPane(initialPane);
         setVisible(true);
@@ -55,7 +81,6 @@ public class Window extends JFrame
 
     public void startWindowController()
     {
-        winControl = new WindowController(this);
         winControl.loop();
     }
 
@@ -94,7 +119,7 @@ class WindowController
                 window.setContentPane(newContent);
                 updateController = false;
             }
-            if (newContent instanceof GameView)
+            if (newContent != null && newContent instanceof GameView)
             {
                 ((GameView)newContent).startGame();
             }
