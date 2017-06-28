@@ -116,14 +116,13 @@ class WindowController
             safeToAct = false;
             if (updateController)
             {
-                window.setContentPane(newContent);
                 updateController = false;
-            }
-            if (newContent != null && newContent instanceof GameView)
-            {
-                ((GameView)newContent).startGame();
-            }
             
+                if (newContent != null && newContent instanceof GameView)
+                {
+                    ((GameView)newContent).startGame();
+                }
+            }
             safeToAct = true;
             do {
                 try {
@@ -152,6 +151,7 @@ class WindowController
         safeToAct = false;
         updateController = true;
         newContent = pane;
+        window.setContentPane(newContent);
         safeToAct = true;
     }
 
