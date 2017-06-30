@@ -114,6 +114,6 @@ public class QueenAnt extends Ant implements HarmlessAnt
 
     public ImageIcon getInitialImageIcon()
     {
-        return new ImageIcon("queenAnt.png");
+        return PictureLoader.queenAnt;
     }
 }

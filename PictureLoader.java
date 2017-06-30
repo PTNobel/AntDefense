@@ -28,7 +28,7 @@ public class PictureLoader
     private static boolean built = false;
     public static ImageIcon antDefenseUI;
     public static ImageIcon poisonFood, poisonSpray, squirtGun, woodenBlock;
-    public static ImageIcon dancingAnt, reidAnt, warriorAnt, workerAnt;
+    public static ImageIcon queenAnt, dancingAnt, reidAnt, warriorAnt, workerAnt;
 
     public PictureLoader()
     {
@@ -41,6 +41,7 @@ public class PictureLoader
             poisonSpray = new ImageIcon(cldr.getResource("poisonSpray.png"));
             squirtGun = new ImageIcon(cldr.getResource("squirtGun.png"));
             woodenBlock = new ImageIcon(cldr.getResource("woodenBlock.png"));
+            queenAnt = new ImageIcon(cldr.getResource("queenAnt.png"));
             dancingAnt = new ImageIcon(cldr.getResource("dancingAnt.png"));
             reidAnt = new ImageIcon(cldr.getResource("reidAnt.png"));
             warriorAnt = new ImageIcon(cldr.getResource("warriorAnt.png"));
