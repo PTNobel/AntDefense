@@ -4,6 +4,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Dimension;
 
+/**
+ * Level Selector is the screen with all the level options
+ *
+ * METHODS
+ *  public LevelSelector(Window win)
+ *  
+ */
 public class LevelSelector extends JRootPane
 {
     private static final long serialVersionUID = 1L;
@@ -12,6 +19,7 @@ public class LevelSelector extends JRootPane
 
     public LevelSelector(Window win)
     {
+        // Let's store the window
         window = win;
         setSize(Window.WIDTH, Window.HEIGHT);
         setLayout(null);

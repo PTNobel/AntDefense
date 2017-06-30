@@ -21,19 +21,22 @@
 
 import java.util.List;
 import java.util.LinkedList;
-import java.util.ListIterator;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
- * Write a description of class DancingAnt here.
+ * Dancing Ant moves throughout the board, randomly traveling, either up, or down
+ * a row as it crosses.
  * 
- * @author Ignatius Widjaja
- * @version 0.0
+ * METHODS
+ *  DancingAnt(Location loc)
+ *  List<Defender> act(List<Defender> defenders)
+ *  int getGold()
+ *  ImageIcon getInitialImageIcon(){
+ *
  */
 public class DancingAnt extends Ant implements HarmlessAnt
 {
-    private int swing;
     private int turnsInDir;
     private int dir;
     private int blockedDir;
@@ -41,9 +44,12 @@ public class DancingAnt extends Ant implements HarmlessAnt
     public DancingAnt(Location loc)
     {
         super(100, loc);
-        swing = 5;
         turnsInDir = 0;
+        // dir is an int [0, 4].
+        // Their is no symbolism between the number and the direction
         dir = 0;
+        // In the event the ant is blocked by a block in front, it will randomly
+        // move either up or down.
         blockedDir = (Math.random() < .5)? 3: 4;
     }
 
@@ -59,24 +65,25 @@ public class DancingAnt extends Ant implements HarmlessAnt
                 // Ensures move doesn't randomize direction.
                 // by making turnsInDir > 0
                 turnsInDir = 5;
-                // If this in top row
+                // If this ant in in the top half of the top row
                 if (loc.getY() <= 40)
                 {
-                    // See move method for definition of dir, moves downard
+                    // moves downwards
                     dir = 4;
-                    // Create new blockedir biased down,
+                    // Create new blockedDir biased to move down,
                     blockedDir = (Math.random() < .75)? 4: 3;
                 }
                 // If we're in the fifth (bottom) row
                 else if (loc.getY() >= 5*80 - 40)
                 {
-                    // See move method for definition of dir, moves upward
+                    // moves upward
                     dir = 3;
                     // Create new blockedir biased up,
                     blockedDir = (Math.random() < .75)? 3: 4;
                 }
                 else
                 {
+                    // Use the randomly selected direction
                     dir = blockedDir;
                 }
             }
@@ -90,6 +97,8 @@ public class DancingAnt extends Ant implements HarmlessAnt
     {
         if (turnsInDir <= 0)
         {
+            // Let's choose a new direction!
+            // but only consider forward moving directions
             dir = (int)(Math.random()*3);
             turnsInDir = 15;
         }
@@ -123,14 +132,18 @@ public class DancingAnt extends Ant implements HarmlessAnt
         
         if(newLoc.getY() <= 0)
         {
+            // We're off the top of the screen!
+            // Move down diagnoally.
             dir = 2;
             turnsInDir = 15;
         }
         else if (newLoc.getY() >= 375)
         {
+            // We're off the bottom of the screen!
+            // Move up diagnoally.
             dir = 1;
             turnsInDir = 15;
-        } 
+        }
         else 
         {
             setLoc(newLoc);
@@ -142,7 +155,8 @@ public class DancingAnt extends Ant implements HarmlessAnt
 	    return 20;
     }
 
-    public ImageIcon getInitialImageIcon(){
+    public ImageIcon getInitialImageIcon()
+    {
         return PictureLoader.dancingAnt;
     }
 }

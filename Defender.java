@@ -23,10 +23,12 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 /**
- * Abstract class Defender - It is the base design for all defenders.
+ * Defender is the super class for all defenders.
  * 
- * @author Parth
- * @version 0.0
+ * METHODS
+ *  Defender(int baseHP, Location loc)
+ *  abstract List<Ant> processAnts(List<Ant> ants);
+ *
  */
 public abstract class Defender extends Character
 {
@@ -39,6 +41,6 @@ public abstract class Defender extends Character
      * Takes ants, does damage to any damage should be done too,
      * Returns ants killed.
      */   
-    abstract public List<Ant> processAnts(List<Ant> ants);
+    public abstract List<Ant> processAnts(List<Ant> ants);
     
 }

@@ -23,9 +23,17 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.LinkedList;
 
+/**
+ * The Hardest Level Generator
+ * 
+ * METHODS
+ *  HardGenerator()
+ *  List<Ant> generateAnts()
+ * 
+ */
+
 public class HardGenerator extends LevelGenerator
 {
-
     public HardGenerator()
     {
         super(1000);
@@ -36,6 +44,7 @@ public class HardGenerator extends LevelGenerator
         List<Ant> output = new LinkedList<Ant>();
         if (completed < max)
         {
+            // Empty the cache of ants.
             ListIterator<Ant> iter = cachedAnts.listIterator();
             while (completed < max && iter.hasNext())
             {
