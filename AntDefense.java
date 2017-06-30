@@ -19,10 +19,15 @@
  *
  */
 
-import javax.swing.JOptionPane; 
 import javax.swing.UIManager; 
 import javax.swing.UnsupportedLookAndFeelException; 
 
+/**
+ * Houses solely the main method.
+ *
+ * METHODS
+ *  static void main(String[] args)
+ */
 public class AntDefense
 {
     public static void main(String[] args)
@@ -54,34 +59,5 @@ public class AntDefense
 
         window.startWindowController();
 
-    }
-
-    public static LevelGenerator getDifficulty()
-    {
-        // Create the dialog.
-        // String[] possibleValues = {"Trivial", "Easy", "Medium", "Hard"};
-        String[] possibleValues = {"Easy", "Medium", "Hard"};
-        Integer selectedValue = JOptionPane.showOptionDialog(null,
-                "Choose a difficulty.", "Ant Defense",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                null,  possibleValues, possibleValues[0]);
-        LevelGenerator lg;
-        switch (selectedValue)
-        {
-
-            case 0: lg = new EasyGenerator();
-                break;
-            
-            case 1: lg = new MediumGenerator();
-                break;
-            
-            case 2: lg = new HardGenerator();
-                break;
-
-            default: lg = new TrivialGenerator();
-                break;
-        }
-
-        return lg;
     }
 }
