@@ -23,8 +23,13 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 /**
- * @author Parth
- * @version 0.0
+ * Super class of all Ants.
+ *
+ * METHODS
+    Ant(int baseHP, Location loc)
+    abstract int getGold();
+    abstract List<Defender> act(List<Defender> defenders);
+ *
  */
 public abstract class Ant extends Character
 {
@@ -36,12 +41,11 @@ public abstract class Ant extends Character
     /**
      * Returns the appropriate gold amount gained from killing the Ant.
      */
-    abstract public int getGold();
+    public abstract int getGold();
 
     /**
-     * Ant should act. If it kills a defender, then it should 
+     * Ant should act. If it kills a defender, then it should
      * return an instance of them.
      */
-    abstract public List<Defender> act(List<Defender> defenders);
-    
+    public abstract List<Defender> act(List<Defender> defenders);
 }
