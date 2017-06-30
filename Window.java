@@ -31,6 +31,9 @@ public class Window extends JFrame
     private static final long serialVersionUID = 1L;
     public static final int WIDTH = 960;
     public static final int HEIGHT = 720;
+    private WelcomeScreen ws = null;
+    private LevelSelector ls = null;
+    private GameView gv = null;
 
     public Window()
     {
@@ -39,9 +42,8 @@ public class Window extends JFrame
         setSize(WIDTH, HEIGHT);    // sets size in pixels
         setResizable(false);   // makes it resizable or not (true == resizable screen)
 
-        JLabel loadingNotice = new JLabel("Loading...");
-
-        add(loadingNotice);
+        ws = new WelcomeScreen(this);
+        setContentPane(ws);
 
         setVisible(true);
 
@@ -55,24 +57,40 @@ public class Window extends JFrame
         );
     }
 
-    public Window(JRootPane initialPane)
+    public WelcomeScreen switchToWelcomeScreen()
     {
-        super("Ant Defense");
-        // set up window
-        setSize(WIDTH, HEIGHT);    // sets size in pixels
-        setResizable(false);   // makes it resizable or not (true == resizable screen)
+        if (ws == null)
+        {
+            ws = new WelcomeScreen(this);
+        }
 
-        setContentPane(initialPane);
-        setVisible(true);
+        setContentPane(ws);
 
-        // needed to close application
-        addWindowListener(new java.awt.event.WindowAdapter() 
-            {
-                public void windowClosing(WindowEvent evt) {
-                    exit();
-                }
-            }
-        );
+        return ws;
+    }
+
+    public LevelSelector switchToLevelSelector()
+    {
+        if (ls == null)
+        {
+            ls = new LevelSelector(this);
+        }
+
+        setContentPane(ls);
+
+        return ls;
+    }
+
+    public GameView switchToGameView()
+    {
+        if (gv == null)
+        {
+            gv = new GameView(this);
+        }
+
+        setContentPane(gv);
+
+        return gv;
     }
 
     public void exit()

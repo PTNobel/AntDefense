@@ -468,9 +468,7 @@ public class GameView extends JRootPane
 
         public void mouseClicked(MouseEvent event){
             control.quitGame();
-            WelcomeScreen ws = new WelcomeScreen();
-            ws.setWindow(window);
-            window.setContentPane(ws);
+            window.switchToWelcomeScreen();
         }
     }
 

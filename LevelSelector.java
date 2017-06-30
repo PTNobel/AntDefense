@@ -90,9 +90,8 @@ public class LevelSelector extends JRootPane
                 break;
             }
             Model model = new Model(lg);
-            GameView gv = new GameView(window);
+            GameView gv = window.switchToGameView();
             Controller control = new Controller(model, gv);
-            window.setContentPane(gv);
             (new LoopThread(control)).start();
         }
     }

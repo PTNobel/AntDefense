@@ -53,8 +53,6 @@ public class AntDefense
 
         PictureLoader picLoader =  new PictureLoader();
    
-        WelcomeScreen ws = new WelcomeScreen();
-        Window window = new Window(ws);
-        ws.setWindow(window);
+        Window window = new Window();
     }
 }
