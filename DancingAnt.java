@@ -126,7 +126,7 @@ public class DancingAnt extends Ant implements HarmlessAnt
             dir = 2;
             turnsInDir = 15;
         }
-        else if (newLoc.getY() >= 400)
+        else if (newLoc.getY() >= 375)
         {
             dir = 1;
             turnsInDir = 15;
