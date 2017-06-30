@@ -52,9 +52,8 @@ public class TrivialDefense
         GameView gv = new GameView(window);
         Controller control = new Controller(model, gv);
 
-        window.setNewContentPane(gv);
+        window.setContentPane(gv);
 
-        window.startWindowController();
-
+        (new LoopThread(control)).start();
     }
 }

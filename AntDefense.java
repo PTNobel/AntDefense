@@ -56,8 +56,5 @@ public class AntDefense
         WelcomeScreen ws = new WelcomeScreen();
         Window window = new Window(ws);
         ws.setWindow(window);
-
-        window.startWindowController();
-
     }
 }
