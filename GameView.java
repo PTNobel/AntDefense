@@ -93,7 +93,7 @@ public class GameView extends JRootPane
                 boardArray[r][c].setBounds(JBUTTONWIDTH*c, JBUTTONHEIGHT*r, JBUTTONWIDTH, JBUTTONHEIGHT);
                 boardUI.add(boardArray[r][c]);                      // add the JButton to the pane
                 BoardMouseHandler bmh = new BoardMouseHandler(r, c);
-                boardArray[r][c].addMouseListener(bmh);    // register the JButton with the mouse handler
+                boardArray[r][c].addActionListener(bmh);    // register the JButton with the mouse handler
                 boardArray[r][c].setContentAreaFilled(false);     // Makes button transparent
                 // Code below is not needed but we're keeping it for reference later
                 //boardArray[r][c].setOpaque(false);              // Dont know why this is needed
@@ -120,7 +120,7 @@ public class GameView extends JRootPane
         for(int r = 0; r < storeItems.length; r++){
             store[r] = new JButton();                   // instantiate each JButton with a row/col label
             store[r].setIcon(storeItems[r].INIT_IMAGE);
-            store[r].addMouseListener(new StoreMouseHandler(storeItems[r], store[r]));    // register the JButton with the mouse handler
+            store[r].addActionListener(new StoreMouseHandler(storeItems[r], store[r]));    // register the JButton with the mouse handler
             store[r].setBounds(r*JBUTTONWIDTH, 0, JBUTTONWIDTH, JBUTTONHEIGHT);
             storeUI.add(store[r]);                      // add the JButton to the pane
             JLabel jl = new JLabel("" + storeItems[r].COST);
@@ -158,7 +158,7 @@ public class GameView extends JRootPane
         int pauseButtonX = boardUIxPos + (int)boardSize.getWidth() - JBUTTONWIDTH;
         int pauseButtonY = storeUIyPos;
         pauseButton.setBounds(pauseButtonX, pauseButtonY, (int)pauseButtonSize.getWidth(), (int)pauseButtonSize.getHeight());
-        pauseButton.addMouseListener(new PauseListener());
+        pauseButton.addActionListener(new PauseListener());
 
 
 
@@ -183,7 +183,7 @@ public class GameView extends JRootPane
 
         // resume button
         JButton resumeButton = new JButton("Resume");
-        resumeButton.addMouseListener(new ResumeListener());
+        resumeButton.addActionListener(new ResumeListener());
         // button location and size
         int resumeWidth = (int) buttonSize.getWidth();    // width
         int resumeHeight = (int) buttonSize.getHeight();  // height
@@ -194,7 +194,7 @@ public class GameView extends JRootPane
 
         // reset button
         JButton resetButton = new JButton("Reset");
-        resetButton.addMouseListener(new ResetListener());
+        resetButton.addActionListener(new ResetListener());
         // button location and size
         int resetWidth = (int) buttonSize.getWidth();    // width
         int resetHeight = (int) buttonSize.getHeight();  // height
@@ -205,7 +205,7 @@ public class GameView extends JRootPane
 
         // quit button
         JButton quitButton = new JButton("Quit");
-        quitButton.addMouseListener(new QuitListener());
+        quitButton.addActionListener(new QuitListener());
         // button location and size
         int quitWidth = (int) buttonSize.getWidth();    // width
         int quitHeight = (int) buttonSize.getHeight();  // height
@@ -226,28 +226,46 @@ public class GameView extends JRootPane
 
         // game over message
         gameOverMessage = new JLabel(gameResult, SwingConstants.CENTER);
-        gameOverMessage.setBounds((int)gameOverSize.getWidth()/2, 20, (int)gameOverSize.getWidth()/2, 30);
+        gameOverMessage.setFont(new Font("Serif", Font.BOLD, 20));
+        gameOverMessage.setBounds(0, 20, (int)gameOverSize.getWidth(), 30);
         gameOverMenu.add(gameOverMessage);
 
         // game over choices buttons
         Dimension gameOverButtonSize = new Dimension(100,40);
         int gameOverButtonMargin = 10;
 
+        // different difficulty button
+        JButton changeDiffButton = new JButton("Change Difficulty");
+        changeDiffButton.addActionListener(new changeDiffListener());
+        // button location and size
+        int changeDiffWidth = (int) gameOverButtonSize.getWidth()+50;    // width
+        int changeDiffHeight = (int) gameOverButtonSize.getHeight();  // height
+        int changeDiffX = ((int)gameOverSize.getWidth() - changeDiffWidth)/2;      // x-position
+        int changeDiffY = ((int)gameOverSize.getHeight() - changeDiffHeight)/2;  // y-position
+        changeDiffButton.setBounds(changeDiffX, changeDiffY, changeDiffWidth, changeDiffHeight);
+        gameOverMenu.add(changeDiffButton);
+
         // reset button
-        JButton gameOverResetButton = new JButton("Reset");
-        gameOverResetButton.addMouseListener(new ResetListener());
+        JButton gameOverResetButton = new JButton("Restart");
+        gameOverResetButton.addActionListener(new ResetListener());
         // button location and size
         int gameOverResetWidth = (int) gameOverButtonSize.getWidth();    // width
         int gameOverResetHeight = (int) gameOverButtonSize.getHeight();  // height
-        int gameOverResetX = ((int)gameOverSize.getWidth() - resumeWidth)/2 - (gameOverResetWidth + gameOverButtonMargin);                                    // x-position
-        int gameOverResetY = ((int)gameOverSize.getHeight() - gameOverResetHeight)/2 - (gameOverResetHeight + gameOverButtonMargin);  // y-position
+        int gameOverResetX = ((int)gameOverSize.getWidth() - resumeWidth)/2 - (changeDiffWidth + gameOverButtonMargin);      // x-position
+        int gameOverResetY = ((int)gameOverSize.getHeight() - gameOverResetHeight)/2;  // y-position
         gameOverResetButton.setBounds(gameOverResetX, gameOverResetY, gameOverResetWidth, gameOverResetHeight);
         gameOverMenu.add(gameOverResetButton);
 
-        // different difficulty button
-
         // exit button
-
+        JButton exitButton = new JButton("Main Menu");
+        exitButton.addActionListener(new QuitListener());
+        // button location and size
+        int exitWidth = (int) gameOverButtonSize.getWidth() + 20;    // width
+        int exitHeight = (int) gameOverButtonSize.getHeight();  // height
+        int exitX = ((int)gameOverSize.getWidth() - exitWidth)/2 + (changeDiffWidth + gameOverButtonMargin);      // x-position
+        int exitY = ((int)gameOverSize.getHeight() - exitHeight)/2;  // y-position
+        exitButton.setBounds(exitX, exitY, exitWidth, exitHeight);
+        gameOverMenu.add(exitButton);
 
 
 
@@ -298,6 +316,7 @@ public class GameView extends JRootPane
           gameResult = "You Loss!";
         }
 
+        enableButtons(false);
         gameOverMessage.setText(gameResult);
         gameOverMenu.setVisible(true);
         /*
@@ -367,109 +386,11 @@ public class GameView extends JRootPane
         }
     }
 
-    public void resetField()
+    public void enableButtons(boolean enabled)
     {
-        gameOverMenu.setVisible(false);
-        control.resetGame();
-    }
-
-    public void unPause()
-    {
-        pauseMenu.setVisible(false);
-        pauseButton.setEnabled(true);
-        setStoreEnabled(true);
-        setBoardEnabled(true);
-        control.pauseGame(false);
-    }
-
-    public void endProgram()
-    {
-        System.exit(0);
-    }
-
-    private class StoreMouseHandler extends MouseAdapter
-    {
-        public StoreItem si;
-        public JButton button;
-
-        public StoreMouseHandler(StoreItem si, JButton button)
-        {
-            this.si = si;
-            this.button = button;
-        }
-
-        public void mouseClicked(MouseEvent event)
-        {
-            control.pickDefender(si);
-        }
-    }
-
-    private class BoardMouseHandler extends MouseAdapter
-    {
-        public int row, col;
-
-        public BoardMouseHandler(int r, int c)
-        {
-            row = r;
-            col = c;
-        }
-
-        public void mouseClicked(MouseEvent event)
-        {
-            Location loc = new Location(col*JBUTTONWIDTH , row*JBUTTONHEIGHT);
-            control.placeDefender(loc);
-        }
-    }
-
-    private class PauseListener extends MouseAdapter
-    {
-        public PauseListener(){
-           // nothing needed
-        }
-
-        public void mouseClicked(MouseEvent event){
-            if(!pauseMenu.isVisible()){
-                pauseButton.setEnabled(false);
-                pauseMenu.setVisible(true);
-                setStoreEnabled(false);
-                setBoardEnabled(false);
-                control.pauseGame(true);
-            }
-        }
-    }
-
-    private class ResumeListener extends MouseAdapter
-    {
-        public ResumeListener(){
-            // nothing needed
-        }
-
-        public void mouseClicked(MouseEvent event){
-            unPause();
-        }
-    }
-
-    private class ResetListener extends MouseAdapter
-    {
-        public ResetListener(){
-            // nothing needed
-        }
-
-        public void mouseClicked(MouseEvent event){
-            resetField();
-        }
-    }
-
-    private class QuitListener extends MouseAdapter
-    {
-        public QuitListener(){
-            // nothing needed
-        }
-
-        public void mouseClicked(MouseEvent event){
-            control.quitGame();
-            window.switchToWelcomeScreen();
-        }
+      setBoardEnabled(enabled);
+      setStoreEnabled(enabled);
+      pauseButton.setEnabled(enabled);
     }
 
     public void setMaxProgress(int max)
@@ -490,5 +411,102 @@ public class GameView extends JRootPane
     public void startGame()
     {
         control.loop();
+    }
+
+    public void resetField()
+    {
+        gameOverMenu.setVisible(false);
+        control.resetGame();
+    }
+
+    public void unPause()
+    {
+        pauseMenu.setVisible(false);
+        pauseButton.setEnabled(true);
+        setStoreEnabled(true);
+        setBoardEnabled(true);
+        control.pauseGame(false);
+    }
+
+    public void endProgram()
+    {
+        System.exit(0);
+    }
+
+    private class StoreMouseHandler implements ActionListener
+    {
+        public StoreItem si;
+        public JButton button;
+
+        public StoreMouseHandler(StoreItem si, JButton button)
+        {
+            this.si = si;
+            this.button = button;
+        }
+
+        public void actionPerformed(ActionEvent event)
+        {
+            control.pickDefender(si);
+        }
+    }
+
+    private class BoardMouseHandler implements ActionListener
+    {
+        public int row, col;
+
+        public BoardMouseHandler(int r, int c)
+        {
+            row = r;
+            col = c;
+        }
+
+        public void actionPerformed(ActionEvent event)
+        {
+            Location loc = new Location(col*JBUTTONWIDTH , row*JBUTTONHEIGHT);
+            control.placeDefender(loc);
+        }
+    }
+
+    private class PauseListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event){
+            if(!pauseMenu.isVisible()){
+                pauseButton.setEnabled(false);
+                pauseMenu.setVisible(true);
+                setStoreEnabled(false);
+                setBoardEnabled(false);
+                control.pauseGame(true);
+            }
+        }
+    }
+
+    private class ResumeListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event){
+            unPause();
+        }
+    }
+
+    private class ResetListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event){
+            resetField();
+        }
+    }
+
+    private class changeDiffListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event){
+            LevelSelector ls = new LevelSelector(window);
+            window.setContentPane(ls);
+        }
+    }
+
+    private class QuitListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event){
+            control.quitGame();
+            window.switchToWelcomeScreen();
+        }
     }
 }
