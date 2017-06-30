@@ -47,8 +47,10 @@ public class GameView extends JRootPane
     private JProgressBar progressBar;
     private JLayeredPane boardUI;
     private JButton pauseButton;
-    private JPanel pauseMenu;
+    private JPanel pauseMenu, gameOverMenu;
+    private JLabel gameOverMessage;
     private Window window;
+    private String gameResult = "Game Over";
 
     /**
      * Constructor for objects of class Model
@@ -213,6 +215,41 @@ public class GameView extends JRootPane
         pauseMenu.add(quitButton);
 
 
+        /** CODE FOR GAME OVER SCREEN **/
+        gameOverMenu = new JPanel();
+        gameOverMenu.setLayout(null);
+        Dimension gameOverSize = new Dimension(500,200);
+        int gameOverX = origin.x + Window.WIDTH/2 - (int)gameOverSize.getWidth()/2;
+        int gameOverY = origin.y + Window.HEIGHT/2 - (int)gameOverSize.getHeight()/2;
+        gameOverMenu.setBounds(gameOverX, gameOverY, (int)gameOverSize.getWidth(), (int)gameOverSize.getHeight());
+        gameOverMenu.setBackground(Color.GRAY);
+
+        // game over message
+        gameOverMessage = new JLabel(gameResult, SwingConstants.CENTER);
+        gameOverMessage.setBounds((int)gameOverSize.getWidth()/2, 20, (int)gameOverSize.getWidth()/2, 30);
+        gameOverMenu.add(gameOverMessage);
+
+        // game over choices buttons
+        Dimension gameOverButtonSize = new Dimension(100,40);
+        int gameOverButtonMargin = 10;
+
+        // reset button
+        JButton gameOverResetButton = new JButton("Reset");
+        gameOverResetButton.addMouseListener(new ResetListener());
+        // button location and size
+        int gameOverResetWidth = (int) gameOverButtonSize.getWidth();    // width
+        int gameOverResetHeight = (int) gameOverButtonSize.getHeight();  // height
+        int gameOverResetX = ((int)gameOverSize.getWidth() - resumeWidth)/2 - (gameOverResetWidth + gameOverButtonMargin);                                    // x-position
+        int gameOverResetY = ((int)gameOverSize.getHeight() - gameOverResetHeight)/2 - (gameOverResetHeight + gameOverButtonMargin);  // y-position
+        gameOverResetButton.setBounds(gameOverResetX, gameOverResetY, gameOverResetWidth, gameOverResetHeight);
+        gameOverMenu.add(gameOverResetButton);
+
+        // different difficulty button
+
+        // exit button
+
+
+
 
         /** CODE FOR THE BACKGROUND **/
         JLabel backgroundLabel;
@@ -222,6 +259,8 @@ public class GameView extends JRootPane
 
         // Set window size and show window
         add(progressBar);             // adds progressBar to the screen
+        add(gameOverMenu);            // adds game over menu to screen
+        gameOverMenu.setVisible(false); // hides game over menu
         add(pauseMenu);               // adds pauseMenu
         pauseMenu.setVisible(false);  // hides pause menu
         add(boardUI);                 // adds boardUI to the screen
@@ -252,6 +291,16 @@ public class GameView extends JRootPane
      */
     public void announceWinOrLoss(boolean wOrL)
     {
+        if(wOrL)
+        {
+          gameResult = "You Won!";
+        } else {
+          gameResult = "You Loss!";
+        }
+
+        gameOverMessage.setText(gameResult);
+        gameOverMenu.setVisible(true);
+        /*
         String[] possibleValues = {"I'll try a different level", "I'll try again", "I'm done"};
         Integer selectedValue = JOptionPane.showOptionDialog(null,
                 ((wOrL)?"You won.": "You lost.") + " What next?", "Ant Defense",
@@ -271,7 +320,7 @@ public class GameView extends JRootPane
             default:
                 endProgram();
                 break;
-        }
+        }*/
     }
 
     public void addCharacter(Character thing)
@@ -324,6 +373,7 @@ public class GameView extends JRootPane
 
     public void resetField()
     {
+        gameOverMenu.setVisible(false);
         control.resetGame();
     }
 
@@ -332,7 +382,7 @@ public class GameView extends JRootPane
         pauseButton.setEnabled(true);
         setStoreEnabled(true);
         setBoardEnabled(true);
-        control.pauseGame();
+        control.pauseGame(false);
     }
 
     public void endProgram()
@@ -386,7 +436,7 @@ public class GameView extends JRootPane
                 pauseMenu.setVisible(true);
                 setStoreEnabled(false);
                 setBoardEnabled(false);
-                control.pauseGame();
+                control.pauseGame(true);
             }
         }
     }
