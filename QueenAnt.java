@@ -25,7 +25,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 /**
  * QueenAnts generate other ants as they move.
- * 
+ *
  * @author Parth Nobel and Ignatius Widjaja
  * @version 0.0
  */
@@ -77,8 +77,8 @@ public class QueenAnt extends Ant implements HarmlessAnt
 
             lg.addAnts(newAnts);
         }
-        
-        
+
+
         if (!blocked)
             move();
 
@@ -114,6 +114,6 @@ public class QueenAnt extends Ant implements HarmlessAnt
 
     public ImageIcon getInitialImageIcon()
     {
-        return new ImageIcon("NullAnt.png");
+        return new ImageIcon("queenAnt.png");
     }
 }
