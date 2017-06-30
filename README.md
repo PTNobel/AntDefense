@@ -13,6 +13,7 @@ Screenshot of *Ant Defense*
 
 #### Objective
 The object of the game is to prevent the ants from making it across the screen to the cake on the left side.
+
 ---
 ### The Code
 
