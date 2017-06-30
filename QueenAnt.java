@@ -36,8 +36,9 @@ public class QueenAnt extends Ant implements HarmlessAnt
 
     public QueenAnt(LevelGenerator lg, Location loc)
     {
-        // Queen Ant always starts in the center column
-        super(2000, loc);
+        // Queen Ant icon is bigger than all the other icons, so keep the same
+        // random row, but change the x position.
+        super(2000, new Location(loc.getX(), loc.getRow()*80 + 10 + (int)(Math.random()*10)));
         swing = 0;
         this.lg = lg;
     }
