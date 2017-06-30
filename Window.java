@@ -31,8 +31,6 @@ public class Window extends JFrame
     private static final long serialVersionUID = 1L;
     public static final int WIDTH = 960;
     public static final int HEIGHT = 720;
-    private WindowController winControl;
-
 
     public Window()
     {
@@ -40,7 +38,6 @@ public class Window extends JFrame
         // set up window
         setSize(WIDTH, HEIGHT);    // sets size in pixels
         setResizable(false);   // makes it resizable or not (true == resizable screen)
-        winControl = new WindowController(this);
 
         JLabel loadingNotice = new JLabel("Loading...");
 
@@ -64,7 +61,6 @@ public class Window extends JFrame
         // set up window
         setSize(WIDTH, HEIGHT);    // sets size in pixels
         setResizable(false);   // makes it resizable or not (true == resizable screen)
-        winControl = new WindowController(this);
 
         setContentPane(initialPane);
         setVisible(true);
@@ -79,84 +75,8 @@ public class Window extends JFrame
         );
     }
 
-    public void startWindowController()
-    {
-        winControl.loop();
-    }
-
-    public void setNewContentPane(JRootPane jcp)
-    {
-        winControl.setNewContentPane(jcp);
-    }
-
     public void exit()
     {
-        winControl.exit();
         System.exit(0);
-    }
-}
-
-class WindowController
-{
-    private boolean safeToAct = true;
-    private boolean updateController = false;
-    private JRootPane newContent = null;
-    private boolean keepOnWatching = true;
-    private Window window;
-
-    public WindowController(Window win)
-    {
-        window = win;
-    }
-
-    public void loop()
-    {
-        while (keepOnWatching)
-        {
-            safeToAct = false;
-            if (updateController)
-            {
-                updateController = false;
-            
-                if (newContent != null && newContent instanceof GameView)
-                {
-                    ((GameView)newContent).startGame();
-                }
-            }
-            safeToAct = true;
-            do {
-                try {
-                    Thread.sleep(100);
-                }
-                catch (Exception e)
-                {
-                }
-            } while (!safeToAct);
-        }
-        
-    }
-
-    public void setNewContentPane(JRootPane pane)
-    {
-        while (!safeToAct)
-        {
-            try
-            {
-                Thread.sleep(5);
-            }
-            catch (Exception e)
-            {
-            }
-        }
-        safeToAct = false;
-        updateController = true;
-        newContent = pane;
-        window.setContentPane(newContent);
-        safeToAct = true;
-    }
-
-    public void exit()
-    {
-        keepOnWatching = false;
     }
 }

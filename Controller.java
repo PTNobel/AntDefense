@@ -203,6 +203,11 @@ public class Controller
 
     public void resetGame()
     {
+        resetGame(null);
+    }
+
+    public void resetGame(LevelGenerator lg)
+    {
         while (!safeToAct && !paused){
             try
             {
@@ -220,45 +225,31 @@ public class Controller
         paused = false;
         safeToAct = false;
 
-        // 
-        for (Character charac: m.resetModel())
+
+        List<Character> listOfAllCharacters;
+        // If lg is null, let's use the resetModel method. Otherwise let's
+        // change the level generator
+        if (lg == null)
+            listOfAllCharacters = m.resetModel();
+        else
+            listOfAllCharacters = m.changeGenerator(lg);
+
+        // let's remove the characters from view.
+        for (Character charac: listOfAllCharacters)
         {
             v.removeCharacter(charac);
         }
 
+        // Set a new gold label, progress, and numAttackers
         v.setGoldLabel(m.getGold());
         v.setProgress(0);
         v.setMaxProgress(m.getNumAttackers());
 
+        v.unPause();
+        // If we were paused let's stay paused
         paused = origPaused;
         safeToAct = !origPaused;
-    }
-
-    public void resetGame(LevelGenerator lg)
-    {
-        while (!safeToAct && !paused)
-        {
-            try {
-                Thread.sleep(5);
-            }
-            catch (Exception e)
-            {
-            }
-        }
-
-        paused = false;
-        safeToAct = false;
-
-        for (Character charac: m.changeGenerator(lg))
-        {
-            v.removeCharacter(charac);
-        }
-
-        v.setGoldLabel(m.getGold());
-        v.setProgress(0);
-        v.setMaxProgress(m.getNumAttackers());
-
-        safeToAct = true;
+        (new LoopThread(this)).start();
     }
 
     public void quitGame()

@@ -1,14 +1,15 @@
 
 public class LoopThread extends Thread
 {
-    private GameView v;
+    private Controller control;
 
-    public LoopThread(GameView view)
+    public LoopThread(Controller c)
     {
-        v = view;
+        control = c;
     }
 
-    public void run() {
-        v.startGame();
+    public void run()
+    {
+        control.loop();
     }
 }

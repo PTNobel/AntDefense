@@ -373,7 +373,8 @@ public class GameView extends JRootPane
         control.resetGame();
     }
 
-    public void unPause(){
+    public void unPause()
+    {
         pauseMenu.setVisible(false);
         pauseButton.setEnabled(true);
         setStoreEnabled(true);
@@ -456,7 +457,6 @@ public class GameView extends JRootPane
 
         public void mouseClicked(MouseEvent event){
             resetField();
-            unPause();
         }
     }
 
@@ -470,7 +470,7 @@ public class GameView extends JRootPane
             control.quitGame();
             WelcomeScreen ws = new WelcomeScreen();
             ws.setWindow(window);
-            window.setNewContentPane(ws);
+            window.setContentPane(ws);
         }
     }
 
