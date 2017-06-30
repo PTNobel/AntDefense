@@ -185,7 +185,12 @@ public class Controller
 
     public void pauseGame(boolean newPause)
     {
-        while (!safeToAct && !paused){
+        // If we are already in whatever state we are being set to, just return
+        if (paused == newPause)
+            return;
+
+        while (!safeToAct && !paused)
+        {
             try
             {
                 Thread.sleep(5);
@@ -208,7 +213,8 @@ public class Controller
 
     public void resetGame(LevelGenerator lg)
     {
-        while (!safeToAct && !paused){
+        while (!safeToAct && !paused)
+        {
             try
             {
                 Thread.sleep(5);
@@ -225,7 +231,6 @@ public class Controller
         paused = false;
         safeToAct = false;
 
-
         List<Character> listOfAllCharacters;
         // If lg is null, let's use the resetModel method. Otherwise let's
         // change the level generator
@@ -233,7 +238,6 @@ public class Controller
             listOfAllCharacters = m.resetModel();
         else
             listOfAllCharacters = m.changeGenerator(lg);
-
         // let's remove the characters from view.
         for (Character charac: listOfAllCharacters)
         {
