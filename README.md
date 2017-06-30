@@ -1,7 +1,8 @@
 # Ant Defense
 
 ### Contributors 
-Copyright 2017 Parth Nobel, Chase Carnaroli, Tiffany Nguyen, Ignatius Widjaja.
+Parth Nobel, Chase Carnaroli, Tiffany Nguyen, Ignatius Widjaja.  
+Copyright 2017
 
 ### Background
 AP Computer Science A Final Project 2017 --- Plants v. Zomies style game.
