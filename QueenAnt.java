@@ -88,19 +88,16 @@ public class QueenAnt extends Ant implements HarmlessAnt
 
     private Location getRandomLocation()
     {
-            // Random number [-1, 1)
-            double yMod = Math.random()*2 - 1;
-            // Same column, variable row
-            Location output = new Location(loc.getX(), loc.getY() + (int)(yMod*80));
-            // if we are off the screen, let's get on the screen
-            if (output.getY() < 0)
-            {
-                output = new Location(loc.getX(), (int)(Math.random()*10));
-            } else if (output.getY() > 375)
-            {
-                output = new Location(loc.getX(), 375 - (int)(Math.random()*10));
-            }
-            return output;
+        // Random number [-1, 1)
+        int rowMod = (int)(Math.random()*3 - 1);
+        int row = loc.getRow() + rowMod;
+        if (row < 0)
+            row = 0;
+        if (row > 4)
+            row = 4;
+        Location output = new Location(loc.getX(), 80*row + (int)(Math.random()*55));
+
+        return output;
     }
 
     private void move()
