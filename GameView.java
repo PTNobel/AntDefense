@@ -309,10 +309,6 @@ public class GameView extends JRootPane
 
         switch (selectedValue)
         {
-            case 0: LevelGenerator lg = AntDefense.getDifficulty();
-                    control.resetGame(lg);
-                    control.loop();
-                break;
             case 1: resetField();
                     control.loop();
                 break;

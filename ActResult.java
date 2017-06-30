@@ -21,12 +21,35 @@
 
 import java.util.List;
 
+/**
+ * This is solely an encapsulating class for moving the data on a round from 
+ * Model to Controller
+ * 
+ * METHODS
+ *  void setDeadCharacters(List<Character> deadCharacters)
+ *  List<Character> getDeadCharacters()
+ *  void setNewCharacters(List<Character> newCharacters)
+ *  List<Character> getNewCharacters()
+ *  void setMovedCharacters(List<Character> movedCharacters)
+ *  List<Character> getMovedCharacters()
+ *  void setCakeEaten(boolean eaten)
+ *  boolean getCakeEaten()
+ *  void setGold(int gold)
+ *  int getGold()
+ *  void setProgress(int prog)
+ *  int getProgress()
+ *  void setGameOver(boolean gameOver)
+ *  boolean getGameWon()
+ *
+ */
 public class ActResult
 {
     private List<Character> deadCharacters;
     private List<Character> newCharacters;
     private boolean cakeEaten, gameOver;
-    private int progress, gold;
+    // Progress is the number of ants killed so far 
+    private int progress;
+    private int gold;
     private List<Character> movedCharacters;
     
     public void setDeadCharacters(List<Character> deadCharacters){

@@ -22,15 +22,25 @@
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 /**
- * Characters is the base class of all defenders and actors
+ * Characters is the super class of all Defenders and Ants
  * 
- * @author Parth
- * @version 0.0
+ * METHODS
+    Character(int baseHP, Location loc)
+    Location getLoc()
+    void setLoc(Location loc)
+    boolean takeDamage(int damage)
+        Returns whether the character is alive (Returns true iff hp > 0)
+    boolean dead()
+    void setJLabel(JLabel jl)
+    JLabel getJLabel()
+    abstract ImageIcon getInitialImageIcon();
  */
-abstract public class Character
+public abstract class Character
 {
     Location loc;
     private int hp;
+    private JLabel jLabel = null;
+
     public Character(int baseHP, Location loc)
     {
         hp = baseHP;
@@ -58,7 +68,6 @@ abstract public class Character
         return hp <= 0;
     }
 
-    private JLabel jLabel = null;
     public void setJLabel(JLabel jl)
     {
         jLabel = jl;
@@ -69,5 +78,5 @@ abstract public class Character
         return this.jLabel;
     }
 
-    abstract public ImageIcon getInitialImageIcon();
+    public abstract ImageIcon getInitialImageIcon();
 }
