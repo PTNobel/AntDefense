@@ -17,6 +17,8 @@ So, for our final project, we felt as though it was necessary to incorporate ant
 ---
 ### The Game
 
+<img src="http://i.imgur.com/S3rHiSr.png" alt="Screen shot of Ant Defense game">  
+
 Screenshot of *Ant Defense*
 
 #### Objective
