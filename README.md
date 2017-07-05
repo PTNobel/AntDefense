@@ -1,8 +1,7 @@
 # Ant Defense
 
 ### Contributors 
-Parth Nobel, Chase Carnaroli, Tiffany Nguyen, Ignatius Widjaja.  
-Copyright 2017
+Parth Nobel, Chase Carnaroli, Tiffany Nguyen, Ignatius Widjaja.
 
 ### Background
 Ant Defense is our final project for AP Computer Science.  
@@ -29,4 +28,7 @@ The object of the Ant Defense is to prevent the ants from making it across the s
 
 ---
 ### License
+
+Copyright 2017 Parth Nobel, Chase Carnaroli, Tiffany Nguyen, Ignatius Widjaja
+
 AntDefense is licensed under [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html "License Information")
