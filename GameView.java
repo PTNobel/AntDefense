@@ -19,19 +19,36 @@
  *
  */
 
-/**
- * Handles all Graphics
- *
- * @author Chase Carnaroli and Parth Nobel
- * @version 0.0
- */
-
-import java.awt.*;          // import Container
-import java.util.*;         // import ArrayList
-import javax.swing.*;       // import JFrame
+import java.awt.*;
+import java.util.*;
+import javax.swing.*;
 import javax.swing.border.*;
-import java.awt.event.*;    // import event listener
+import java.awt.event.*;
 
+/**
+ * GameView is the JRootPane for the actual game board.
+ * 
+ * METHODS:
+ *  static final int JBUTTONHEIGHT
+ *  static final int JBUTTONWIDTH
+ *  GameView(Window window)
+ *  void setControl(Controller control)
+ *  void moveCharacter(Character thing)
+ *  void announceWinOrLoss(boolean wOrL)
+ *  void addCharacter(Character thing)
+ *  void removeCharacter(Character thing)
+ *  void setStoreButtonPressed(StoreItem si, boolean pressed)
+ *  void setStoreEnabled(boolean enabled)
+ *  void setBoardEnabled(boolean enabled)
+ *  void enableButtons(boolean enabled)
+ *  void setMaxProgress(int max)
+ *  void setProgress(int prog)
+ *  void setGoldLabel(int gold)
+ *  void startGame()
+ *  void resetField()
+ *  void unPause()
+ * 
+ */
 public class GameView extends JRootPane
 {
     private static final long serialVersionUID = 1L;
@@ -59,45 +76,50 @@ public class GameView extends JRootPane
     {
         // initialise instance variables
         this.window = window;
+        // These are constants.
         NUM_ROWS = Model.getNumRows();
         NUM_COLS = Model.getNumCols();
+        // Sane default. We'll change it later.
         NUM_ATTACKERS = 1;
-        this.control = control;
 
-        Point origin = new Point(0,0);  // variable for the origin
-
+        // We should fill the entire Window
         setSize(Window.WIDTH, Window.HEIGHT);
+        // We want to freely place things.
         setLayout(null);
 
 
 
         /**CODE FOR THE BOARD ON THE SCREEN**/
         // Create board
-        boardUI = new JLayeredPane();                                  // constructs boardUI pane
-        Dimension boardSize = new Dimension(NUM_COLS*80, NUM_ROWS*80);  // dimensions of the board
-        int boardUIxPos = origin.x+(Window.WIDTH/12);                                      // x position of boardUI
-        int boardUIyPos = origin.y+(Window.HEIGHT/5);                                      // y position of the boardUI
+        // We need things on top of each other without anything misbehaving, so
+        // we'll go with a JLayeredPane
+        boardUI = new JLayeredPane();
+        Dimension boardSize = new Dimension(NUM_COLS*JBUTTONWIDTH, NUM_ROWS*JBUTTONHEIGHT);
+        // Magic numbers used to choose the boardUI's x and y positions.
+        int boardUIxPos = Window.WIDTH/12;
+        int boardUIyPos = Window.HEIGHT/5;
 
         // set position of board
-        boardUI.setBounds(boardUIxPos, boardUIyPos, (int)boardSize.getWidth(), (int)boardSize.getHeight());     // puts boardUI at (x,y) and sets width/height
+        boardUI.setBounds(boardUIxPos, boardUIyPos, (int)boardSize.getWidth(), (int)boardSize.getHeight());
 
         // add buttons to board
-        boardArray = new JButton[NUM_ROWS][NUM_COLS];           // instantiates boardArray
+        boardArray = new JButton[NUM_COLS][NUM_ROWS];
 
         // places buttons on boardArray
-        for(int r = 0; r < NUM_ROWS; r++){
+        for(int r = 0; r < NUM_ROWS; r++)
+        {
             for (int c = 0; c < NUM_COLS; c++)
             {
-
-                boardArray[r][c] = new JButton();                   // instantiate each JButton with a row/col label
-                boardArray[r][c].setBounds(JBUTTONWIDTH*c, JBUTTONHEIGHT*r, JBUTTONWIDTH, JBUTTONHEIGHT);
-                boardUI.add(boardArray[r][c]);                      // add the JButton to the pane
-                BoardMouseHandler bmh = new BoardMouseHandler(r, c);
-                boardArray[r][c].addActionListener(bmh);    // register the JButton with the mouse handler
-                boardArray[r][c].setContentAreaFilled(false);     // Makes button transparent
-                // Code below is not needed but we're keeping it for reference later
-                //boardArray[r][c].setOpaque(false);              // Dont know why this is needed
-                //boardArray[r][c].setBorderPainted(true);        // Keeps border outlines
+                // Let's make the button
+                boardArray[c][r] = new JButton();
+                // Set position and size
+                boardArray[c][r].setBounds(JBUTTONWIDTH*c, JBUTTONHEIGHT*r, JBUTTONWIDTH, JBUTTONHEIGHT);
+                boardUI.add(boardArray[c][r]);
+                // The BMH is used to place defenders
+                BoardMouseHandler bmh = new BoardMouseHandler(c, r);
+                boardArray[c][r].addActionListener(bmh);
+                // Let's make the buttons transparent
+                boardArray[c][r].setContentAreaFilled(false);
             }
         }
 
@@ -105,49 +127,59 @@ public class GameView extends JRootPane
 
         /**CODE FOR THE STORE ON THE SCREEN**/
         // Create store
-        JLayeredPane storeUI = new JLayeredPane();  // constructs storeUI pane
-        int storeUIxPos = origin.x+(Window.WIDTH/24);      // x position of storeUI
-        int storeUIyPos = origin.y+(Window.HEIGHT/20);     // y position of storeUI
+        JLayeredPane storeUI = new JLayeredPane();
+        // More magic numbers to place storeUI.
+        int storeUIxPos = Window.WIDTH/24;
+        int storeUIyPos = Window.HEIGHT/20;
 
+        // Let's ask the enum listing everything that belongs in the store,
+        // for that list
         storeItems = StoreItem.values();
         // set position of storeUI
-        storeUI.setBounds(storeUIxPos, storeUIyPos, JBUTTONWIDTH * storeItems.length, JBUTTONHEIGHT+10);   // puts boardUI at (x,y) and sets width/height
+        storeUI.setBounds(storeUIxPos, storeUIyPos, JBUTTONWIDTH * storeItems.length, JBUTTONHEIGHT+10);
 
-        // add buttons to store
-        store = new JButton[storeItems.length];                   // instantiates store
+        store = new JButton[storeItems.length];
 
         // places buttons on store
-        for(int r = 0; r < storeItems.length; r++){
-            store[r] = new JButton();                   // instantiate each JButton with a row/col label
-            store[r].setIcon(storeItems[r].INIT_IMAGE);
-            store[r].addActionListener(new StoreMouseHandler(storeItems[r], store[r]));    // register the JButton with the mouse handler
-            store[r].setBounds(r*JBUTTONWIDTH, 0, JBUTTONWIDTH, JBUTTONHEIGHT);
-            storeUI.add(store[r]);                      // add the JButton to the pane
-            JLabel jl = new JLabel("" + storeItems[r].COST);
-            jl.setBounds(r*JBUTTONWIDTH, JBUTTONHEIGHT, JBUTTONWIDTH, 10);
+        for(int i = 0; i < storeItems.length; i++)
+        {
+            store[i] = new JButton();
+            // Set the icon to that of the store item
+            store[i].setIcon(storeItems[i].INIT_IMAGE);
+            store[i].addActionListener(new StoreMouseHandler(storeItems[i], store[i]));
+            // Upper left corner should be at (i buttons, 0)
+            store[i].setBounds(i*JBUTTONWIDTH, 0, JBUTTONWIDTH, JBUTTONHEIGHT);
+            // add the JButton to the pane
+            storeUI.add(store[i]);
+            // Content of the jl should be the numerical representation of the cost
+            JLabel jl = new JLabel("" + storeItems[i].COST);
+            // the JLabel goes right below the button
+            jl.setBounds(i*JBUTTONWIDTH, JBUTTONHEIGHT, JBUTTONWIDTH, 10);
             storeUI.add(jl);
         }
 
 
 
         /** CODE FOR GOLD LABEL **/
-        // Create Gold Label
+        // Create Gold Label, we'll default to zero gold, Controller should 
+        // set the real number before the user sees the screen
         goldLabel = new JLabel("0", JLabel.LEFT);
-        goldLabel.setBounds(175, 8, 20000, 20); // NOTE: EVERYTHING IN THIS LINE IS A MAGIC NUMBER
+        // MAGIC NUMBERS, based off the background image
+        goldLabel.setBounds(175, 8, 20000, 20);
 
 
 
         /** CODE FOR THE PROGRESS BAR **/
         // Create progress bar
-        progressBar = new JProgressBar(0, NUM_ATTACKERS);                                // constructs progressBar
-        Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), Window.HEIGHT/20);   // dimensions of the progressBar
+        // realize that NUM_ATTACKERS is still set to 1.
+        progressBar = new JProgressBar(0, NUM_ATTACKERS);
+        Dimension progressBarSize = new Dimension((int)(boardSize.getWidth()/3), Window.HEIGHT/20);
 
         // set coordinate
-        int progressBarxPos = boardUIxPos + (int)boardSize.getWidth() - (int)progressBarSize.getWidth();    // x position of progress bar
-        //int progressBaryPos = boardUIyPos + (int)boardSize.getHeight() + Window.HEIGHT/11;                         // y position of progress bar
-        int progressBaryPos = 19*Window.HEIGHT/20 - (int)progressBarSize.getHeight();                         // y position of progress bar
+        int progressBarxPos = boardUIxPos + (int)boardSize.getWidth() - (int)progressBarSize.getWidth();
+        int progressBaryPos = 19*Window.HEIGHT/20 - (int)progressBarSize.getHeight();
         // set position of progressBar
-        progressBar.setBounds(progressBarxPos, progressBaryPos, (int)progressBarSize.getWidth(), (int)progressBarSize.getHeight()); // puts progressBar at (x,y) and sets width/height
+        progressBar.setBounds(progressBarxPos, progressBaryPos, (int)progressBarSize.getWidth(), (int)progressBarSize.getHeight());
 
 
 
@@ -158,16 +190,18 @@ public class GameView extends JRootPane
         int pauseButtonX = boardUIxPos + (int)boardSize.getWidth() - JBUTTONWIDTH;
         int pauseButtonY = storeUIyPos;
         pauseButton.setBounds(pauseButtonX, pauseButtonY, (int)pauseButtonSize.getWidth(), (int)pauseButtonSize.getHeight());
+        // If clicked open the pause menu
         pauseButton.addActionListener(new PauseListener());
 
 
 
         /** CODE FOR PAUSE MENU **/
         pauseMenu = new JPanel();
+        // Allow arbitrary placement
         pauseMenu.setLayout(null);
         Dimension pauseMenuSize = new Dimension(Window.WIDTH/4,Window.HEIGHT/2);
-        int pauseMenuUIxPos = origin.x+(Window.WIDTH/2) - (int)pauseMenuSize.getWidth()/2;          // x position of storeUI
-        int pauseMenuUIyPos = origin.y+(Window.HEIGHT/2) - (int)pauseMenuSize.getHeight()/2;        // y position of storeUI
+        int pauseMenuUIxPos = Window.WIDTH/2 - (int)pauseMenuSize.getWidth()/2;          // x position of storeUI
+        int pauseMenuUIyPos = Window.HEIGHT/2 - (int)pauseMenuSize.getHeight()/2;        // y position of storeUI
         //pauseMenu.setBackground(Color.GRAY);
 
         // set position of pauseMenu
@@ -219,8 +253,8 @@ public class GameView extends JRootPane
         gameOverMenu = new JPanel();
         gameOverMenu.setLayout(null);
         Dimension gameOverSize = new Dimension(500,200);
-        int gameOverX = origin.x + Window.WIDTH/2 - (int)gameOverSize.getWidth()/2;
-        int gameOverY = origin.y + Window.HEIGHT/2 - (int)gameOverSize.getHeight()/2;
+        int gameOverX = Window.WIDTH/2 - (int)gameOverSize.getWidth()/2;
+        int gameOverY = Window.HEIGHT/2 - (int)gameOverSize.getHeight()/2;
         gameOverMenu.setBounds(gameOverX, gameOverY, (int)gameOverSize.getWidth(), (int)gameOverSize.getHeight());
         gameOverMenu.setBackground(Color.GRAY);
 
@@ -356,7 +390,8 @@ public class GameView extends JRootPane
         boardUI.remove(thing.getJLabel());
     }
 
-    public void setStoreButtonPressed(StoreItem si, boolean pressed){
+    public void setStoreButtonPressed(StoreItem si, boolean pressed)
+    {
         JButton button = null;
         for (int r = 0; r < store.length; r++)
         {
@@ -367,18 +402,22 @@ public class GameView extends JRootPane
             }
         }
 
-        if(pressed && button != null){
+        if(pressed && button != null)
+        {
             button.setBorder(new LineBorder(Color.GRAY, 3));
         }
     }
 
-    public void setStoreEnabled(boolean enabled){
-        for(JButton storeButton: store){
+    public void setStoreEnabled(boolean enabled)
+    {
+        for(JButton storeButton: store)
+        {
             storeButton.setEnabled(enabled);
         }
     }
 
-    public void setBoardEnabled(boolean enabled){
+    public void setBoardEnabled(boolean enabled)
+    {
         for(JButton[] boardRow: boardArray)
         {
             for (JButton boardButton: boardRow)
@@ -452,12 +491,12 @@ public class GameView extends JRootPane
 
     private class BoardMouseHandler implements ActionListener
     {
-        public int row, col;
+        private int row, col;
 
-        public BoardMouseHandler(int r, int c)
+        public BoardMouseHandler(int c, int r)
         {
-            row = r;
             col = c;
+            row = r;
         }
 
         public void actionPerformed(ActionEvent event)
@@ -469,8 +508,10 @@ public class GameView extends JRootPane
 
     private class PauseListener implements ActionListener
     {
-        public void actionPerformed(ActionEvent event){
-            if(!pauseMenu.isVisible()){
+        public void actionPerformed(ActionEvent event)
+        {
+            if(!pauseMenu.isVisible())
+            {
                 pauseButton.setEnabled(false);
                 pauseMenu.setVisible(true);
                 setStoreEnabled(false);
@@ -482,21 +523,24 @@ public class GameView extends JRootPane
 
     private class ResumeListener implements ActionListener
     {
-        public void actionPerformed(ActionEvent event){
+        public void actionPerformed(ActionEvent event)
+        {
             unPause();
         }
     }
 
     private class ResetListener implements ActionListener
     {
-        public void actionPerformed(ActionEvent event){
+        public void actionPerformed(ActionEvent event)
+        {
             resetField();
         }
     }
 
     private class changeDiffListener implements ActionListener
     {
-        public void actionPerformed(ActionEvent event){
+        public void actionPerformed(ActionEvent event)
+        {
             LevelSelector ls = new LevelSelector(window);
             window.setContentPane(ls);
         }
@@ -504,7 +548,8 @@ public class GameView extends JRootPane
 
     private class QuitListener implements ActionListener
     {
-        public void actionPerformed(ActionEvent event){
+        public void actionPerformed(ActionEvent event)
+        {
             control.quitGame();
             window.switchToWelcomeScreen();
         }
