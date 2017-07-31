@@ -52,35 +52,43 @@ public class ActResult
     private int gold;
     private List<Character> movedCharacters;
     
-    public void setDeadCharacters(List<Character> deadCharacters){
+    public void setDeadCharacters(List<Character> deadCharacters)
+    {
         this.deadCharacters = deadCharacters;
     }
     
-    public List<Character> getDeadCharacters(){
+    public List<Character> getDeadCharacters()
+    {
         return deadCharacters;
     }
     
-    public void setNewCharacters(List<Character> newCharacters){
+    public void setNewCharacters(List<Character> newCharacters)
+    {
         this.newCharacters = newCharacters;
     }
     
-    public List<Character> getNewCharacters(){
+    public List<Character> getNewCharacters()
+    {
         return newCharacters;
     }
     
-    public void setMovedCharacters(List<Character> movedCharacters){
+    public void setMovedCharacters(List<Character> movedCharacters)
+    {
         this.movedCharacters = movedCharacters;
     }
     
-    public List<Character> getMovedCharacters(){
+    public List<Character> getMovedCharacters()
+    {
         return movedCharacters;
     }
     
-    public void setCakeEaten(boolean eaten){
+    public void setCakeEaten(boolean eaten)
+    {
         cakeEaten = eaten;
     }
     
-    public boolean getCakeEaten(){
+    public boolean getCakeEaten()
+    {
         return cakeEaten;
     }
 
@@ -94,19 +102,23 @@ public class ActResult
         return this.gold;
     }
     
-    public void setProgress(int prog){
+    public void setProgress(int prog)
+    {
         progress = prog;
     }
     
-    public int getProgress(){
+    public int getProgress()
+    {
         return progress;
     }
     
-    public void setGameOver(boolean gameOver){
+    public void setGameOver(boolean gameOver)
+    {
         this.gameOver = gameOver;
     }
     
-    public boolean getGameWon(){
+    public boolean getGameWon()
+    {
         return gameOver;
     }
 }

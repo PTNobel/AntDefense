@@ -73,7 +73,8 @@ public class LevelSelector extends JRootPane
             diff = difficutly;
         }
 
-        public void mouseClicked(MouseEvent event){
+        public void mouseClicked(MouseEvent event)
+        {
             LevelGenerator lg;
             switch (diff)
             {

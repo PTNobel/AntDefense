@@ -63,7 +63,8 @@ public class PoisonSpray extends Defender
         return a;
     }
 
-    public ImageIcon getInitialImageIcon(){
+    public ImageIcon getInitialImageIcon()
+    {
         return PictureLoader.poisonSpray;
     }
 }

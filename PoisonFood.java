@@ -61,7 +61,8 @@ public class PoisonFood extends Defender
         return d;
     }
     
-    public ImageIcon getInitialImageIcon(){
+    public ImageIcon getInitialImageIcon()
+    {
         return PictureLoader.poisonFood;
     }
 }

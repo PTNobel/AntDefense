@@ -139,7 +139,8 @@ public class Controller
             return;
 
         // Wait for our turn to act.
-        while (!safeToAct){
+        while (!safeToAct)
+        {
             try
             {
                 Thread.sleep(5);
@@ -165,7 +166,8 @@ public class Controller
         if (paused)
             return;
 
-        while (!safeToAct){
+        while (!safeToAct)
+        {
             try
             {
                 Thread.sleep(5);

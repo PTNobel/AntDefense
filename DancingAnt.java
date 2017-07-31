@@ -32,7 +32,7 @@ import javax.swing.ImageIcon;
  *  DancingAnt(Location loc)
  *  List<Defender> act(List<Defender> defenders)
  *  int getGold()
- *  ImageIcon getInitialImageIcon(){
+ *  ImageIcon getInitialImageIcon()
  *
  */
 public class DancingAnt extends Ant implements HarmlessAnt

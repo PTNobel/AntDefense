@@ -141,7 +141,8 @@ public class Model
 
     public boolean selectDefenderToPlace(StoreItem si)
     {
-        if(gold >= si.COST){
+        if(gold >= si.COST)
+        {
             curSelectedDefender = si;
             return true;
         } else {
@@ -154,9 +155,11 @@ public class Model
      */
     public Defender placeDefender(Location loc)
     {
-        if(curSelectedDefender == null){
+        if(curSelectedDefender == null)
+        {
             return null;
-        } else if(getDefenderAtLoc(loc) != null){
+        } else if(getDefenderAtLoc(loc) != null)
+        {
             return null;
         } else {
             Defender def = curSelectedDefender.getDefender(loc);
@@ -199,7 +202,8 @@ public class Model
         return resetModel();
     }
 
-    public boolean getGameWon(){
+    public boolean getGameWon()
+    {
         return NUM_ATTACKERS == progress;
     }
 

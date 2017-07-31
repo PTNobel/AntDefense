@@ -63,7 +63,8 @@ public class WelcomeScreen extends JRootPane
         {
         }
 
-        public void mouseClicked(MouseEvent event){
+        public void mouseClicked(MouseEvent event)
+        {
             window.switchToLevelSelector();
         }
     }
@@ -74,7 +75,8 @@ public class WelcomeScreen extends JRootPane
         {
         }
 
-        public void mouseClicked(MouseEvent event){
+        public void mouseClicked(MouseEvent event)
+        {
             // Code to open help screen
         }
     }
@@ -85,7 +87,8 @@ public class WelcomeScreen extends JRootPane
         {
         }
 
-        public void mouseClicked(MouseEvent event){
+        public void mouseClicked(MouseEvent event)
+        {
             // Code to open credit screen
         }
     }
