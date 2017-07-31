@@ -42,12 +42,15 @@ public class Controller
 {
     private Model m;
     private GameView v;
-    private boolean safeToAct = true;
-    private boolean paused = false;
-    private boolean gameQuit = false;
+    private boolean safeToAct;
+    private boolean paused;
+    private boolean gameQuit;
 
     public Controller(Model model, GameView view)
     {
+        safeToAct = true;
+        paused = false;
+        gameQuit = false;
         m = model;
         setGameView(view);
     }
@@ -100,6 +103,7 @@ public class Controller
             gameWon = move.getGameWon();
             cakeEaten = move.getCakeEaten();
             turn++;
+            System.out.println("Turn: " + turn + ", Time: " + System.nanoTime());
             
             // Allow the other methods to do work
             safeToAct = true;
@@ -124,6 +128,8 @@ public class Controller
             v.announceWinOrLoss(true);
         if (cakeEaten)
             v.announceWinOrLoss(false);
+
+        gameQuit = false;
     }
 
     public void pickDefender(StoreItem si)
@@ -224,10 +230,8 @@ public class Controller
             }
         }
 
-        // If we are being called from the pause menu, let's record that.
-        // and let's make it impossible for pauseGame() to unpause while we clear
+        // Let's make it impossible for pauseGame() to unpause while we clear
         // the board
-        boolean origPaused = paused;
         paused = false;
         safeToAct = false;
 
@@ -244,20 +248,34 @@ public class Controller
             v.removeCharacter(charac);
         }
 
-        // Set a new gold label, progress, and numAttackers
+        // // Set a new gold label, progress, and numAttackers
         v.setGoldLabel(m.getGold());
         v.setProgress(0);
         v.setMaxProgress(m.getNumAttackers());
 
+        // Let's unpause to kill loop()
         v.unPause();
-        // If we were paused let's stay paused
-        paused = origPaused;
-        safeToAct = !origPaused;
-        (new LoopThread(this)).start();
+        gameQuit = true;
+        safeToAct = true;
+
+        // Wait for loop to die...
+        while (gameQuit)
+        {
+            try
+            {
+                Thread.sleep(5);
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        // Now let's start a new loop, with a clean controller.
+        (new LoopThread(new Controller(m, v))).start();
     }
 
     public void quitGame()
     {
-        gameQuit = true;
+       gameQuit = true;
     }
 }
