@@ -26,17 +26,19 @@ import java.util.List;
  * METHODS
  *  Controller(Model model, GameView view)
  *  void loop()
- *      The main loop of the game, 
+ *      The main loop of the game
  *  void pickDefender(StoreItem si)
  *      Inidcates which store item was picked
  *  void placeDefender(Location loc)
  *      Places the previously indicated store item
  *  void pauseGame()
+ *      Pauses the game
  *  void resetGame()
  *      Resets game, including the LevelGenerator
  *  void resetGame(LevelGenerator lg)
  *      Resets game with a new LevelGenerator
  *  void quitGame()
+ *      Quits the game
  */
 public class Controller
 {
@@ -63,6 +65,7 @@ public class Controller
         v.setMaxProgress(m.getNumAttackers());
     }
 
+    // The main loop of the game
     public void loop()
     {
         boolean cakeEaten = false, gameWon = false;
@@ -104,7 +107,7 @@ public class Controller
             cakeEaten = move.getCakeEaten();
             turn++;
             System.out.println("Turn: " + turn + ", Time: " + System.nanoTime());
-            
+
             // Allow the other methods to do work
             safeToAct = true;
 
@@ -120,7 +123,7 @@ public class Controller
                 {
                 }
             } while (timeOfStartedMove + 1e8 > System.nanoTime() || !safeToAct && !gameQuit);
-            // Basically keep on waiting while, it is not safe to act, we haven't quit, 
+            // Basically keep on waiting while, it is not safe to act, we haven't quit,
             // and it has not been 100 ms from the last move.
         }
 
@@ -132,6 +135,7 @@ public class Controller
         gameQuit = false;
     }
 
+    // Inidcates which store item was picked
     public void pickDefender(StoreItem si)
     {
         // We don't allow the selection of defenders while we are paused.
@@ -160,6 +164,7 @@ public class Controller
         safeToAct = true;
     }
 
+    // Places the previously indicated store item
     public void placeDefender(Location loc)
     {
         // Don't allow defender placement if paused.
@@ -191,6 +196,7 @@ public class Controller
         safeToAct = true;
     }
 
+    // Pauses the game
     public void pauseGame(boolean newPause)
     {
         // If we are already in whatever state we are being set to, just return
@@ -214,11 +220,13 @@ public class Controller
         safeToAct = !paused;
     }
 
+    // Resets game, including the LevelGenerator
     public void resetGame()
     {
         resetGame(null);
     }
 
+    // Resets game, including the LevelGenerator
     public void resetGame(LevelGenerator lg)
     {
         while (!safeToAct && !paused)
@@ -276,6 +284,7 @@ public class Controller
         (new LoopThread(new Controller(m, v))).start();
     }
 
+    // Quits the game
     public void quitGame()
     {
        gameQuit = true;

@@ -27,27 +27,43 @@ import java.awt.event.*;
 
 /**
  * GameView is the JRootPane for the actual game board.
- * 
+ *
  * METHODS:
  *  static final int JBUTTONHEIGHT
  *  static final int JBUTTONWIDTH
  *  GameView(Window window)
  *  void setControl(Controller control)
+        Sets control
  *  void moveCharacter(Character thing)
+        Moves a character, updating its location on the screen
  *  void announceWinOrLoss(boolean wOrL)
+        Returns whether the player won or loss
  *  void addCharacter(Character thing)
+        Adds character to the screen
  *  void removeCharacter(Character thing)
+        Removes character from the screen
  *  void setStoreButtonPressed(StoreItem si, boolean pressed)
+        Changes store buttons apperance to indicate that it is selected
  *  void setStoreEnabled(boolean enabled)
+        Enables or disables the store buttons depending on the value of enabled
  *  void setBoardEnabled(boolean enabled)
+        Enables or disables the board buttons depending on the value of enabled
  *  void enableButtons(boolean enabled)
+        Enables or disables the store buttons, board buttons, and pause button
+        depending on the value of enabled
  *  void setMaxProgress(int max)
+        Sets max value of progress bar
  *  void setProgress(int prog)
+        Updates value of the progress bar
  *  void setGoldLabel(int gold)
+        Updates gold label on the screen
  *  void startGame()
+        Starts game
  *  void resetField()
+        Resets the game, clearing the characters on the screen
  *  void unPause()
- * 
+        Unpauses the game
+ *
  */
 public class GameView extends JRootPane
 {
@@ -161,7 +177,7 @@ public class GameView extends JRootPane
 
 
         /** CODE FOR GOLD LABEL **/
-        // Create Gold Label, we'll default to zero gold, Controller should 
+        // Create Gold Label, we'll default to zero gold, Controller should
         // set the real number before the user sees the screen
         goldLabel = new JLabel("0", JLabel.LEFT);
         // MAGIC NUMBERS, based off the background image
@@ -325,11 +341,15 @@ public class GameView extends JRootPane
 
     }
 
+    /* METHODS */
+
+    // Sets control
     public void setControl(Controller control)
     {
         this.control = control;
     }
 
+    // Moves a character, updating its location on the screen
     public void moveCharacter(Character thing)
     {
         Location loc = thing.getLoc();
@@ -338,8 +358,9 @@ public class GameView extends JRootPane
     }
 
     /**
-     * true denotes Player Win
-     * false denotes Player loss
+     *  Returns whether the player won or loss
+     *
+     *  post: true denotes Player Win, false denotes Player loss
      */
     public void announceWinOrLoss(boolean wOrL)
     {
@@ -372,6 +393,7 @@ public class GameView extends JRootPane
         }*/
     }
 
+    // Adds character to the screen
     public void addCharacter(Character thing)
     {
         Location loc = thing.getLoc();
@@ -384,12 +406,14 @@ public class GameView extends JRootPane
         thing.setJLabel(jl);
     }
 
+    // Removes character from the screen
     public void removeCharacter(Character thing)
     {
         thing.getJLabel().setVisible(false);
         boardUI.remove(thing.getJLabel());
     }
 
+    // Changes store buttons apperance to indicate that it is selected
     public void setStoreButtonPressed(StoreItem si, boolean pressed)
     {
         JButton button = null;
@@ -408,6 +432,7 @@ public class GameView extends JRootPane
         }
     }
 
+    // Enables or disables the store buttons depending on the value of enabled
     public void setStoreEnabled(boolean enabled)
     {
         for(JButton storeButton: store)
@@ -416,6 +441,7 @@ public class GameView extends JRootPane
         }
     }
 
+    // Enables or disables the board buttons depending on the value of enabled
     public void setBoardEnabled(boolean enabled)
     {
         for(JButton[] boardRow: boardArray)
@@ -425,6 +451,7 @@ public class GameView extends JRootPane
         }
     }
 
+    // Enables or disables the store buttons, board buttons, and pause button depending on the value of enabled
     public void enableButtons(boolean enabled)
     {
       setBoardEnabled(enabled);
@@ -432,32 +459,38 @@ public class GameView extends JRootPane
       pauseButton.setEnabled(enabled);
     }
 
+    // Sets max value of progress bar
     public void setMaxProgress(int max)
     {
         progressBar.setMaximum(max);
     }
 
+    // Updates value of the progress bar
     public void setProgress(int prog)
     {
         progressBar.setValue(prog);
     }
 
+    // Updates gold label on the screen
     public void setGoldLabel(int gold)
     {
         goldLabel.setText("" + gold);
     }
 
+    // Starts game
     public void startGame()
     {
         control.loop();
     }
 
+    // Resets the game, clearing the characters on the screen
     public void resetField()
     {
         gameOverMenu.setVisible(false);
         control.resetGame();
     }
 
+    // Unpauses the game
     public void unPause()
     {
         pauseMenu.setVisible(false);
@@ -467,10 +500,14 @@ public class GameView extends JRootPane
         control.pauseGame(false);
     }
 
+    // Ends program
+    // post: Closes window
     public void endProgram()
     {
         System.exit(0);
     }
+
+    /* PRIVATE MOUSE HANDLERS */
 
     private class StoreMouseHandler implements ActionListener
     {
