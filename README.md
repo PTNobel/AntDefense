@@ -24,9 +24,6 @@ Screenshot of *Ant Defense*
 The object of the Ant Defense is to prevent the ants from making it across the screen to the cake on the left side.
 
 ---
-### The Code
-
----
 ### License
 
 Copyright 2017 Parth Nobel, Chase Carnaroli, Tiffany Nguyen, Ignatius Widjaja
