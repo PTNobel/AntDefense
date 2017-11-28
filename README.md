@@ -1,14 +1,14 @@
 # Ant Defense
 
 ### Contributors
-[Parth Nobel](https://www.linkedin.com/in/parth-n-b57aa6123/),
+[Parth Nobel](https://www.linkedin.com/in/PTNobel/),
 [Chase Carnaroli](https://www.linkedin.com/in/chase-carnaroli-5ba365141/),
 [Tiffany Nguyen](https://www.linkedin.com/in/tiffany-n-85b965138/),
 [Ignatius Widjaja](https://github.com/IggyW).
 
 ### Background
 Ant Defense is our final project for AP Computer Science.  
-It is a spinoff of the popular game, [*Plants v. Zomies*](http://www.popcap.com/plants-vs-zombies-1).
+It is a spinoff of the popular game, [*Plants v. Zombies*](http://www.popcap.com/plants-vs-zombies-1).
 
 Earlier in our AP Computer Science class, we had to created a program called [Ant Farm](http://www.garfieldcs.com/2010/04/ant-farm-gridworld-project/).
 From that moment on, ants became almost like an inside joke among the Computer Science students.  
