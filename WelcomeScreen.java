@@ -10,8 +10,9 @@ public class WelcomeScreen extends JRootPane
     private static final long serialVersionUID = 1L;
     private Window window;
 
-    public WelcomeScreen()
+    public WelcomeScreen(Window win)
     {
+        window = win;
         setSize(Window.WIDTH, Window.HEIGHT);
         setLayout(null);
         Dimension buttonSize = new Dimension(80,40);
@@ -62,9 +63,9 @@ public class WelcomeScreen extends JRootPane
         {
         }
 
-        public void mouseClicked(MouseEvent event){
-            LevelSelector ls = new LevelSelector(window);
-            window.setNewContentPane(ls);
+        public void mouseClicked(MouseEvent event)
+        {
+            window.switchToLevelSelector();
         }
     }
 
@@ -74,7 +75,8 @@ public class WelcomeScreen extends JRootPane
         {
         }
 
-        public void mouseClicked(MouseEvent event){
+        public void mouseClicked(MouseEvent event)
+        {
             // Code to open help screen
         }
     }
@@ -85,13 +87,9 @@ public class WelcomeScreen extends JRootPane
         {
         }
 
-        public void mouseClicked(MouseEvent event){
+        public void mouseClicked(MouseEvent event)
+        {
             // Code to open credit screen
         }
-    }
-
-    public void setWindow(Window win)
-    {
-        window = win;
     }
 }

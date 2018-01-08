@@ -22,52 +22,82 @@
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 /**
- * Characters is the base class of all defenders and actors
- * 
- * @author Parth
- * @version 0.0
+ * Characters is the super class of all Defenders and Ants
+ *
+ * METHODS
+    Character(int baseHP, Location loc)
+    void setLoc(Location loc)
+        Set loc
+    Location getLoc()
+        Return loc
+    boolean takeDamage(int damage)
+        Reduces the character's hp by damage
+        post: Returns whether the character is alive (Returns true iff hp > 0)
+    boolean dead()
+        Returns whether or not the character is dead
+        post: Returns true iff hp <= 0
+    void setJLabel(JLabel jl)
+        Set jLabel
+    JLabel getJLabel()
+        Return jLabel
+    abstract ImageIcon getInitialImageIcon();
+        Returns InitialImageIcon
  */
-abstract public class Character
+public abstract class Character
 {
+    // INSTANCE VARIABLES
     Location loc;
     private int hp;
+    private JLabel jLabel = null;
+
+    // CONSTRUCTOR
     public Character(int baseHP, Location loc)
     {
         hp = baseHP;
         this.loc = loc;
     }
 
-    public Location getLoc()
-    {
-        return loc;
-    }
+    // METHODS
 
+    // Set loc
     public void setLoc(Location loc)
     {
         this.loc = loc;
     }
 
+    // Return loc
+    public Location getLoc()
+    {
+        return loc;
+    }
+
+    // Reduces the character's hp by damage
+    // post: Returns whether the character is alive (Returns true iff hp > 0)
     public boolean takeDamage(int damage)
     {
         hp -= damage;
         return hp > 0;
     }
 
+    // Returns whether or not the character is dead
+    // post: Returns true iff hp <= 0
     public boolean dead()
     {
         return hp <= 0;
     }
 
-    private JLabel jLabel = null;
-    public void setJLabel(JLabel jl)
+    // Sets jLabel
+    public void setJLabel(JLabel jLabel)
     {
-        jLabel = jl;
+        this.jLabel = jLabel;
     }
-    
+
+    // Returns jLabel
     public JLabel getJLabel()
     {
         return this.jLabel;
     }
 
-    abstract public ImageIcon getInitialImageIcon();
+    // Returns InitialImageIcon
+    public abstract ImageIcon getInitialImageIcon();
 }

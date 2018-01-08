@@ -22,6 +22,19 @@
 import java.util.List;
 import java.util.LinkedList;
 
+
+/**
+ * The Super class of the level generators
+ * 
+ * METHODS
+ *  LevelGenerator(int max)
+ *  int getNumAttackers()
+ *  Location selectRandomRow()
+ *  abstract List<Ant> generateAnts();
+ *  void resetGenerator()
+ *  void addAnts(List<Ant> ants)
+ *
+ */
 public abstract class LevelGenerator
 {
     // instance variables
@@ -34,17 +47,20 @@ public abstract class LevelGenerator
     private int yGap = 40;
     private int xStart = 760;
   
-    public LevelGenerator(int max){
+    public LevelGenerator(int max)
+    {
         cachedAnts = new LinkedList<Ant>();
         this.max = max;
     }
     
     // The total number of attackers in this round.
-    public int getNumAttackers(){
+    public int getNumAttackers()
+    {
         return max;
     }
 
-    public Location selectRandomRow(){
+    public Location selectRandomRow()
+    {
         int randomRow = (int)(Math.random()*numRows);
         
         // yStart = Random number in [0, 4] times 80 + random number [0, 55]

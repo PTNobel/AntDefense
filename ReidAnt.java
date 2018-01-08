@@ -69,7 +69,8 @@ public class ReidAnt extends Ant
     {
 	    return 30;
     }
-    public ImageIcon getInitialImageIcon(){
+    public ImageIcon getInitialImageIcon()
+    {
         return PictureLoader.reidAnt;
     }
 }

@@ -4,6 +4,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Dimension;
 
+/**
+ * Level Selector is the screen with all the level options
+ *
+ * METHODS
+ *  public LevelSelector(Window win)
+ *  
+ */
 public class LevelSelector extends JRootPane
 {
     private static final long serialVersionUID = 1L;
@@ -12,6 +19,7 @@ public class LevelSelector extends JRootPane
 
     public LevelSelector(Window win)
     {
+        // Let's store the window
         window = win;
         setSize(Window.WIDTH, Window.HEIGHT);
         setLayout(null);
@@ -65,7 +73,8 @@ public class LevelSelector extends JRootPane
             diff = difficutly;
         }
 
-        public void mouseClicked(MouseEvent event){
+        public void mouseClicked(MouseEvent event)
+        {
             LevelGenerator lg;
             switch (diff)
             {
@@ -82,9 +91,9 @@ public class LevelSelector extends JRootPane
                 break;
             }
             Model model = new Model(lg);
-            GameView gv = new GameView(window);
+            GameView gv = window.switchToGameView();
             Controller control = new Controller(model, gv);
-            window.setNewContentPane(gv);
+            (new LoopThread(control)).start();
         }
     }
 

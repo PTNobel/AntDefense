@@ -19,7 +19,6 @@
  *
  */
 
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -50,12 +49,10 @@ public class TrivialDefense
 
         Model model = new Model(new TrivialGenerator());
 
-        GameView gv = new GameView(window);
+        GameView gv = window.switchToGameView();
         Controller control = new Controller(model, gv);
 
-        window.setNewContentPane(gv);
 
-        window.startWindowController();
-
+        (new LoopThread(control)).start();
     }
 }

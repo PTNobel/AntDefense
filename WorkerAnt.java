@@ -70,7 +70,8 @@ public class WorkerAnt extends Ant
 	    return 5;
     }
 
-    public ImageIcon getInitialImageIcon(){
+    public ImageIcon getInitialImageIcon()
+    {
         return PictureLoader.workerAnt;
     }
 }

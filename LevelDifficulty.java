@@ -19,6 +19,10 @@
  *
  */
 
+/**
+ * Lists the three types of LevelDifficulties
+ */
+
  public enum LevelDifficulty {
    EASY, MEDIUM, HARD
  }

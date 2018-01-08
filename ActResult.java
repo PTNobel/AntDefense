@@ -21,69 +21,121 @@
 
 import java.util.List;
 
+/**
+ * This is solely an encapsulating class for moving the data on a round from
+ * Model to Controller
+ *
+ * METHODS
+ *  void setDeadCharacters(List<Character> deadCharacters)
+ *  List<Character> getDeadCharacters()
+ *  void setNewCharacters(List<Character> newCharacters)
+ *  List<Character> getNewCharacters()
+ *  void setMovedCharacters(List<Character> movedCharacters)
+ *  List<Character> getMovedCharacters()
+ *  void setCakeEaten(boolean eaten)
+ *  boolean getCakeEaten()
+ *  void setGold(int gold)
+ *  int getGold()
+ *  void setProgress(int prog)
+ *  int getProgress()
+ *  void setGameOver(boolean gameOver)
+ *  boolean getGameWon()
+ *
+ */
 public class ActResult
 {
+    // INSTANCE VARIABLES
     private List<Character> deadCharacters;
     private List<Character> newCharacters;
     private boolean cakeEaten, gameOver;
-    private int progress, gold;
+    // Progress is the number of ants killed so far
+    private int progress;
+    private int gold;
     private List<Character> movedCharacters;
+
+    // METHODS
     
-    public void setDeadCharacters(List<Character> deadCharacters){
+    // sets deadCharacters to the inputted argument
+    public void setDeadCharacters(List<Character> deadCharacters)
+    {
         this.deadCharacters = deadCharacters;
     }
-    
-    public List<Character> getDeadCharacters(){
+
+    // returns deadCharacters
+    public List<Character> getDeadCharacters()
+    {
         return deadCharacters;
     }
-    
-    public void setNewCharacters(List<Character> newCharacters){
+
+    // sets newCharacters to the inputted argument
+    public void setNewCharacters(List<Character> newCharacters)
+    {
         this.newCharacters = newCharacters;
     }
-    
-    public List<Character> getNewCharacters(){
+
+    // returns newCharacters
+    public List<Character> getNewCharacters()
+    {
         return newCharacters;
     }
-    
-    public void setMovedCharacters(List<Character> movedCharacters){
+
+    // sets movedCharacters to the inputted argument
+    public void setMovedCharacters(List<Character> movedCharacters)
+    {
         this.movedCharacters = movedCharacters;
     }
-    
-    public List<Character> getMovedCharacters(){
+
+    // returns movedCharacters
+    public List<Character> getMovedCharacters()
+    {
         return movedCharacters;
     }
-    
-    public void setCakeEaten(boolean eaten){
+
+    // sets cakeEaten to the inputted argument
+    public void setCakeEaten(boolean eaten)
+    {
         cakeEaten = eaten;
     }
-    
-    public boolean getCakeEaten(){
+
+    // returns cakeEaten
+    public boolean getCakeEaten()
+    {
         return cakeEaten;
     }
 
+    // sets gold to the inputted argument
     public void setGold(int gold)
     {
         this.gold = gold;
     }
 
+    // returns gold
     public int getGold()
     {
         return this.gold;
     }
-    
-    public void setProgress(int prog){
-        progress = prog;
+
+    // sets progress to the inputted argument
+    public void setProgress(int progress)
+    {
+        this.progress = progress;
     }
-    
-    public int getProgress(){
+
+    // returns progress
+    public int getProgress()
+    {
         return progress;
     }
-    
-    public void setGameOver(boolean gameOver){
+
+    // sets gameOver to the inputted argument
+    public void setGameOver(boolean gameOver)
+    {
         this.gameOver = gameOver;
     }
-    
-    public boolean getGameWon(){
+
+    // returns gameOver
+    public boolean getGameWon()
+    {
         return gameOver;
     }
 }

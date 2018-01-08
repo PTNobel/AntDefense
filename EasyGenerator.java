@@ -23,6 +23,15 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.LinkedList;
 
+/**
+ * The easiest level generator.
+ *
+ * METHODS
+ *  EasyGenerator()
+ *  List<Ant> generateAnts()
+ *
+ */
+
 public class EasyGenerator extends LevelGenerator
 {
 
@@ -36,6 +45,7 @@ public class EasyGenerator extends LevelGenerator
         List<Ant> output = new LinkedList<Ant>();
         if (completed < max)
         {
+            // Empty the cachedAnts into the outpt.
             ListIterator<Ant> iter = cachedAnts.listIterator();
             while (completed < max && iter.hasNext())
             {

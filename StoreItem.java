@@ -36,8 +36,10 @@ public enum StoreItem
         INIT_IMAGE = imgIcon;
     }
 
-    public Defender getDefender(Location loc){
-        switch(this){
+    public Defender getDefender(Location loc)
+    {
+        switch(this)
+        {
             case POISONFOOD:
                 return new PoisonFood(loc);
             case POISONSPRAY:

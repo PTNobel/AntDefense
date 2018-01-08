@@ -31,8 +31,9 @@ public class Window extends JFrame
     private static final long serialVersionUID = 1L;
     public static final int WIDTH = 960;
     public static final int HEIGHT = 720;
-    private WindowController winControl;
-
+    private WelcomeScreen ws = null;
+    private LevelSelector ls = null;
+    private GameView gv = null;
 
     public Window()
     {
@@ -40,11 +41,9 @@ public class Window extends JFrame
         // set up window
         setSize(WIDTH, HEIGHT);    // sets size in pixels
         setResizable(false);   // makes it resizable or not (true == resizable screen)
-        winControl = new WindowController(this);
 
-        JLabel loadingNotice = new JLabel("Loading...");
-
-        add(loadingNotice);
+        ws = new WelcomeScreen(this);
+        setContentPane(ws);
 
         setVisible(true);
 
@@ -58,105 +57,44 @@ public class Window extends JFrame
         );
     }
 
-    public Window(JRootPane initialPane)
+    public WelcomeScreen switchToWelcomeScreen()
     {
-        super("Ant Defense");
-        // set up window
-        setSize(WIDTH, HEIGHT);    // sets size in pixels
-        setResizable(false);   // makes it resizable or not (true == resizable screen)
-        winControl = new WindowController(this);
+        if (ws == null)
+        {
+            ws = new WelcomeScreen(this);
+        }
 
-        setContentPane(initialPane);
-        setVisible(true);
+        setContentPane(ws);
 
-        // needed to close application
-        addWindowListener(new java.awt.event.WindowAdapter() 
-            {
-                public void windowClosing(WindowEvent evt) {
-                    exit();
-                }
-            }
-        );
+        return ws;
     }
 
-    public void startWindowController()
+    public LevelSelector switchToLevelSelector()
     {
-        winControl.loop();
+        if (ls == null)
+        {
+            ls = new LevelSelector(this);
+        }
+
+        setContentPane(ls);
+
+        return ls;
     }
 
-    public void setNewContentPane(JRootPane jcp)
+    public GameView switchToGameView()
     {
-        winControl.setNewContentPane(jcp);
+        if (gv == null)
+        {
+            gv = new GameView(this);
+        }
+
+        setContentPane(gv);
+
+        return gv;
     }
 
     public void exit()
     {
-        winControl.exit();
         System.exit(0);
-    }
-}
-
-class WindowController
-{
-    private boolean safeToAct = true;
-    private boolean updateController = false;
-    private JRootPane newContent = null;
-    private boolean keepOnWatching = true;
-    private Window window;
-
-    public WindowController(Window win)
-    {
-        window = win;
-    }
-
-    public void loop()
-    {
-        while (keepOnWatching)
-        {
-            safeToAct = false;
-            if (updateController)
-            {
-                updateController = false;
-            
-                if (newContent != null && newContent instanceof GameView)
-                {
-                    ((GameView)newContent).startGame();
-                }
-            }
-            safeToAct = true;
-            do {
-                try {
-                    Thread.sleep(100);
-                }
-                catch (Exception e)
-                {
-                }
-            } while (!safeToAct);
-        }
-        
-    }
-
-    public void setNewContentPane(JRootPane pane)
-    {
-        while (!safeToAct)
-        {
-            try
-            {
-                Thread.sleep(5);
-            }
-            catch (Exception e)
-            {
-            }
-        }
-        safeToAct = false;
-        updateController = true;
-        newContent = pane;
-        window.setContentPane(newContent);
-        safeToAct = true;
-    }
-
-    public void exit()
-    {
-        keepOnWatching = false;
     }
 }
