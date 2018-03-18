@@ -2,7 +2,7 @@
 
 ### Contributors
 [Parth Nobel](https://www.linkedin.com/in/PTNobel/),
-[Chase Carnaroli](https://www.linkedin.com/in/chase-carnaroli-5ba365141/),
+[Chase Carnaroli](https://www.linkedin.com/in/chasecarnaroli/),
 [Tiffany Nguyen](https://www.linkedin.com/in/tiffany-n-85b965138/),
 [Ignatius Widjaja](https://github.com/IggyW).
 
